@@ -13,9 +13,6 @@
   "author": {
     "name": "EDIA"
   },
-  "dependencies": {
-  },
-  "samples": [
-  ],
+  "dependencies": {},
   "hideInEditor": false
 }
