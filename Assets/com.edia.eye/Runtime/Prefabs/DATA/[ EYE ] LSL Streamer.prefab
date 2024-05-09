@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &472562654239227347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6814174451523147870}
+  - component: {fileID: 3073502778733778519}
+  - component: {fileID: 2100543422302982273}
+  - component: {fileID: -5724669730907343416}
+  m_Layer: 0
+  m_Name: '[ EYE ] LSL Streamer'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6814174451523147870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472562654239227347}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3073502778733778519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472562654239227347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6050ec4d8869a041b33e79d980139c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Eye: 2
+--- !u!114 &2100543422302982273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472562654239227347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab766cb53fc2eda4db0828819cfef988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eyeId: 2
+  StreamName: EDIA.Eye
+  StreamType: Eye.Data
+  IrregularRate: 0
+  SamplingRate: 120
+--- !u!114 &-5724669730907343416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472562654239227347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e3dacc4599bc547af4a43b0b848c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Note: "Important steps: \n1. Add, if not there, the [EYE] DataHandler prefab\n2.
+    Add this to the list of dataclients\n3. Make sure that both \"EyeDataClientLslPusher\"
+    and \"EyeOutlet\" use the same Eye\n4. Set the Sampling Rate on the \"Eye Outlet\"
+    to the SR of your Eye Tracker (e.g., 120 Hz for the Vive Pro Eye) if the tracking
+    is implemented accordingly; otherwise set it to the display refresh rate (e.g.,
+    90 Hz)"
