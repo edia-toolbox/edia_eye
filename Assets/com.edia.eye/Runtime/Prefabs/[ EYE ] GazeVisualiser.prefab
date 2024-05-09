@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7828082810676772037}
-  - component: {fileID: 8520395705315328194}
+  - component: {fileID: 2717778056733670142}
   m_Layer: 0
   m_Name: '[ EYE ] GazeVisualiser'
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 7704582191693126049}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8520395705315328194
+--- !u!114 &2717778056733670142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,9 +43,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1883004046998932545}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ae1833e6522d6c459eaf1adbdb69d4c, type: 3}
+  m_Script: {fileID: 11500000, guid: d877d8a2e73fe1749a9c91163f2eaae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Eye: 2
   GazeRayRenderer: {fileID: 1853412771004669866}
   LengthOfRay: 25
   gazeOriginOffsetZ: 0.05

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4625099936160350869}
   - component: {fileID: 1873206133}
-  - component: {fileID: 4625099936160350868}
+  - component: {fileID: 1409125293413158502}
   m_Layer: 0
   m_Name: '[ EYE ] DataHandler'
   m_TagString: Untagged
@@ -51,7 +51,7 @@ MonoBehaviour:
     \n\nTick \"Process on Start\" on the EyeDataHandler if you want to push data
     to the clients right from the start. Otherwise you need to call the according
     method from code to start pushing. \n\n"
---- !u!114 &4625099936160350868
+--- !u!114 &1409125293413158502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4625099936160350870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 773da9f56f902a643847386cca9a3300, type: 3}
+  m_Script: {fileID: 11500000, guid: 949ccbf220c960d4daa26152cd7aa851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DataClients: []
