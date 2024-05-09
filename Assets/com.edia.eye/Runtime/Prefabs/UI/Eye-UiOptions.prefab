@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 8944290399349549836}
   - component: {fileID: 5169774671832145640}
   m_Layer: 5
-  m_Name: '[ EYE ] UI_Options'
+  m_Name: Eye-UiOptions
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: ed2e144a4a003054085892bf7f1a66be, type: 3}
   m_NavMeshLayer: 0

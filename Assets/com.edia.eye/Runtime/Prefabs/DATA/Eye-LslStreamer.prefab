@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4234274112086025500}
   - component: {fileID: -5724669730907343416}
   m_Layer: 0
-  m_Name: '[ EYE ] LSL Streamer'
+  m_Name: Eye-LslStreamer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
