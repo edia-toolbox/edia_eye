@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 1731690274}
   - component: {fileID: 1731690273}
   m_Layer: 0
-  m_Name: Debug
+  m_Name: DebugDataSender
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,7 +459,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d73f1bd08517040b6729d99932f1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isStarted: 0
+  isStarted: 1
+  UseLslTiming: 0
 --- !u!4 &1731690274
 Transform:
   m_ObjectHideFlags: 0
