@@ -11,7 +11,7 @@ namespace Edia.Eye
     /// </summary>
     public class DebugDataSender : MonoBehaviour
     {
-        public bool IsStarted = false;
+        public bool IsRunning = false;
         public static ILslTimer LslTimer;
         public bool UseLslTiming = true;
         double timestampLsl;
@@ -21,13 +21,13 @@ namespace Edia.Eye
 
         public void StartAddingDummyEyedata()
         {
-            IsStarted = true;
+            IsRunning = true;
         }
 
         // Sends random data to the eDIA `EyeDataHandler` 
         void Update()
         {
-            if (!IsStarted)
+            if (!IsRunning)
                 return;
 
             if (Time.time < (lastTime + randomWaitValue))
