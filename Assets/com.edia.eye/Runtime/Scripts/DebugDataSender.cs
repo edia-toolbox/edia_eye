@@ -16,7 +16,8 @@ namespace Edia.Eye
         public bool UseLslTiming = true;
         double timestampLsl;
         EyeDataPackage ed;
-        float randomNewValue = 0.3f;
+        double randomWaitValue = 0.3f;
+        double lastTime;
 
         public void StartAddingDummyEyedata()
         {
@@ -29,6 +30,8 @@ namespace Edia.Eye
             if (!IsStarted)
                 return;
 
+            if (Time.time < (lastTime + randomWaitValue))
+                return;
 
             ed = new();
 
@@ -49,6 +52,8 @@ namespace Edia.Eye
             ed.timestamp_lsl = 0f;
 
             EyeDataHandler.Instance.AddEyeDataPackage(ed);
+
+            lastTime = Time.time;
         }
     }
 }
