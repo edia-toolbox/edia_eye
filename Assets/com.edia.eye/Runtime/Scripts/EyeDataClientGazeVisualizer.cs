@@ -34,6 +34,8 @@ namespace Edia.Eye
         private void OnEnable()
         {
             this.transform.parent = XRManager.Instance.XRCam;
+            this.transform.localPosition = Vector3.zero;
+            this.transform.localRotation = Quaternion.identity;
         }
 
         void Start()
