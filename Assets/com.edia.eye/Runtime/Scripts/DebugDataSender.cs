@@ -53,6 +53,7 @@ namespace Edia.Eye
 
             EyeDataHandler.Instance.AddEyeDataPackage(ed);
 
+            randomWaitValue = UnityEngine.Random.Range(0.01f, 1.0f);
             lastTime = Time.time;
         }
     }

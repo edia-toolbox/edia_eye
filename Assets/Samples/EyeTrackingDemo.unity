@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d73f1bd08517040b6729d99932f1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isStarted: 1
+  IsStarted: 1
   UseLslTiming: 0
 --- !u!4 &1731690274
 Transform:
