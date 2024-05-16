@@ -49,7 +49,7 @@ namespace Edia.Eye
             ed.timestamp_et = 123f;
 
             timestampLsl = LslTimer != null ? LslTimer.GetTime() : 0;
-            ed.timestamp_lsl = 0f;
+            ed.timestamp_lsl = timestampLsl;
 
             EyeDataHandler.Instance.AddEyeDataPackage(ed);
 
