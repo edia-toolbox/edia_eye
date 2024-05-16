@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.edia.core": {
-      "version": "https://gitlab.gwdg.de/edia/edia_core.git?path=Assets/com.edia.core#dev",
+      "version": "git@gitlab.gwdg.de:edia/edia_core.git?path=Assets/com.edia.core#dev",
       "depth": 0,
       "source": "git",
       "dependencies": {
