@@ -46,7 +46,7 @@ namespace Edia.Eye
             ed.rotation_x_local = UnityEngine.Random.Range(-15f, 15f);
             ed.rotation_y_local = UnityEngine.Random.Range(-60f, 60f);
             ed.rotation_z_local = 0f;
-            ed.timestamp_et = 123f;
+            ed.timestamp_et = Time.realtimeSinceStartup;
 
             timestampLsl = LslTimer != null ? LslTimer.GetTime() : 0;
             ed.timestamp_lsl = timestampLsl;
