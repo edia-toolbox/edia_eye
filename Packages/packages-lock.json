@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.edia.core": {
-      "version": "https://gitlab.gwdg.de/edia/edia_core.git?path=Assets/com.edia.core#dev",
+      "version": "git@gitlab.gwdg.de:edia/edia_core.git?path=Assets/com.edia.core#dev",
       "depth": 0,
       "source": "git",
       "dependencies": {
@@ -12,7 +12,7 @@
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.unity.textmeshpro": "3.0.8"
       },
-      "hash": "1a5c791e54a94f84ec40fbbf2080aae268e6d203"
+      "hash": "c17c7827b41b8afe401cb652e6f7c35a5c143f43"
     },
     "com.unity.burst": {
       "version": "1.8.9",
