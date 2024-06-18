@@ -12,7 +12,7 @@ namespace Edia.Eye
     public class DebugDataSender : MonoBehaviour
     {
         public bool IsRunning = false;
-        public static ILslTimer LslTimer;
+        public static ILslTimeAccessible LslTimer;
         public bool UseLslTiming = true;
         double timestampLsl;
         EyeDataPackage ed;
@@ -48,7 +48,7 @@ namespace Edia.Eye
             ed.rotation_z_local = 0f;
             ed.timestamp_et = 123f;
 
-            timestampLsl = LslTimer != null ? LslTimer.GetTime() : 0;
+            timestampLsl = LslTimer != null ? LslTimer.GetLslTime() : 0;
             ed.timestamp_lsl = 0f;
 
             EyeDataHandler.Instance.AddEyeDataPackage(ed);
