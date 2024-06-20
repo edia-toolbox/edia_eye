@@ -3,57 +3,68 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Edia.Eye
-{
+namespace Edia.Eye {
     /// <summary>
     /// Dummy class to fake a minimal data stream from an eye tracker (with 90Hz).
     /// </summary>
-    public class DebugDataSender : MonoBehaviour
-    {
+    public class DebugDataSender : MonoBehaviour {
         public bool IsRunning = false;
         public static ILslTimeAccessible LslTimer;
         public bool UseLslTiming = true;
-        double timestampLsl;
-        EyeDataPackage ed;
-        double randomWaitValue = 0.3f;
-        double lastTime;
+        double _timestampLsl;
+        EyeDataPackage _ed = new();
+        double _randomWaitValue = 0.3f;
+        double _lastTime;
 
-		public void StartAddingDummyEyedata() {
-			IsRunning = true;
-		}
+        public void StartAddingDummyEyedata() {
+            IsRunning = true;
+        }
 
-		// Sends random data to the eDIA `EyeDataHandler` 
-		void Update() {
-			if (!IsRunning)
-				return;
+        private void Start() {
 
-			if (Time.time < (lastTime + randomWaitValue))
-				return;
+            if (UseLslTiming) {
+                // check if the LslTiming component is available
+                if (GetComponent<ILslTimeAccessible>() == null) {
+                    Debug.LogError("To use LSL timing, the DebugDataSender requires a component on the same GameObject " +
+                                   "which implements the ILslTimeAccessible interface (e.g., Edia.Lsl.LslTiming or " +
+                                   "Edia.Lsl.EyeOutlet).");
+                } else {
+                    LslTimer = GetComponent<ILslTimeAccessible>();
+                }
+            }
+        }
 
-			ed = new();
+        // Sends random data to the eDIA `EyeDataHandler` 
+        void Update() {
+            if (!IsRunning)
+                return;
 
-			ed.eye = Edia.Constants.EyeId.CENTER.ToString().ToLower();
-			ed.position_x_local = 0f;
-			ed.position_y_local = 0f;
-			ed.position_z_local = 0f;
-			ed.diameter = UnityEngine.Random.Range(0.02f, 1.0f);
-			ed.rotation_x_local = UnityEngine.Random.Range(-15f, 15f);
-			ed.rotation_y_local = UnityEngine.Random.Range(-60f, 60f);
-			ed.rotation_z_local = 0f;
-			Quaternion eyeRot = Quaternion.Euler(ed.rotation_x_local, ed.rotation_y_local, 0);
-			Vector3 eyeFwd = eyeRot * Vector3.forward;
-			ed.direction_x_local = eyeFwd.x;
-			ed.direction_y_local = eyeFwd.y;
-			ed.direction_z_local = eyeFwd.z;
-			ed.timestamp_et = Time.realtimeSinceStartup;
+            if (Time.time > (_lastTime + _randomWaitValue)) {
+                // Update fake eye data only after random interval
+                _randomWaitValue = UnityEngine.Random.Range(0.01f, 1.0f);
+                _lastTime = Time.time;
 
-            timestampLsl = LslTimer != null ? LslTimer.GetLslTime() : 0;
-            ed.timestamp_lsl = 0f;
+                _ed.eye = Edia.Constants.EyeId.CENTER.ToString().ToLower();
+                _ed.position_x_local = 0f;
+                _ed.position_y_local = 0f;
+                _ed.position_z_local = 0f;
+                _ed.diameter = UnityEngine.Random.Range(0.02f, 1.0f);
+                _ed.rotation_x_local = UnityEngine.Random.Range(-15f, 15f);
+                _ed.rotation_y_local = UnityEngine.Random.Range(-60f, 60f);
+                _ed.rotation_z_local = 0f;
+                Quaternion eyeRot = Quaternion.Euler(_ed.rotation_x_local, _ed.rotation_y_local, 0);
+                Vector3 eyeFwd = eyeRot * Vector3.forward;
+                _ed.direction_x_local = eyeFwd.x;
+                _ed.direction_y_local = eyeFwd.y;
+                _ed.direction_z_local = eyeFwd.z;
+            }
 
-			EyeDataHandler.Instance.AddEyeDataPackage(ed);
+            _ed.timestamp_et = Time.realtimeSinceStartup;
 
-			randomWaitValue = UnityEngine.Random.Range(0.01f, 1.0f);
-			lastTime = Time.time;
-		}
-	}
+            _timestampLsl = LslTimer != null ? LslTimer.GetLslTime() : 0;
+            _ed.timestamp_lsl = _timestampLsl;
+
+            EyeDataHandler.Instance.AddEyeDataPackage(_ed);
+        }
+    }
 }
