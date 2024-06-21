@@ -27,7 +27,10 @@ namespace Edia.Eye {
 		private void OnEvEnableEyeCalibrationTrigger(eParam obj)
 		{
 			// Debug.Log(name + "OnEvEnableEyeCalibrationTrigger: " + obj.GetBool());
-			btnEyeCalibration.interactable = obj.GetBool();
+			if (obj.GetBool()) {
+				ShowPanel();
+				btnEyeCalibration.interactable = obj.GetBool();
+			} else HidePanel();
 		}
 
 		public void Reset() {
