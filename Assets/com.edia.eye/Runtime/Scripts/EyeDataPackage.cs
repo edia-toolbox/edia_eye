@@ -24,7 +24,7 @@ namespace Edia.Eye
         public float confidence = float.NaN; // confidence in reliability of this sample (ideally in [0;1])
         public float timestamp_et = float.NaN; // timestamp provided by the eye tracker
         public double timestamp_lsl = float.NaN; // timestamp provided by Time.realtimeSinceStartup
-        public float openness = float.NaN; // timestamp provided by LSL.local_clock()
+        public float openness = float.NaN; // openness value provided by SDK
         public string target_id = "NA"; // identifier of the object that was intersected by the gaze ray
     }
 }
