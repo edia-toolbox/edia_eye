@@ -8,14 +8,14 @@ namespace Edia.Eye {
 
         private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
         private float[] _sample;
-        private ILslPusher _eyeOutlet;
+        private ILslEyeOutlet _eyeOutlet;
 
         public Edia.Constants.EyeId Eye = Edia.Constants.EyeId.CENTER;
 
         // Start is called before the first frame update
         void Start() {
 
-            _eyeOutlet = GetComponent<ILslPusher>();
+            _eyeOutlet = GetComponent<ILslEyeOutlet>();
 
             if (_eyeOutlet == null) {
                 Debug.LogError("EyeDataClientLslPusher requires a EyeOutlet component (edia_lsl) on the same GameObject.");
@@ -70,7 +70,7 @@ namespace Edia.Eye {
 
                 double lslTime = receivedEyeDataSamples[0].timestamp_lsl;
 
-                _eyeOutlet.PushSample(posX, posY, posZ, rotX, rotY, rotZ, pupilDia, confidence, etTime, lslTime);
+                _eyeOutlet.PushSample(new Vector3(posX, posY, posZ), new Vector3(rotX, rotY, rotZ), pupilDia, confidence, etTime, lslTime);
 
                 receivedEyeDataSamples.RemoveAt(0);
             }
