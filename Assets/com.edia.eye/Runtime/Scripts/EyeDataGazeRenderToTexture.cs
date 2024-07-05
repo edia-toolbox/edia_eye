@@ -2,47 +2,58 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Edia;
 
 namespace Edia.Eye
 {
-    public class EyeDataClientGazeVisualizer : MonoBehaviour, IEyeDataClient
+    public class EyeDataGazeRenderToTexture : MonoBehaviour, IEyeDataClient
     {
 #region DECLARATIONS 
 
 		[Header("Which Eye?")]
-		public Constants.EyeId Eye = Constants.EyeId.CENTER;
+		public Edia.Constants.EyeId Eye = Edia.Constants.EyeId.CENTER;
 
-		LineRenderer gazeRayRenderer;
-		int lengthOfRay = 25;
-		float gazeOriginOffsetZ = 0.05f;
+		[Header ("Ray")]
+		public LineRenderer GazeRayRenderer;
+		public int LengthOfRay = 25;
+		public float GazeOriginOffsetZ = 0.05f;
 
         [Header("Settings")]
         [Tooltip("Update the gaze ray only every Xth update.")]
         public int UpdateStep = 50;
 
-        Vector3 gazeDirection;
-        Vector3 gazeOriginLocal;
+        Vector3 GazeDirection;
+        Vector3 GazeOriginLocal;
         int counter = 0;
 
         private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
 
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region INITS	
-		private void Awake() {
-			gazeRayRenderer = GetComponent<LineRenderer>();
-		}
-
-		void Start()
+        void Start()
         {
+            SetLayer(gameObject, 9);
+            
             this.transform.parent = XRManager.Instance.XRCam;
             this.transform.localPosition = Vector3.zero;
             this.transform.localRotation = Quaternion.identity;
-
-			gazeRayRenderer.materials[0].color = Eye == Constants.EyeId.CENTER ? Color.cyan : Eye == Constants.EyeId.LEFT? Color.green: Color.yellow;
-
             counter = UpdateStep;
         }
+
+		void SetLayer(GameObject obj, int newLayer) {
+		
+            obj.layer = newLayer;
+			foreach (Transform child in obj.transform) {
+				SetLayer(child.gameObject, newLayer);
+			}
+		}
+
+		void OnValidate() {
+#if UNITY_EDITOR
+            if (LayerMask.LayerToName(9) != "EyeTrackingViz") {
+                Debug.LogError($"Layer 9 'EyeTrackingViz' not existing. Run Menu>Edia>Configurator to generate needed layers");
+            }
+#endif
+		}
 
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region IEyeDataClient INTERFACE IMPLEMENTATION 
@@ -50,7 +61,7 @@ namespace Edia.Eye
 		public void ProcessCurrentSamples (List<EyeDataPackage> currentSamples) {
 			receivedEyeDataSamples.Clear ();
 			foreach (var sample in currentSamples) {
-				if (sample.eye.ToLower() == Eye.ToString().ToLower())
+				if (sample.eye.ToLower() == "center")
 					receivedEyeDataSamples.Add (sample);
             }
 		}
@@ -70,26 +81,27 @@ namespace Edia.Eye
         {
             counter = UpdateStep;
 
+            //Debug.Log($"EyeDataClientGazeRecorder: {receivedEyeDataSamples.Count} samples received");
+
             if (receivedEyeDataSamples.Count == 0)
                 return;
 
-			gazeOriginLocal = new Vector3(
+            GazeOriginLocal = new Vector3(
                 receivedEyeDataSamples[0].position_x_local, 
                 receivedEyeDataSamples[0].position_y_local, 
                 receivedEyeDataSamples[0].position_z_local
             );
 
-			gazeDirection = new Vector3(
+			GazeDirection = new Vector3(
                 receivedEyeDataSamples[0].direction_x_local, 
                 receivedEyeDataSamples[0].direction_y_local, 
                 receivedEyeDataSamples[0].direction_z_local
             );
 
-            gazeRayRenderer.SetPosition(0, gazeOriginLocal + (Vector3.forward * gazeOriginOffsetZ));
-            gazeRayRenderer.SetPosition(1, gazeOriginLocal + gazeDirection * lengthOfRay);
+			GazeRayRenderer.SetPosition(0, GazeOriginLocal + (Vector3.forward * GazeOriginOffsetZ));
+			GazeRayRenderer.SetPosition(1, GazeOriginLocal + GazeDirection * LengthOfRay);
+        }
 
-		}
-
-		#endregion // -------------------------------------------------------------------------------------------------------------------------------
-	}
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+    }
 }

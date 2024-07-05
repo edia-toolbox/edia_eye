@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Edia;
 
 namespace Edia.Eye {
     /// <summary>
@@ -13,7 +14,7 @@ namespace Edia.Eye {
         public bool UseLslTiming = true;
         double _timestampLsl;
         EyeDataPackage _ed = new();
-        double _randomWaitValue = 0.3f;
+        double _randomWaitValue = 0.15f;
         double _lastTime;
 
         public void StartAddingDummyEyedata() {
@@ -34,18 +35,17 @@ namespace Edia.Eye {
             }
         }
 
-        // Sends random data to the eDIA `EyeDataHandler` 
-        void Update() {
+		// Sends random data to the eDIA `EyeDataHandler` 
+		void Update() {
             if (!IsRunning)
                 return;
 
             if (Time.time > (_lastTime + _randomWaitValue)) {
                 // Update fake eye data only after random interval
-                _randomWaitValue = UnityEngine.Random.Range(0.01f, 1.0f);
+                _randomWaitValue = UnityEngine.Random.Range(0.01f, 0.1f);
                 _lastTime = Time.time;
-
-                _ed.eye = Edia.Constants.EyeId.CENTER.ToString().ToLower();
-                _ed.position_x_local = 0f;
+                _ed.eye = ((Constants.EyeId)(UnityEngine.Random.Range(0, 3))).ToString().ToLower();
+				_ed.position_x_local = 0f;
                 _ed.position_y_local = 0f;
                 _ed.position_z_local = 0f;
                 _ed.diameter = UnityEngine.Random.Range(0.02f, 1.0f);
