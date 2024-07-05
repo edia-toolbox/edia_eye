@@ -34,8 +34,6 @@ namespace Edia.Eye
 
 		void Start()
         {
-            PutObjectOnLayer(gameObject, 9); //"EyeTrackingViz"
-            
             this.transform.parent = XRManager.Instance.XRCam;
             this.transform.localPosition = Vector3.zero;
             this.transform.localRotation = Quaternion.identity;
@@ -44,25 +42,6 @@ namespace Edia.Eye
 
             counter = updateDelay;
         }
-
-		void PutObjectOnLayer(GameObject obj, int newLayer) {
-		
-            obj.layer = newLayer;
-			foreach (Transform child in obj.transform) {
-				PutObjectOnLayer(child.gameObject, newLayer);
-			}
-		}
-
-        /// <summary>
-        /// Called when object is added and when inspector value update happens
-        /// </summary>
-		void OnValidate() {
-#if UNITY_EDITOR
-            if (LayerMask.LayerToName(9) != "EyeTrackingViz") {
-                Debug.LogError($"Layer 9 'EyeTrackingViz' not existing. Run Menu>Edia>Configurator to generate needed layers");
-            }
-#endif
-		}
 
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region IEyeDataClient INTERFACE IMPLEMENTATION 
