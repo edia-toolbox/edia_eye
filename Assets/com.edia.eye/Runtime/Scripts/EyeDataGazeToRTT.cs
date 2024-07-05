@@ -2,20 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Edia;
 
 namespace Edia.Eye
 {
-    public class EyeDataClientGazeVisualizer : MonoBehaviour, IEyeDataClient
+    public class EyeDataGazeToRTT : MonoBehaviour, IEyeDataClient
     {
 #region DECLARATIONS 
 
 		[Header("Which Eye?")]
-		public Constants.EyeId Eye = Constants.EyeId.CENTER;
+		public Edia.Constants.EyeId Eye = Edia.Constants.EyeId.CENTER;
 
-		LineRenderer GazeRayRenderer;
-		int LengthOfRay = 25;
-		float gazeOriginOffsetZ = 0.05f;
+		[Header ("Ray")]
+		public LineRenderer GazeRayRenderer;
+		public int LengthOfRay = 25;
+		public float gazeOriginOffsetZ = 0.05f;
 
         [Header("Settings")]
         public int updateDelay = 50;
@@ -28,34 +28,24 @@ namespace Edia.Eye
 
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region INITS	
-		private void Awake() {
-	        GazeRayRenderer	= GetComponent<LineRenderer>();
-		}
-
-		void Start()
+        void Start()
         {
-            PutObjectOnLayer(gameObject, 9); //"EyeTrackingViz"
+            SetLayer(gameObject, 9);
             
             this.transform.parent = XRManager.Instance.XRCam;
             this.transform.localPosition = Vector3.zero;
             this.transform.localRotation = Quaternion.identity;
-
-			GazeRayRenderer.materials[0].color = Eye == Constants.EyeId.CENTER ? Color.cyan : Eye == Constants.EyeId.LEFT? Color.green: Color.yellow;
-
             counter = updateDelay;
         }
 
-		void PutObjectOnLayer(GameObject obj, int newLayer) {
+		void SetLayer(GameObject obj, int newLayer) {
 		
             obj.layer = newLayer;
 			foreach (Transform child in obj.transform) {
-				PutObjectOnLayer(child.gameObject, newLayer);
+				SetLayer(child.gameObject, newLayer);
 			}
 		}
 
-        /// <summary>
-        /// Called when object is added and when inspector value update happens
-        /// </summary>
 		void OnValidate() {
 #if UNITY_EDITOR
             if (LayerMask.LayerToName(9) != "EyeTrackingViz") {
@@ -70,7 +60,7 @@ namespace Edia.Eye
 		public void ProcessCurrentSamples (List<EyeDataPackage> currentSamples) {
 			receivedEyeDataSamples.Clear ();
 			foreach (var sample in currentSamples) {
-				if (sample.eye.ToLower() == Eye.ToString().ToLower())
+				if (sample.eye.ToLower() == "center")
 					receivedEyeDataSamples.Add (sample);
             }
 		}
@@ -89,6 +79,8 @@ namespace Edia.Eye
         void UpdateGazeRays()
         {
             counter = updateDelay;
+
+            //Debug.Log($"EyeDataClientGazeRecorder: {receivedEyeDataSamples.Count} samples received");
 
             if (receivedEyeDataSamples.Count == 0)
                 return;
