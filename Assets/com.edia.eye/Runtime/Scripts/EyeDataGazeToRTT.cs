@@ -18,7 +18,8 @@ namespace Edia.Eye
 		public float GazeOriginOffsetZ = 0.05f;
 
         [Header("Settings")]
-        public int updateDelay = 50;
+        [Tooltip("Update the gaze ray only every Xth update.")]
+        public int UpdateStep = 50;
 
         Vector3 GazeDirection;
         Vector3 GazeOriginLocal;
