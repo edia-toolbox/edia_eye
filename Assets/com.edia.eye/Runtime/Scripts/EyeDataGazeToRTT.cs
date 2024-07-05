@@ -15,7 +15,7 @@ namespace Edia.Eye
 		[Header ("Ray")]
 		public LineRenderer GazeRayRenderer;
 		public int LengthOfRay = 25;
-		public float gazeOriginOffsetZ = 0.05f;
+		public float GazeOriginOffsetZ = 0.05f;
 
         [Header("Settings")]
         public int updateDelay = 50;
