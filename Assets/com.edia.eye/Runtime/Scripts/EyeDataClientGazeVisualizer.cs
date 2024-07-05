@@ -30,7 +30,7 @@ namespace Edia.Eye
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region INITS	
 		private void Awake() {
-	        GazeRayRenderer	= GetComponent<LineRenderer>();
+			gazeRayRenderer = GetComponent<LineRenderer>();
 		}
 
 		void Start()
@@ -39,9 +39,9 @@ namespace Edia.Eye
             this.transform.localPosition = Vector3.zero;
             this.transform.localRotation = Quaternion.identity;
 
-			GazeRayRenderer.materials[0].color = Eye == Constants.EyeId.CENTER ? Color.cyan : Eye == Constants.EyeId.LEFT? Color.green: Color.yellow;
+			gazeRayRenderer.materials[0].color = Eye == Constants.EyeId.CENTER ? Color.cyan : Eye == Constants.EyeId.LEFT? Color.green: Color.yellow;
 
-            counter = updateDelay;
+            counter = UpdateStep;
         }
 
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
@@ -68,27 +68,28 @@ namespace Edia.Eye
 
         void UpdateGazeRays()
         {
-            counter = updateDelay;
+            counter = UpdateStep;
 
             if (receivedEyeDataSamples.Count == 0)
                 return;
 
-            GazeOriginLocal = new Vector3(
+			gazeOriginLocal = new Vector3(
                 receivedEyeDataSamples[0].position_x_local, 
                 receivedEyeDataSamples[0].position_y_local, 
                 receivedEyeDataSamples[0].position_z_local
             );
 
-			GazeDirection = new Vector3(
+			gazeDirection = new Vector3(
                 receivedEyeDataSamples[0].direction_x_local, 
                 receivedEyeDataSamples[0].direction_y_local, 
                 receivedEyeDataSamples[0].direction_z_local
             );
 
-            GazeRayRenderer.SetPosition(0, new Vector3(0f, 0f, gazeOriginOffsetZ));
-            GazeRayRenderer.SetPosition(1, GazeOriginLocal + GazeDirection * LengthOfRay);
-        }
+            gazeRayRenderer.SetPosition(0, gazeOriginLocal + (Vector3.forward * gazeOriginOffsetZ));
+            gazeRayRenderer.SetPosition(1, gazeOriginLocal + gazeDirection * lengthOfRay);
 
-#endregion // -------------------------------------------------------------------------------------------------------------------------------
-    }
+		}
+
+		#endregion // -------------------------------------------------------------------------------------------------------------------------------
+	}
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Edia.Eye
 {
-    public class EyeDataGazeToRTT : MonoBehaviour, IEyeDataClient
+    public class EyeDataGazeRenderToTexture : MonoBehaviour, IEyeDataClient
     {
 #region DECLARATIONS 
 
@@ -21,8 +21,8 @@ namespace Edia.Eye
         [Tooltip("Update the gaze ray only every Xth update.")]
         public int UpdateStep = 50;
 
-        Vector3 gazeDirection;
-        Vector3 gazeOriginLocal;
+        Vector3 GazeDirection;
+        Vector3 GazeOriginLocal;
         int counter = 0;
 
         private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
@@ -36,7 +36,7 @@ namespace Edia.Eye
             this.transform.parent = XRManager.Instance.XRCam;
             this.transform.localPosition = Vector3.zero;
             this.transform.localRotation = Quaternion.identity;
-            counter = updateDelay;
+            counter = UpdateStep;
         }
 
 		void SetLayer(GameObject obj, int newLayer) {
@@ -79,7 +79,7 @@ namespace Edia.Eye
 
         void UpdateGazeRays()
         {
-            counter = updateDelay;
+            counter = UpdateStep;
 
             //Debug.Log($"EyeDataClientGazeRecorder: {receivedEyeDataSamples.Count} samples received");
 
@@ -98,8 +98,8 @@ namespace Edia.Eye
                 receivedEyeDataSamples[0].direction_z_local
             );
 
-            GazeRayRenderer.SetPosition(0, new Vector3(0f, 0f, gazeOriginOffsetZ));
-            GazeRayRenderer.SetPosition(1, GazeOriginLocal + GazeDirection * LengthOfRay);
+			GazeRayRenderer.SetPosition(0, GazeOriginLocal + (Vector3.forward * GazeOriginOffsetZ));
+			GazeRayRenderer.SetPosition(1, GazeOriginLocal + GazeDirection * LengthOfRay);
         }
 
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
