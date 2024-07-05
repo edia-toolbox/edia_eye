@@ -21,8 +21,8 @@ namespace Edia.Eye
         [Tooltip("Update the gaze ray only every Xth update.")]
         public int UpdateStep = 50;
 
-        Vector3 GazeDirection;
-        Vector3 GazeOriginLocal;
+        Vector3 gazeDirection;
+        Vector3 gazeOriginLocal;
         int counter = 0;
 
         private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
