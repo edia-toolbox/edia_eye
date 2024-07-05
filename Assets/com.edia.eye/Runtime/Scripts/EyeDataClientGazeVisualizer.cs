@@ -7,8 +7,7 @@ namespace Edia.Eye
 {
     public class EyeDataClientGazeVisualizer : MonoBehaviour, IEyeDataClient
     {
-
-        #region DECLARATIONS 
+#region DECLARATIONS 
 
 		[Header("Which Eye?")]
 		public Edia.Constants.EyeId Eye = Edia.Constants.EyeId.CENTER;
@@ -25,26 +24,38 @@ namespace Edia.Eye
         Vector3 GazeOriginCombinedLocal;
         int counter = 0;
 
-
-
         private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
 
-        #endregion // -------------------------------------------------------------------------------------------------------------------------------
-        #region INITS	
-        private void OnEnable()
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+#region INITS	
+        void Start()
         {
+            SetLayer(gameObject, 9);
+            
             this.transform.parent = XRManager.Instance.XRCam;
             this.transform.localPosition = Vector3.zero;
             this.transform.localRotation = Quaternion.identity;
-        }
-
-        void Start()
-        {
             counter = updateDelay;
         }
 
-        #endregion // -------------------------------------------------------------------------------------------------------------------------------
-        #region IEyeDataClient INTERFACE IMPLEMENTATION 
+		void SetLayer(GameObject obj, int newLayer) {
+		
+            obj.layer = newLayer;
+			foreach (Transform child in obj.transform) {
+				SetLayer(child.gameObject, newLayer);
+			}
+		}
+
+		void OnValidate() {
+#if UNITY_EDITOR
+            if (LayerMask.LayerToName(9) != "EyeTrackingViz") {
+                Debug.LogError($"Layer 9 'EyeTrackingViz' not existing. Run Menu>Edia>Configurator to generate needed layers");
+            }
+#endif
+		}
+
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+#region IEyeDataClient INTERFACE IMPLEMENTATION 
 
 		public void ProcessCurrentSamples (List<EyeDataPackage> currentSamples) {
 			receivedEyeDataSamples.Clear ();
@@ -54,8 +65,8 @@ namespace Edia.Eye
             }
 		}
 
-        #endregion // -------------------------------------------------------------------------------------------------------------------------------
-        #region PROCESSING SAMPLES
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+#region PROCESSING SAMPLES
 
         void Update()
         {
@@ -84,6 +95,6 @@ namespace Edia.Eye
             GazeRayRenderer.SetPosition(1, GazeOriginCombinedLocal + GazeDirectionCombined * LengthOfRay);
         }
 
-        #endregion // -------------------------------------------------------------------------------------------------------------------------------
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
     }
 }
