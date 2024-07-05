@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7828082810676772037}
   - component: {fileID: 2717778056733670142}
   m_Layer: 0
-  m_Name: Eye-GazeToRTT
+  m_Name: Eye-GazeRendertoTexture
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: ed2e144a4a003054085892bf7f1a66be, type: 3}
   m_NavMeshLayer: 0
@@ -47,11 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Eye: 2
-  GazeRayRenderer: {fileID: 1853412771004669866}
-  LengthOfRay: 25
-  gazeOriginOffsetZ: 0.05
-  updateDelay: 5
-  showInHMD: 0
+  UpdateStep: 50
 --- !u!1 &3426685457235045079
 GameObject:
   m_ObjectHideFlags: 0

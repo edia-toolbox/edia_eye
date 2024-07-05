@@ -12,7 +12,7 @@
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.unity.textmeshpro": "3.0.8"
       },
-      "hash": "61975782e79fc6fd9beb7c70c80a382ee405e126"
+      "hash": "c9476681f346ab7a3120f932307e61e2e5553db2"
     },
     "com.unity.burst": {
       "version": "1.8.9",
