@@ -14,7 +14,7 @@ namespace Edia.Eye
 		public Constants.EyeId Eye = Constants.EyeId.CENTER;
 
 		LineRenderer GazeRayRenderer;
-		int LengthOfRay = 25;
+		int lengthOfRay = 25;
 		float gazeOriginOffsetZ = 0.05f;
 
         [Header("Settings")]
