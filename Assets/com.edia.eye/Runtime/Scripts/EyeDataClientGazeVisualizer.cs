@@ -25,6 +25,12 @@ namespace Edia.Eye
         Vector3 gazeOriginLocal;
         int counter = 0;
 
+        Color colorRay;
+        Color colorLeft = Color.green;
+        Color colorRight = Color.yellow;
+        Color colorCenter = Color.cyan;
+        Color colorInvalid = Color.red;
+
         private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
 
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
@@ -39,7 +45,8 @@ namespace Edia.Eye
             this.transform.localPosition = Vector3.zero;
             this.transform.localRotation = Quaternion.identity;
 
-			gazeRayRenderer.materials[0].color = Eye == Constants.EyeId.CENTER ? Color.cyan : Eye == Constants.EyeId.LEFT? Color.green: Color.yellow;
+            colorRay = Eye == Constants.EyeId.CENTER ? colorCenter : Eye == Constants.EyeId.LEFT ? colorLeft : colorRight;
+            gazeRayRenderer.materials[0].color = colorRay;
 
             counter = UpdateStep;
         }
@@ -47,13 +54,14 @@ namespace Edia.Eye
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region IEyeDataClient INTERFACE IMPLEMENTATION 
 
-		public void ProcessCurrentSamples (List<EyeDataPackage> currentSamples) {
-			receivedEyeDataSamples.Clear ();
-			foreach (var sample in currentSamples) {
-				if (sample.eye.ToLower() == Eye.ToString().ToLower())
-					receivedEyeDataSamples.Add (sample);
+		public void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
+			receivedEyeDataSamples.Clear();
+            foreach (var sample in currentSamples) {
+                if (sample.eye.ToLower() == Eye.ToString().ToLower()) {
+                    receivedEyeDataSamples.Add(sample);
+                }
             }
-		}
+        }
 
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region PROCESSING SAMPLES
@@ -73,16 +81,33 @@ namespace Edia.Eye
             if (receivedEyeDataSamples.Count == 0)
                 return;
 
+            // Grab the first valid sample since last ray update:
+            int sampleIdx = -1;
+            for (int i = 0; i < receivedEyeDataSamples.Count; i++) {
+                if (receivedEyeDataSamples[i].isValid) {
+                    sampleIdx = i;
+                    break;
+                }
+            }
+
+            // for invalid samples, we skip:
+            if (sampleIdx < 0) {
+                gazeRayRenderer.materials[0].color = Color.red;
+                return;
+            } else {
+                gazeRayRenderer.materials[0].color = colorRay;
+            }
+
 			gazeOriginLocal = new Vector3(
-                receivedEyeDataSamples[0].position_x_local, 
-                receivedEyeDataSamples[0].position_y_local, 
-                receivedEyeDataSamples[0].position_z_local
+                receivedEyeDataSamples[sampleIdx].position_x_local, 
+                receivedEyeDataSamples[sampleIdx].position_y_local, 
+                receivedEyeDataSamples[sampleIdx].position_z_local
             );
 
 			gazeDirection = new Vector3(
-                receivedEyeDataSamples[0].direction_x_local, 
-                receivedEyeDataSamples[0].direction_y_local, 
-                receivedEyeDataSamples[0].direction_z_local
+                receivedEyeDataSamples[sampleIdx].direction_x_local, 
+                receivedEyeDataSamples[sampleIdx].direction_y_local, 
+                receivedEyeDataSamples[sampleIdx].direction_z_local
             );
 
             gazeRayRenderer.SetPosition(0, gazeOriginLocal + (Vector3.forward * gazeOriginOffsetZ));
