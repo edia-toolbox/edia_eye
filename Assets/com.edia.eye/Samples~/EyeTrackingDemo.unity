@@ -746,6 +746,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1883004046998932545, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2717778056733670142, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
         type: 3}
       propertyPath: Eye
@@ -1789,6 +1794,11 @@ PrefabInstance:
     - target: {fileID: 1883004046998932545, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
         type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883004046998932545, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2717778056733670142, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
