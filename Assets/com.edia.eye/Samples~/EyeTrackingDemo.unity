@@ -213,6 +213,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1883004046998932545, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2717778056733670142, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
         type: 3}
       propertyPath: Eye
@@ -221,7 +226,7 @@ PrefabInstance:
     - target: {fileID: 2717778056733670142, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
         type: 3}
       propertyPath: UpdateStep
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2717778056733670142, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
         type: 3}
@@ -748,6 +753,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2717778056733670142, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
         type: 3}
+      propertyPath: UpdateStep
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717778056733670142, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
+        type: 3}
       propertyPath: updateDelay
       value: 2
       objectReference: {fileID: 0}
@@ -822,6 +832,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 917445249}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &917445252 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2717778056733670142, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
+    type: 3}
+  m_PrefabInstance: {fileID: 917445249}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d877d8a2e73fe1749a9c91163f2eaae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1160148230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1388,7 +1410,7 @@ PrefabInstance:
     - target: {fileID: 1409125293413158502, guid: 220628ae61044264f99c8bc2419ebd99,
         type: 3}
       propertyPath: DataClients.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1409125293413158502, guid: 220628ae61044264f99c8bc2419ebd99,
         type: 3}
@@ -1404,7 +1426,7 @@ PrefabInstance:
         type: 3}
       propertyPath: DataClients.Array.data[2]
       value: 
-      objectReference: {fileID: 1878179377}
+      objectReference: {fileID: 917445252}
     - target: {fileID: 4625099936160350869, guid: 220628ae61044264f99c8bc2419ebd99,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1773,6 +1795,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Eye
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717778056733670142, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
+        type: 3}
+      propertyPath: UpdateStep
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2717778056733670142, guid: 5aab4a6d6956b5f42b22b5efc959c5be,
         type: 3}
