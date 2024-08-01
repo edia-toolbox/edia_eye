@@ -102,6 +102,7 @@ namespace Edia.Eye
                 gazeDirection = Vector3.forward;
                 lengthOfRay = 1;
 				gazeRayRenderer.materials[0].color = colorInvalid;
+                Debug.Log($"Invalid {receivedEyeDataSamples[0].eye} dataframe");
 			}
 
             gazeRayRenderer.SetPosition(0, gazeOriginLocal + (Vector3.forward * gazeOriginOffsetZ));
