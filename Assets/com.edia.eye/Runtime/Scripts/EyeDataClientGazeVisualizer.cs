@@ -46,7 +46,7 @@ namespace Edia.Eye
             this.transform.localRotation = Quaternion.identity;
 
             colorRay = Eye == Constants.EyeId.CENTER ? colorCenter : Eye == Constants.EyeId.LEFT ? colorLeft : colorRight;
-            gazeRayRenderer.materials[0].color = colorRay;
+            gazeRayRenderer.materials[0].color = colorInvalid;
 
             counter = UpdateStep;
         }
@@ -100,7 +100,8 @@ namespace Edia.Eye
 			} else {
                 gazeOriginLocal = Vector3.zero;
                 gazeDirection = Vector3.forward;
-				gazeRayRenderer.materials[0].color = Color.red;
+                lengthOfRay = 1;
+				gazeRayRenderer.materials[0].color = colorInvalid;
 			}
 
             gazeRayRenderer.SetPosition(0, gazeOriginLocal + (Vector3.forward * gazeOriginOffsetZ));
