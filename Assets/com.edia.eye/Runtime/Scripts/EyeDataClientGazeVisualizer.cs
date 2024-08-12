@@ -75,7 +75,6 @@ namespace Edia.Eye {
 			counter = UpdateStep;
 
 			if (receivedEyeDataSamples.Count == 0) {
-				Debug.Log($"No dataframes");
 				gazeRayRenderer.materials[0].color = colorInvalid;
 				UpdateRayPosition(gazeOriginLocal + Vector3.zero, Vector3.forward);
 				return;
