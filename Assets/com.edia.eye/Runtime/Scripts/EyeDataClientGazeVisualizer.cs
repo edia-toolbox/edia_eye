@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Edia;
+using System.Linq;
 
 namespace Edia.Eye {
 	public class EyeDataClientGazeVisualizer : MonoBehaviour, IEyeDataClient {
@@ -80,27 +81,29 @@ namespace Edia.Eye {
 				return;
 			}
 
-			if (receivedEyeDataSamples[0].isValid) {
-
-				gazeOriginLocal = new Vector3(
-					receivedEyeDataSamples[0].position_x_local,
-					receivedEyeDataSamples[0].position_y_local,
-					receivedEyeDataSamples[0].position_z_local
-				);
-
-				gazeDirection = new Vector3(
-					receivedEyeDataSamples[0].direction_x_local,
-					receivedEyeDataSamples[0].direction_y_local,
-					receivedEyeDataSamples[0].direction_z_local
-				);
-
-				gazeRayRenderer.materials[0].color = colorRay;
-				UpdateRayPosition(gazeOriginLocal + (Vector3.forward * gazeOriginOffsetZ), gazeOriginLocal + gazeDirection * lengthOfRay);
+			EyeDataPackage validEyeDataPackage = receivedEyeDataSamples.First(x => x.isValid); // find first valid package
+			
+			// no valid samples, we skip:
+			if (validEyeDataPackage == null) {
+				gazeRayRenderer.materials[0].color = Color.red;
+				return;
 			}
-			else {
-				gazeRayRenderer.materials[0].color = colorInvalid;
-				UpdateRayPosition(gazeOriginLocal + Vector3.zero, Vector3.forward);
-			}
+
+			gazeOriginLocal = new Vector3(
+				receivedEyeDataSamples[0].position_x_local,
+				receivedEyeDataSamples[0].position_y_local,
+				receivedEyeDataSamples[0].position_z_local
+			);
+
+			gazeDirection = new Vector3(
+				receivedEyeDataSamples[0].direction_x_local,
+				receivedEyeDataSamples[0].direction_y_local,
+				receivedEyeDataSamples[0].direction_z_local
+			);
+
+			gazeRayRenderer.materials[0].color = colorRay;
+			UpdateRayPosition(gazeOriginLocal + (Vector3.forward * gazeOriginOffsetZ), gazeOriginLocal + gazeDirection * lengthOfRay);
+
 		}
 
 		private void UpdateRayPosition(Vector3 startPosition, Vector3 endPosition) {
