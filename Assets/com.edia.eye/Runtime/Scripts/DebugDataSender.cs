@@ -12,6 +12,8 @@ namespace Edia.Eye {
         public bool IsRunning = false;
         public static ILslTimeAccessible LslTimer;
         public bool UseLslTiming = true;
+        [Range(0f, 1f)]
+        public float proportionInvalidSamples = 0.1f;
         double _timestampLsl;
         EyeDataPackage _ed = new();
         double _randomWaitValue = 0.15f;
@@ -42,10 +44,10 @@ namespace Edia.Eye {
 
             if (Time.time > (_lastTime + _randomWaitValue)) {
                 // Update fake eye data only after random interval
-                _randomWaitValue = UnityEngine.Random.Range(0.01f, 0.1f);
+                _randomWaitValue = UnityEngine.Random.Range(0.01f, 0.5f);
                 _lastTime = Time.time;
                 _ed.eye = ((Constants.EyeId)(UnityEngine.Random.Range(0, 3))).ToString().ToLower();
-				_ed.position_x_local = 0f;
+                _ed.position_x_local = 0f;
                 _ed.position_y_local = 0f;
                 _ed.position_z_local = 0f;
                 _ed.diameter = UnityEngine.Random.Range(0.02f, 1.0f);
@@ -57,6 +59,7 @@ namespace Edia.Eye {
                 _ed.direction_x_local = eyeFwd.x;
                 _ed.direction_y_local = eyeFwd.y;
                 _ed.direction_z_local = eyeFwd.z;
+                _ed.isValid = UnityEngine.Random.Range(0f, 1f) < proportionInvalidSamples ? false : true;  // sometimes send invalid sample
             }
 
             _ed.timestamp_et = Time.realtimeSinceStartup;
