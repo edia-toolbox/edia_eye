@@ -19,8 +19,10 @@ namespace Edia.Eye {
 		[Header("Settings")]
 		[Tooltip("Update the gaze ray only every Xth update.")]
 		public int UpdateStep = 50;
+		[Tooltip("Hides the ray after X seconds with no new sample.")]
+        public float timeoutAfterSecondsWithNoNewSample = 4f;
 
-		Vector3 gazeDirection;
+        Vector3 gazeDirection;
 		Vector3 gazeOriginLocal;
 		int counter = 0;
 
@@ -29,6 +31,9 @@ namespace Edia.Eye {
 		Color colorRight = Color.yellow;
 		Color colorCenter = Color.cyan;
 		Color colorInvalid = Color.red;
+
+		float timeLastSample = -1f;
+		
 
 		private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
 
@@ -53,10 +58,11 @@ namespace Edia.Eye {
 		#region IEyeDataClient INTERFACE IMPLEMENTATION 
 
 		public void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
-			receivedEyeDataSamples.Clear();
 			foreach (var sample in currentSamples) {
 				if (sample.eye.ToLower() == Eye.ToString().ToLower()) {
-					receivedEyeDataSamples.Add(sample);
+                    receivedEyeDataSamples.Clear();
+                    receivedEyeDataSamples.Add(sample);
+					timeLastSample = Time.time;
 				}
 			}
 		}
@@ -74,36 +80,34 @@ namespace Edia.Eye {
 		void UpdateGazeRays() {
 			counter = UpdateStep;
 
-			if (receivedEyeDataSamples.Count == 0) {
-				gazeRayRenderer.materials[0].color = colorInvalid;
-				UpdateRayPosition(gazeOriginLocal + Vector3.zero, Vector3.forward);
+			if (receivedEyeDataSamples.Count == 0 | (Time.time - timeLastSample > timeoutAfterSecondsWithNoNewSample)) {
+				UpdateRayPosition(gazeOriginLocal + Vector3.zero, Vector3.zero);
 				return;
 			}
 
-			EyeDataPackage validEyeDataPackage = receivedEyeDataSamples.First(x => x.isValid); // find first valid package
-			
-			// no valid samples, we skip:
-			if (validEyeDataPackage == null) {
+			EyeDataPackage validEyeDataPackage = receivedEyeDataSamples.FirstOrDefault(x => x.isValid); // find first valid package
+
+            // no valid samples, we skip:
+            if (validEyeDataPackage == default) {
 				gazeRayRenderer.materials[0].color = Color.red;
 				return;
 			}
 
 			gazeOriginLocal = new Vector3(
-				receivedEyeDataSamples[0].position_x_local,
-				receivedEyeDataSamples[0].position_y_local,
-				receivedEyeDataSamples[0].position_z_local
+				validEyeDataPackage.position_x_local,
+				validEyeDataPackage.position_y_local,
+				validEyeDataPackage.position_z_local
 			);
 
 			gazeDirection = new Vector3(
-				receivedEyeDataSamples[0].direction_x_local,
-				receivedEyeDataSamples[0].direction_y_local,
-				receivedEyeDataSamples[0].direction_z_local
+				validEyeDataPackage.direction_x_local,
+				validEyeDataPackage.direction_y_local,
+				validEyeDataPackage.direction_z_local
 			);
 
 			gazeRayRenderer.materials[0].color = colorRay;
 			UpdateRayPosition(gazeOriginLocal + (Vector3.forward * gazeOriginOffsetZ), gazeOriginLocal + gazeDirection * lengthOfRay);
-
-		}
+        }
 
 		private void UpdateRayPosition(Vector3 startPosition, Vector3 endPosition) {
 			gazeRayRenderer.SetPosition(0, startPosition);
