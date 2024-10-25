@@ -66,7 +66,7 @@ namespace Edia.Eye {
 
                 float confidence = receivedEyeDataSamples[0].confidence;
 
-                float etTime = receivedEyeDataSamples[0].timestamp_et;
+                double etTime = receivedEyeDataSamples[0].timestamp_et;
 
                 double lslTime = receivedEyeDataSamples[0].timestamp_lsl;
 
