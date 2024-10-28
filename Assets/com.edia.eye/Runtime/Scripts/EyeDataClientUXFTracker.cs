@@ -3,21 +3,18 @@ using Edia;
 using UnityEngine;
 using UXF;
 
-namespace Edia.Eye
-{
+namespace Edia.Eye {
 
     /// <summary>
     /// Data client to the `EyeDataHandler` that receives the data and writes it to UXF logfiles.
-    /// needs to be hooked to the list of Tracked Objects on the [ UXF_Rig ]. 
-    /// TODO: tbc ...
+    /// 1. needs to be hooked to the list of Tracked Objects on the [ UXF_Rig ]. 
+    /// 2. also needs to be hooked to the EyeDataHandler
     /// </summary>
-    public class EyeDataClientUXFTracker : Tracker, IEyeDataClient
-    {
-
+    public class EyeDataClientUXFTracker : Tracker, IEyeDataClient {
         public Edia.Constants.EyeId Eye = Edia.Constants.EyeId.CENTER;
 
         #region DECLARATIONS 
-
+        // When properties are added to this list in script -> call component RESET on inspector to force updating the component.
         string[] Properties2Log = new string[] {
             "timestamp_et",
             "timestamp_lsl",
@@ -28,7 +25,9 @@ namespace Edia.Eye
             "position_y_local",
             "position_z_local",
             "diameter",
-            "confidence"
+            "confidence",
+            "openness",
+            "eye"
     };
 
         private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
@@ -36,15 +35,18 @@ namespace Edia.Eye
         #endregion // -------------------------------------------------------------------------------------------------------------------------------
         #region IEyeDataClient INTERFACE IMPLEMENTATION 
 
+        void Awake() {
+            objectName = Eye.ToString().ToLower();
+            SetupDescriptorAndHeader();
+        }
+
         /// <summary>
         /// Called from EyeDataHandler, supplies new eyedata frame(s)
         /// </summary>
         /// <param name="currentSamples">Sampled eyedata in this frame</param>
-        public void ProcessCurrentSamples(List<EyeDataPackage> currentSamples)
-        {
+        public void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
             receivedEyeDataSamples.Clear();
-            foreach (var sample in currentSamples)
-            {
+            foreach (var sample in currentSamples) {
                 if (sample.eye.ToLower() == Eye.ToString().ToLower())
                     receivedEyeDataSamples.Add(sample);
             }
@@ -54,28 +56,23 @@ namespace Edia.Eye
         #region PROCESSING SAMPLES
 
         //As we're always recording "manually" with this tracker, we can overwrite LateUpdate
-        void LateUpdate()
-        {
-            if (this.Recording)
-            {
+        void LateUpdate() {
+            if (this.Recording) {
                 RecordCurrentSamples();
             }
         }
 
-        void RecordCurrentSamples()
-        {
-            while (receivedEyeDataSamples.Count > 0)
-            {
+        void RecordCurrentSamples() {
+            //Debug.Log($"receivedEyeDataSamples {receivedEyeDataSamples.Count}");
+            while (receivedEyeDataSamples.Count > 0) {
                 RecordRow(); // Inherited from UXF tracker
                 receivedEyeDataSamples.RemoveAt(0);
             }
         }
 
-        UXFDataRow ParseEyeDataToUXFrow(EyeDataPackage eyeData)
-        {
+        UXFDataRow ParseEyeDataToUXFrow(EyeDataPackage eyeData) {
             UXFDataRow row = new UXFDataRow();
-            foreach (string prop2log in Properties2Log)
-            {
+            foreach (string prop2log in Properties2Log) {
                 row.Add((prop2log, GetFieldValue(eyeData, prop2log)));
             }
             return row;
@@ -84,21 +81,16 @@ namespace Edia.Eye
         #endregion // -------------------------------------------------------------------------------------------------------------------------------
         #region  TRACKER
 
-        protected override void SetupDescriptorAndHeader()
-        {
-            measurementDescriptor = $"eye-tracking-{Eye.ToString().ToLower()}";
+        protected override void SetupDescriptorAndHeader() {
+            measurementDescriptor = $"-eye-tracking";
             customHeader = Properties2Log;
         }
 
-        protected override UXFDataRow GetCurrentValues()
-        {
+        protected override UXFDataRow GetCurrentValues() {
             UXFDataRow row = new UXFDataRow();
-            if (receivedEyeDataSamples.Count > 0)
-            {
+            if (receivedEyeDataSamples.Count > 0) {
                 row = ParseEyeDataToUXFrow(receivedEyeDataSamples[0]);
-            }
-            else
-            {
+            } else {
                 Debug.Log("ET queue is empty. Not a good sign.");
             }
             return row;
@@ -107,8 +99,7 @@ namespace Edia.Eye
         #endregion // -------------------------------------------------------------------------------------------------------------------------------
 
         // TODO: This should go to the `Utils` of the framweork
-        object GetFieldValue(object src, string propName)
-        {
+        object GetFieldValue(object src, string propName) {
             return src.GetType().GetField(propName).GetValue(src);
         }
     }

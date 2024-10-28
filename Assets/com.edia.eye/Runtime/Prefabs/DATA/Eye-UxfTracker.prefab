@@ -77,4 +77,8 @@ MonoBehaviour:
     2. Add this to the
     list of dataclients
 
-    2. Add this to the UXF prefab under DATA COLLECTION'
+    3. Add this to the UXF prefab under DATA COLLECTION
+
+
+    Note:
+    `Object_name'' value is overwritten at runtime'
