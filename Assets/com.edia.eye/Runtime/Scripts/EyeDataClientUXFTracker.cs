@@ -36,7 +36,7 @@ namespace Edia.Eye {
         #region IEyeDataClient INTERFACE IMPLEMENTATION 
 
         void Awake() {
-            objectName = Eye.ToString();
+            objectName = Eye.ToString().ToLower();
             SetupDescriptorAndHeader();
         }
 
@@ -82,7 +82,7 @@ namespace Edia.Eye {
         #region  TRACKER
 
         protected override void SetupDescriptorAndHeader() {
-            measurementDescriptor = $"eye-tracking-{Eye.ToString().ToLower()}";
+            measurementDescriptor = $"-eye-tracking";
             customHeader = Properties2Log;
         }
 
