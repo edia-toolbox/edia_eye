@@ -47,7 +47,7 @@ namespace Edia.Eye {
                 _randomWaitValue = UnityEngine.Random.Range(0.01f, 0.5f);
                 _lastTime = Time.time;
                 _ed.eye = ((Constants.EyeId)(UnityEngine.Random.Range(0, 3))).ToString().ToLower();
-                _ed.position_x_local = 0f;
+                _ed.position_x_local = _ed.eye == "left" ? -0.03f : _ed.eye == "right" ? 0.03f : 0f;
                 _ed.position_y_local = 0f;
                 _ed.position_z_local = 0f;
                 _ed.diameter = UnityEngine.Random.Range(0.02f, 1.0f);
@@ -59,6 +59,7 @@ namespace Edia.Eye {
                 _ed.direction_x_local = eyeFwd.x;
                 _ed.direction_y_local = eyeFwd.y;
                 _ed.direction_z_local = eyeFwd.z;
+                _ed.openness = UnityEngine.Random.Range(0f, 1f) < 0.05f ? 0 : UnityEngine.Random.Range(0.8f, 1.0f);
                 _ed.isValid = UnityEngine.Random.Range(0f, 1f) < proportionInvalidSamples ? false : true;  // sometimes send invalid sample
             }
 
