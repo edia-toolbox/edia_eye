@@ -64,13 +64,15 @@ namespace Edia.Eye {
                 float pupilDiaX = receivedEyeDataSamples[0].diameter_x;
                 float pupilDiaY = receivedEyeDataSamples[0].diameter_y;
 
+                float openness = receivedEyeDataSamples[0].openness;
+
                 float confidence = receivedEyeDataSamples[0].confidence;
 
                 double etTime = receivedEyeDataSamples[0].timestamp_et;
 
                 double lslTime = receivedEyeDataSamples[0].timestamp_lsl;
 
-                _eyeOutlet.PushSample(new Vector3(posX, posY, posZ), new Vector3(rotX, rotY, rotZ), pupilDia, confidence, etTime, lslTime);
+                _eyeOutlet.PushSample(new Vector3(posX, posY, posZ), new Vector3(rotX, rotY, rotZ), pupilDia, openness, confidence, etTime, lslTime);
 
                 receivedEyeDataSamples.RemoveAt(0);
             }
