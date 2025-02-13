@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Edia;
 using UnityEngine;
-using UXF;
 
 namespace Edia.Eye {
-
-
+    
     /// <summary>EyeData handler
     /// EyeDataHandler 
     /// - is a singleton
@@ -19,76 +16,72 @@ namespace Edia.Eye {
     /// 	- empties the `currentSamples`
     /// 	- releases the lock again
     /// </summary>
-    /// 
+    public sealed class EyeDataHandler : MonoBehaviour {
 
-    public sealed class EyeDataHandler : MonoBehaviour
+        [Header("Refs")]
+        public List<MonoBehaviour> DataClients;
 
-	{
-		public static EyeDataHandler Instance;
+        [Header("Debug")]
+        public bool AutoStartProcessing = false;
 
-		[Header("Refs")]
-		public List<MonoBehaviour> DataClients;
+        List<EyeDataPackage> _currentSamples { get; } = new List<EyeDataPackage>();
 
-		[Header("Debug")]
-		public bool ProcessOnStart = false;
+        // Lock for thread safety:
+        private readonly object _lock = new object();
 
-		List<EyeDataPackage> currentSamples { get; } = new List<EyeDataPackage> ();
+        // TODO: extend script from Edia.core <singeleton>  
+        // Pseudo-Singleton pattern to make sure we have only one DataHandler in the scene:
+        public static EyeDataHandler Instance;
+        private void Awake() {
+            if (Instance == null) {
+                Instance = this;
+            }
+            else if (Instance != this) {
+                Destroy(this.gameObject);
+            }
+        }
 
-		// Lock for thread safety:
-		public readonly object Lock = new object ();
+        private void Start() {
+            if (AutoStartProcessing)
+                StartPushingSamples();
+        }
 
-		// Pseudo-Singleton pattern to make sure we have only one DataHandler in the scene:
-		private void Awake () {
-			if (Instance == null) {
-				Instance = this;
-			} else if (Instance != this) {
-				Destroy (this.gameObject);
-			}
-		}
+        /// <summary> Start the coroutine that sends data to the `DataClients`. Called when recording should start </summary>
+        public void StartPushingSamples() {
+            Debug.Log("Started pushing");
+            ResetCurrentSamplesCollection();
+            StartCoroutine(PushSamplesThreadsafeAndReset());
+        }
 
-		private void Start() {
-			if(ProcessOnStart)
-				StartPushingSamples();
-		}
+        /// <summary> Coroutine that pushes the items in `currentSamples` to all `DataClients` in a somewhat threadsafe way. 
+        /// Empties the list after all samples are sent.  </summary>
+        private IEnumerator PushSamplesThreadsafeAndReset() {
+            while (true) {
+                yield return new WaitForEndOfFrame();
 
-		/// <summary>
-		/// Start the coroutine that sends data to the `DataClients`. Called when recording should start
-		/// </summary>
-		public void StartPushingSamples () {
-			Debug.Log ("Started pushing");
-			ResetCurrentSamplesCollection ();
-			StartCoroutine (PushSamplesThreadsafeAndReset ());
-		}
+                if (_currentSamples.Count == 0)
+                    continue;
 
-		/// <summary> Coroutine that pushes the items in `currentSamples` to all `DataClients` in a somewhat threadsafe way. 
-		/// Empties the list after all samples are sent.  </summary>
-		private IEnumerator PushSamplesThreadsafeAndReset () {
-			while (true) {
-				yield return new WaitForEndOfFrame ();
+                lock (_lock) {
+                    // Push listed samples to all clients
+                    foreach (IEyeDataClient dataClient in DataClients) {
+                        dataClient.ProcessCurrentSamples(_currentSamples);
+                    }
 
-				if (currentSamples.Count == 0)
-					continue;
+                    ResetCurrentSamplesCollection(); // Reset Queue
+                }
+            }
+        }
 
-				lock (Lock) {
-					// Push listed samples to all clients
-					foreach (IEyeDataClient dataClient in DataClients) {
-						dataClient.ProcessCurrentSamples (currentSamples);
-					}
+        /// <summary>Empties the List of `currentSamples`. </summary>
+        private void ResetCurrentSamplesCollection() {
+            _currentSamples.Clear();
+        }
 
-                    ResetCurrentSamplesCollection (); // Reset Queue
-				}
-			}
-		}
-
-		/// <summary>Empties the List of `currentSamples`. </summary>
-		private void ResetCurrentSamplesCollection () {
-			currentSamples.Clear ();
-		}
-
-		/// <summary> Add samples to the list of `currentSamples`.  </summary>
-		/// <param name="latestSample">Latest sample recorded by the eye tracker.</param>
-		public void AddEyeDataPackage (EyeDataPackage latestSample) {
-            currentSamples.Add (latestSample);
-		}
-	}
+        /// <summary> Add samples to the list of `currentSamples`.  </summary>
+        /// <param name="latestSample">Latest sample recorded by the eye tracker.</param>
+        public void AddEyeDataPackage(EyeDataPackage latestSample) {
+            _currentSamples.Add(latestSample);
+        }
+    }
 }
