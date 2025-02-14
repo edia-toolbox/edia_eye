@@ -1,24 +1,23 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Edia;
 
 namespace Edia.Eye {
-    /// <summary>
-    /// Dummy class to fake a minimal data stream from an eye tracker (with 90Hz).
-    /// </summary>
+    /// <summary> Dummy class to fake a minimal data stream from an eye tracker (with 90Hz). </summary>
     public class DebugDataSender : MonoBehaviour {
+        
+        [Header("Refs")]
         public bool IsRunning = false;
         public static ILslTimeAccessible LslTimer;
         public bool UseLslTiming = true;
         [Range(0f, 1f)]
-        public float proportionInvalidSamples = 0.1f;
-        double _timestampLsl;
-        EyeDataPackage _ed = new();
-        double _randomWaitValue = 0.15f;
-        double _lastTime;
+        public float ProportionInvalidSamples = 0.1f;
 
+        // Locals
+        private double _timestampLsl;
+        private EyeDataPackage _ed = new();
+        private double _randomWaitValue = 0.15f;
+        private double _lastTime;
+
+        /// <summary> Start the dummy data provider from script </summary>
         public void StartAddingDummyEyedata() {
             IsRunning = true;
         }
@@ -38,12 +37,11 @@ namespace Edia.Eye {
         }
 
 		// Sends random data to the eDIA `EyeDataHandler` 
-		void Update() {
+        private void Update() {
             if (!IsRunning)
                 return;
 
-            if (Time.time > (_lastTime + _randomWaitValue)) {
-                // Update fake eye data only after random interval
+            if (Time.time > (_lastTime + _randomWaitValue)) { // Update fake eye data only after random interval
                 _randomWaitValue = UnityEngine.Random.Range(0.01f, 0.5f);
                 _lastTime = Time.time;
                 _ed.eye = ((Constants.EyeId)(UnityEngine.Random.Range(0, 3))).ToString().ToLower();
@@ -60,7 +58,7 @@ namespace Edia.Eye {
                 _ed.direction_y_local = eyeFwd.y;
                 _ed.direction_z_local = eyeFwd.z;
                 _ed.openness = UnityEngine.Random.Range(0f, 1f) < 0.05f ? 0 : UnityEngine.Random.Range(0.8f, 1.0f);
-                _ed.isValid = UnityEngine.Random.Range(0f, 1f) < proportionInvalidSamples ? false : true;  // sometimes send invalid sample
+                _ed.isValid = UnityEngine.Random.Range(0f, 1f) < ProportionInvalidSamples ? false : true;  // sometimes send invalid sample
             }
 
             _ed.timestamp_et = Time.realtimeSinceStartup;
