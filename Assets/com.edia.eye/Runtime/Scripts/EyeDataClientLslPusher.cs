@@ -41,12 +41,6 @@ namespace Edia.Eye {
                 return;
 
             while (_receivedEyeDataSamples.Count > 0) {
-                float dirX = _receivedEyeDataSamples[0].direction_x_local;
-                float dirY = _receivedEyeDataSamples[0].direction_y_local;
-                float dirZ = _receivedEyeDataSamples[0].direction_z_local;
-
-                float yaw = Mathf.Atan2(-1 * dirX, dirZ) * Mathf.Rad2Deg;
-                float pitch = Mathf.Asin(dirY) * Mathf.Rad2Deg;
 
                 float posX = _receivedEyeDataSamples[0].position_x_local;
                 float posY = _receivedEyeDataSamples[0].position_y_local;
@@ -56,8 +50,6 @@ namespace Edia.Eye {
                 float rotY = _receivedEyeDataSamples[0].rotation_y_local;
                 float rotZ = _receivedEyeDataSamples[0].rotation_z_local;
 
-                float pupilDia = _receivedEyeDataSamples[0].diameter;
-                float pupilDiaX = _receivedEyeDataSamples[0].diameter_x;
                 float pupilDiaY = _receivedEyeDataSamples[0].diameter_y;
 
                 float openness = _receivedEyeDataSamples[0].openness;
