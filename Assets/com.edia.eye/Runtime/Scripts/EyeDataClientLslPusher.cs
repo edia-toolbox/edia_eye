@@ -50,7 +50,7 @@ namespace Edia.Eye {
                 float rotY = _receivedEyeDataSamples[0].rotation_y_local;
                 float rotZ = _receivedEyeDataSamples[0].rotation_z_local;
 
-                float pupilDiaY = _receivedEyeDataSamples[0].diameter_y;
+                float pupilDia = _receivedEyeDataSamples[0].diameter;
 
                 float openness = _receivedEyeDataSamples[0].openness;
 
