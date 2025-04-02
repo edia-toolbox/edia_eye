@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Edia;
 using UnityEngine;
@@ -37,12 +38,24 @@ namespace Edia.Eye {
 
         void Awake() {
             objectName = Eye.ToString().ToLower();
+            gameObject.name = ($"Eye-{objectName}-UxfTracker");
             SetupDescriptorAndHeader();
         }
 
-        /// <summary>
-        /// Called from EyeDataHandler, supplies new eyedata frame(s)
-        /// </summary>
+        /// <summary> Auto add myself to UXF trackers in start, as the Session singleton does not exist earlier </summary>
+        private void Start() {
+            RegisterWithUXF();
+        }
+
+        private void RegisterWithUXF() {
+            if (UXF.Session.instance != null)
+                UXF.Session.instance.trackedObjects.Add(this);
+            else {
+                Debug.LogError("Session not yet initialized. You probably need to add the <b>Edia-Executer</b> prefab to the scene.");
+            }
+        }
+
+        /// <summary> Called from EyeDataHandler, supplies new eyedata frame(s) </summary>
         /// <param name="currentSamples">Sampled eyedata in this frame</param>
         public void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
             receivedEyeDataSamples.Clear();

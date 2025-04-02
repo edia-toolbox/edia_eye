@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.edia.core": "git@gitlab.gwdg.de:edia/edia_core.git?path=Assets/com.edia.core#feat/eyeOpenness",
+    "com.unity.ide.rider": "3.0.35",
     "com.unity.ide.visualstudio": "2.0.22",
     "com.unity.render-pipelines.universal": "14.0.9",
     "com.unity.test-framework": "1.1.33",
