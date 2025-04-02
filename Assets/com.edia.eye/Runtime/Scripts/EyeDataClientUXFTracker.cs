@@ -13,9 +13,10 @@ namespace Edia.Eye {
     /// </summary>
     public class EyeDataClientUXFTracker : Tracker, IEyeDataClient {
         public Edia.Constants.EyeId Eye = Edia.Constants.EyeId.CENTER;
-
+        
         #region DECLARATIONS 
         // When properties are added to this list in script -> call component RESET on inspector to force updating the component.
+        
         string[] Properties2Log = new string[] {
             "timestamp_et",
             "timestamp_lsl",
@@ -39,7 +40,6 @@ namespace Edia.Eye {
         void Awake() {
             objectName = Eye.ToString().ToLower();
             gameObject.name = ($"Eye-{objectName}-UxfTracker");
-            SetupDescriptorAndHeader();
         }
 
         /// <summary> Auto add myself to UXF trackers in start, as the Session singleton does not exist earlier </summary>
@@ -94,10 +94,8 @@ namespace Edia.Eye {
         #endregion // -------------------------------------------------------------------------------------------------------------------------------
         #region  TRACKER
 
-        protected override void SetupDescriptorAndHeader() {
-            measurementDescriptor = $"-eye-tracking";
-            customHeader = Properties2Log;
-        }
+        public override string MeasurementDescriptor => $"-eye-tracking";
+        public override IEnumerable<string> CustomHeader => Properties2Log;
 
         protected override UXFDataRow GetCurrentValues() {
             UXFDataRow row = new UXFDataRow();
