@@ -51,17 +51,17 @@ jobs:
         git checkout $GITHUB_SHA  # Checkout the commit for the tag
         git checkout -b release-branch  # Create a new release branch from the tagged commit
 
+    - name: Copy matched folder to release branch
+      run: |
+        # Copy the matched folder to the root directory first
+        cp -r "./Assets/$MATCHED_FOLDER" ./
+        git add .
+        git commit -m "Add release assets for ${RELEASE_NAME}"
+
     - name: Delete all files except the relevant folder
       run: |
         # Remove all files from the repo except the matched folder
         find . -mindepth 1 -maxdepth 1 ! -path "./$MATCHED_FOLDER" ! -name ".git" -exec rm -rf {} +
-        
-    - name: Copy matched folder to release branch
-      run: |
-        # Copy the matched folder (if not already copied)
-        cp -r "$MATCHED_FOLDER" ./  # Make sure it's in the root directory
-        git add .
-        git commit -m "Add release assets for ${RELEASE_NAME}"
 
     - name: Tag the commit
       run: |
@@ -77,7 +77,7 @@ jobs:
       with:
         tag_name: "${RELEASE_NAME}"
         name: "${RELEASE_NAME}"
-        # files: release-${RELEASE_NAME}.zip
+        # files: release-${RELEASE_NAME}.zip  # Uncomment if you want to attach files
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
