@@ -67,7 +67,13 @@ jobs:
       run: |
         git tag "${RELEASE_NAME}"
 
+    - name: Configure Git to use GitHub Token
+      run: |
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+
     - name: Push commit and tag to remote
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git push origin release-branch
         git push origin "${RELEASE_NAME}"
