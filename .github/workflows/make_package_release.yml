@@ -34,6 +34,12 @@ jobs:
       if: steps.validate_tag.outputs.valid != 'true'
       run: exit 0
 
+      - name: Configure Git
+        run: |
+          git config --global user.email "ci@github.com"
+          git config --global user.name "GitHub Actions Bot"
+
+
     - name: Find matching folder
       id: find_folder
       run: |
