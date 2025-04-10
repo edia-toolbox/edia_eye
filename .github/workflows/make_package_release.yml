@@ -1,0 +1,91 @@
+name: Create Subfolder Release
+
+on:
+  push:
+    tags:
+      - 'release-*'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Get tag and release name
+      id: get_tag
+      run: |
+        echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+        echo "RELEASE_NAME=${GITHUB_REF#refs/tags/release-}" >> $GITHUB_ENV
+
+    - name: Validate tag pattern
+      id: validate_tag
+      run: |
+        if [[ "$TAG_NAME" =~ ^release-.+ ]]; then
+          echo "valid=true" >> $GITHUB_OUTPUT
+        else
+          echo "valid=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Exit if tag is invalid
+      if: steps.validate_tag.outputs.valid != 'true'
+      run: exit 0
+
+    - name: Find matching folder
+      id: find_folder
+      run: |
+        MATCH=$(find Assets -type d -regex '.*/com\.edia[^/]*' | head -n 1)
+        if [ -z "$MATCH" ]; then
+          echo "No matching folder found"
+          exit 1
+        fi
+        echo "MATCHED_FOLDER=$MATCH" >> $GITHUB_ENV
+        echo "Matched folder: $MATCH"
+
+    - name: Checkout the tagged commit
+      run: |
+        git fetch origin
+        git checkout $GITHUB_SHA  # Checkout the commit for the tag
+        git checkout -b release-branch  # Create a new release branch from the tagged commit
+
+    - name: Delete all files except the relevant folder
+      run: |
+        # Remove all files from the repo except the matched folder
+        find . -mindepth 1 -maxdepth 1 ! -path "./$MATCHED_FOLDER" ! -name ".git" -exec rm -rf {} +
+        
+    - name: Copy matched folder to release branch
+      run: |
+        # Copy the matched folder (if not already copied)
+        cp -r "$MATCHED_FOLDER" ./  # Make sure it's in the root directory
+        git add .
+        git commit -m "Add release assets for ${RELEASE_NAME}"
+
+    - name: Tag the commit
+      run: |
+        git tag "${RELEASE_NAME}"
+
+    - name: Push commit and tag to remote
+      run: |
+        git push origin release-branch
+        git push origin "${RELEASE_NAME}"
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: "${RELEASE_NAME}"
+        name: "${RELEASE_NAME}"
+        # files: release-${RELEASE_NAME}.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Delete release branch locally
+      run: |
+        git checkout main  # Switch back to the main branch
+        git branch -D release-branch  # Delete the branch locally
+
+    - name: Delete release branch remotely
+      run: |
+        git push origin --delete release-branch  # Delete the branch remotely
