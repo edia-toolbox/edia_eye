@@ -37,7 +37,7 @@ jobs:
     - name: Find matching folder
       id: find_folder
       run: |
-        MATCH=$(find Assets -type d -regex 'com\.edia[^/]*' | head -n 1)
+        MATCH=$(find Assets -type d -regex '.*/com\.edia[^/]*' | head -n 1)
         if [ -z "$MATCH" ]; then
           echo "No matching folder found"
           exit 1
