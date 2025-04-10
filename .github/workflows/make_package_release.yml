@@ -37,7 +37,7 @@ jobs:
     - name: Find matching folder
       id: find_folder
       run: |
-        MATCH=$(find Assets -type d -regex '.*/com\.edia[^/]*' | head -n 1)
+        MATCH=$(find Assets -type d -regex 'com\.edia[^/]*' | head -n 1)
         if [ -z "$MATCH" ]; then
           echo "No matching folder found"
           exit 1
@@ -54,7 +54,7 @@ jobs:
     - name: Copy matched folder to release branch
       run: |
         # Copy the matched folder to the root directory first
-        cp -r "./Assets/$MATCHED_FOLDER" ./
+        cp -r "./$MATCHED_FOLDER" ./
         git add .
         git commit -m "Add release assets for ${RELEASE_NAME}"
 
