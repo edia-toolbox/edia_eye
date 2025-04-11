@@ -27,7 +27,7 @@ jobs:
     - name: Extract Subfolder and Push Branch
       run: |
           git subtree split --prefix=Assets/com.edia.eye -b release-branch
-          git push origin release-branch
+          git push -f origin release-branch
           git tag "${RELEASE_NAME}"
           git push origin "${RELEASE_NAME}"
           git push --delete origin "$TAG_NAME"
