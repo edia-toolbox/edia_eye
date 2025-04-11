@@ -26,17 +26,18 @@ jobs:
 
     - name: Extract Subfolder and Push Branch
       run: |
-          git subtree split --prefix=Assets/com.edia.eye -b release-branch-$RELEASE_NAME
-          git push -f origin release-branch-$RELEASE_NAME
+          git subtree split --prefix=Assets/com.edia.eye -b release-branch
+          git push origin release-branch
 
     - name: Tag the commit
       run: |
         git tag "${RELEASE_NAME}"
         git push origin "${RELEASE_NAME}"
+        git push --delete origin "$TAG_NAME"
 
     - name: Create GitHub Release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        gh release create "$RELEASE_NAME" --title "Release $RELEASE_NAME" --target release-branch-$RELEASE_NAME
+        gh release create "$RELEASE_NAME" --title "$RELEASE_NAME" --target release-branch
 
