@@ -28,12 +28,9 @@ jobs:
       run: |
           git subtree split --prefix=Assets/com.edia.eye -b release-branch
           git push origin release-branch
-
-    - name: Tag the commit
-      run: |
-        git tag "${RELEASE_NAME}"
-        git push origin "${RELEASE_NAME}"
-        git push --delete origin "$TAG_NAME"
+          git tag "${RELEASE_NAME}"
+          git push origin "${RELEASE_NAME}"
+          git push --delete origin "$TAG_NAME"
 
     - name: Create GitHub Release
       env:
