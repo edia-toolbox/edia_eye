@@ -24,12 +24,16 @@ jobs:
         git config --global user.email "ci@github.com"
         git config --global user.name "GitHub Actions Bot"
 
+    - name: Get package folder
+      run: |
+        echo "PACKAGE_FOLDER=$(find Assets -type d -regex '.*/com\.edia\..[^/]+')" >> $GITHUB_ENV
+
     - name: Extract Subfolder and Push Branch
       run: |
-          git subtree split --prefix=Assets/com.edia.eye -b release-branch
+          git subtree split --prefix=${PACKAGE_FOLDER} -b release-branch
           git push -f origin release-branch
-          git tag "${RELEASE_NAME}" origin/release-branch
-          git push origin "${RELEASE_NAME}"
+          git tag "$RELEASE_NAME" origin/release-branch
+          git push origin "$RELEASE_NAME"
           git push --delete origin "$TAG_NAME"
 
     - name: Create GitHub Release
