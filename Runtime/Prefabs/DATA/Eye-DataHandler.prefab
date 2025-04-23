@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4625099936160350870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4625099936160350869}
+  - component: {fileID: 1873206133}
+  - component: {fileID: 1409125293413158502}
+  m_Layer: 0
+  m_Name: Eye-DataHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4625099936160350869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625099936160350870}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1873206133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625099936160350870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e3dacc4599bc547af4a43b0b848c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Note: "Manages incoming eyetracking data, conversion and forwarding to dataclients.\n\nAdd
+    all EyeDataClients that need access to eye tracking data to the list of \"DataClients\"
+    on the Eye Data Handler (EyeDataClients need to implement the EyeDataClient interface).
+    \n\nTick \"Process on Start\" on the EyeDataHandler if you want to push data
+    to the clients right from the start. Otherwise you need to call the according
+    method from code to start pushing. \n\n"
+--- !u!114 &1409125293413158502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625099936160350870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 949ccbf220c960d4daa26152cd7aa851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DataClients: []
+  ProcessOnStart: 1

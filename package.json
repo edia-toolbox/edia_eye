@@ -1,0 +1,18 @@
+{
+	"name": "com.edia.eye",
+	"displayName": "EDIA Eye",
+	"version": "0.4.0",
+	"unity": "6000.0",
+	"description": "EDIA: Eye tracking functionalities",
+	"keywords": ["EDIA", "xr", "vr", "experiment"],
+	"author": {
+		"name": "EDIA"
+	},
+	"samples": [{
+			"displayName": "EDIA Eye demo scenes",
+			"description": "Scenes demonstrating basic eye tracking capabilities.",
+			"path": "Samples~/"
+		}],
+	"dependencies": {},
+	"hideInEditor": false
+}
