@@ -4,30 +4,125 @@
 
 namespace Edia.Eye
 {
+    /// <summary>
+    /// Data container for one single frame of eye data from an eye tracker.
+    /// This class holds various properties related to the eye's position, orientation,
+    /// gaze direction, pupil size, and timestamps. It can be used to track eye movements,
+    /// gaze points, and eye state (such as pupil diameter and openness) for further analysis.
+    /// </summary>
     public class EyeDataPackage {
+        
+        // Default value for numeric fields
         static float defaultValue = 0f;
 
+        /// <summary>
+        /// Indicates if the data package is valid. 
+        /// </summary>
         public bool isValid = false;
-        public string eye = ""; // Which eye the package is referring to (can be left, right, or center)
-        public float direction_x_local = defaultValue; // x element of normalized gaze vector in local space of HMD
-        public float direction_y_local = defaultValue; // y element
-        public float direction_z_local = defaultValue; // z element
-        public float position_x_local = defaultValue; // x coordinate of eye center in local space of HMD
-        public float position_y_local = defaultValue; // y coordinate
-        public float position_z_local = defaultValue; // z coordinate
-        public float rotation_x_local = defaultValue; // x rotation of the eye in local space of HMD
-        public float rotation_y_local = defaultValue; // y rotation
-        public float rotation_z_local = defaultValue; // z rotation
-        public float intersection_x = defaultValue; // x position of the intersection point with a plane in world space
-        public float intersection_y = defaultValue; // y
-        public float intersection_z = defaultValue; // z
-        public string target_id = ""; // identifier of the object that was intersected by the gaze ray
-        public float diameter = defaultValue; // pupil diameter of the eye [in mm]
-        public float diameter_x = defaultValue; // first axis of pupil ellipse [in mm]
-        public float diameter_y = defaultValue; // second axis of pupil ellipse [in mm]
-        public float confidence = defaultValue; // confidence in reliability of this sample [0-1]
-        public double timestamp_et = (double)defaultValue; // timestamp provided by the eye tracker [in ms]
-        public double timestamp_lsl = defaultValue; // timestamp in LSL time (approx) at the moment of sample recording [in s]
-        public float openness = defaultValue; // eye openness value provided by SDK [0-1]
+
+        /// <summary>
+        /// Specifies which eye the data refers to. It can be "left", "right", or "center".
+        /// </summary>
+        public string eye = "";
+
+        /// <summary>
+        /// The x-component of the normalized gaze vector in the local space of the HMD.
+        /// </summary>
+        public float direction_x_local = defaultValue;
+
+        /// <summary>
+        /// The y-component of the normalized gaze vector in the local space of the HMD.
+        /// </summary>
+        public float direction_y_local = defaultValue;
+
+        /// <summary>
+        /// The z-component of the normalized gaze vector in the local space of the HMD.
+        /// </summary>
+        public float direction_z_local = defaultValue;
+
+        /// <summary>
+        /// The x-coordinate of the eye center in the local space of the HMD.
+        /// </summary>
+        public float position_x_local = defaultValue;
+
+        /// <summary>
+        /// The y-coordinate of the eye center in the local space of the HMD.
+        /// </summary>
+        public float position_y_local = defaultValue;
+
+        /// <summary>
+        /// The z-coordinate of the eye center in the local space of the HMD.
+        /// </summary>
+        public float position_z_local = defaultValue;
+
+        /// <summary>
+        /// The x rotation of the eye in the local space of the HMD, representing the eye's orientation.
+        /// </summary>
+        public float rotation_x_local = defaultValue;
+
+        /// <summary>
+        /// The y rotation of the eye in the local space of the HMD, representing the eye's orientation.
+        /// </summary>
+        public float rotation_y_local = defaultValue;
+
+        /// <summary>
+        /// The z rotation of the eye in the local space of the HMD, representing the eye's orientation.
+        /// </summary>
+        public float rotation_z_local = defaultValue;
+
+        /// <summary>
+        /// The x-coordinate of the intersection point of the gaze with an object in world space.
+        /// </summary>
+        public float intersection_x = defaultValue;
+
+        /// <summary>
+        /// The y-coordinate of the intersection point of the gaze with an object in world space.
+        /// </summary>
+        public float intersection_y = defaultValue;
+
+        /// <summary>
+        /// The z-coordinate of the intersection point of the gaze with an object in world space.
+        /// </summary>
+        public float intersection_z = defaultValue;
+
+        /// <summary>
+        /// The identifier of the object that was intersected by the gaze ray.
+        /// </summary>
+        public string target_id = "";
+
+        /// <summary>
+        /// The diameter of the pupil in millimeters.
+        /// </summary>
+        public float diameter = defaultValue;
+
+        /// <summary>
+        /// The first axis of the pupil ellipse, representing the diameter in millimeters.
+        /// </summary>
+        public float diameter_x = defaultValue;
+
+        /// <summary>
+        /// The second axis of the pupil ellipse, representing the diameter in millimeters.
+        /// </summary>
+        public float diameter_y = defaultValue;
+
+        /// <summary>
+        /// The confidence level in the reliability of this sample, ranging from 0 (low) to 1 (high).
+        /// </summary>
+        public float confidence = defaultValue;
+
+        /// <summary>
+        /// The timestamp from the eye tracker, in milliseconds.
+        /// </summary>
+        public double timestamp_et = (double)defaultValue;
+
+        /// <summary>
+        /// The timestamp in LSL (Lab Streaming Layer) time, representing the time when the sample was recorded, in seconds.
+        /// </summary>
+        public double timestamp_lsl = defaultValue;
+
+        /// <summary>
+        /// The openness of the eye, with a value ranging from 0 (closed) to 1 (fully open).
+        /// </summary>
+        public float openness = defaultValue;
     }
 }
