@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Edia.Eye
 {
-    public class EyeDataGazeRenderToTexture : MonoBehaviour, IEyeDataClient
+    public class EyeDataClientGazeRenderToTexture : EyeDataClient
     {
 #region DECLARATIONS 
 
@@ -58,7 +58,7 @@ namespace Edia.Eye
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region IEyeDataClient INTERFACE IMPLEMENTATION 
 
-		public void ProcessCurrentSamples (List<EyeDataPackage> currentSamples) {
+		public override void ProcessCurrentSamples (List<EyeDataPackage> currentSamples) {
 			receivedEyeDataSamples.Clear ();
 			foreach (var sample in currentSamples) {
 				if (sample.eye.ToLower() == "center")

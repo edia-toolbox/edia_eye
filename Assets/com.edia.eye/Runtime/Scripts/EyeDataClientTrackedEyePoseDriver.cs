@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Edia.Eye;
 using UnityEngine;
 
-public class TrackedEyePoseDriver : MonoBehaviour, IEyeDataClient {
+public class EyeDataClientTrackedEyePoseDriver : EyeDataClient {
     public bool ApplyPositionLocal = true;
     public bool ApplyRotationLocal = true;
 
 
-    public void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
+    public override void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
         if (currentSamples.Count == 0) {
             return;
         }

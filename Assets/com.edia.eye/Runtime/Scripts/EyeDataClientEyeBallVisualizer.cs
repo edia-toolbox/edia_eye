@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EyeDataClientEyeBallVisualizer : MonoBehaviour, IEyeDataClient
+public class EyeDataClientEyeBallVisualizer : EyeDataClient
 {
     public Constants.EyeId Eye = Constants.EyeId.CENTER;
     public float Openness;
@@ -15,7 +15,7 @@ public class EyeDataClientEyeBallVisualizer : MonoBehaviour, IEyeDataClient
 
 	public GameObject EyeLid;
 	public GameObject EyeBall;
-    public void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
+    public override void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
         foreach (var sample in currentSamples) {
             if (sample.eye.ToLower() == Eye.ToString().ToLower()) {
                 Openness = sample.openness;

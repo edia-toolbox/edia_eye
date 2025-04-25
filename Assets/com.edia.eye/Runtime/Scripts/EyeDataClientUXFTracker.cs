@@ -12,6 +12,11 @@ namespace Edia.Eye {
     /// 2. also needs to be hooked to the EyeDataHandler
     /// </summary>
     public class EyeDataClientUXFTracker : Tracker, IEyeDataClient {
+        [Header("References")]
+        [Tooltip("Add link to Eye Data Handler Prefab in the scene.")]
+        public GameObject EyeDataHandler;
+        
+        [Header("Which Eye?")]
         public Edia.Constants.EyeId Eye = Edia.Constants.EyeId.CENTER;
         
         #region DECLARATIONS 
@@ -38,6 +43,7 @@ namespace Edia.Eye {
         #region IEyeDataClient INTERFACE IMPLEMENTATION 
 
         void Awake() {
+            EyeDataHandler.GetComponent<EyeDataHandler>().AddDataClient(this);
             objectName = Eye.ToString().ToLower();
             gameObject.name = ($"Eye-{objectName}-UxfTracker");
         }

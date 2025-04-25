@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Edia.Eye {
     
-    public class EyeDataClientLslPusher : MonoBehaviour, IEyeDataClient {
+    public class EyeDataClientLslPusher : EyeDataClient {
         private List<EyeDataPackage> _receivedEyeDataSamples = new List<EyeDataPackage>();
         private float[] _sample;
         private ILslEyeOutlet _eyeOutlet;
@@ -24,7 +24,7 @@ namespace Edia.Eye {
             }
         }
 
-        public void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
+        public override void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
             _receivedEyeDataSamples.Clear();
             foreach (var sample in currentSamples) {
                 if (sample.eye.ToLower() == Eye.ToString().ToLower())

@@ -26,14 +26,13 @@ namespace Edia.Eye {
 	{
 		public static EyeDataHandler Instance;
 
-		[Header("Refs")]
-		public List<MonoBehaviour> DataClients;
-
 		[Header("Debug")]
 		public bool ProcessOnStart = false;
 
         // Lock for thread safety:
         public readonly object Lock = new object();
+
+        private List<IEyeDataClient> _dataClients = new(); 
 
         List<EyeDataPackage> _currentSamples { get; } = new List<EyeDataPackage> ();
 
@@ -49,6 +48,13 @@ namespace Edia.Eye {
 		private void Start() {
 			if(ProcessOnStart)
 				StartPushingSamples();
+		}
+
+		public void AddDataClient(IEyeDataClient dataClient) {
+			if (!_dataClients.Contains(dataClient))
+			{
+				_dataClients.Add(dataClient);
+			}
 		}
 
 		/// <summary>
@@ -71,7 +77,7 @@ namespace Edia.Eye {
 
 				lock (Lock) {
 					// Push listed samples to all clients
-					foreach (IEyeDataClient dataClient in DataClients) {
+					foreach (IEyeDataClient dataClient in _dataClients) {
 						dataClient.ProcessCurrentSamples (_currentSamples);
 					}
 

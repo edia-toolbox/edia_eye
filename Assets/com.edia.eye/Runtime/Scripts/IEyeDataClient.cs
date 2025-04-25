@@ -8,8 +8,8 @@ namespace Edia.Eye {
 	/// <summary>
 	/// Interface to be implemented by data clients that receive data from the `EyeDataHandler`. 
 	/// </summary>
-	public interface IEyeDataClient {
-
+	public interface IEyeDataClient
+	{
 		/// <summary>
 		/// This method is called by the `EyeDataHandler` to push the current samples to the data clients. 
 		/// </summary>

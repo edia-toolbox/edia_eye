@@ -6,7 +6,7 @@ using Edia;
 using System.Linq;
 
 namespace Edia.Eye {
-	public class EyeDataClientGazeVisualizer : MonoBehaviour, IEyeDataClient {
+	public class EyeDataClientGazeVisualizer : EyeDataClient {
 		#region DECLARATIONS 
 
 		[Header("Which Eye?")]
@@ -21,7 +21,7 @@ namespace Edia.Eye {
 		public int UpdateStep = 50;
 		[Tooltip("Hides the ray after X seconds with no new sample.")]
         public float timeoutAfterSecondsWithNoNewSample = 4f;
-
+        
         Vector3 gazeDirection;
 		Vector3 gazeOriginLocal;
 		int counter = 0;
@@ -38,8 +38,10 @@ namespace Edia.Eye {
 		private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
 
 		#endregion // -------------------------------------------------------------------------------------------------------------------------------
-		#region INITS	
-		private void Awake() {
+		#region INITS
+
+		private protected override void Awake() {
+			base.Awake();
 			gazeRayRenderer = GetComponent<LineRenderer>();
 		}
 
@@ -57,7 +59,7 @@ namespace Edia.Eye {
 		#endregion // -------------------------------------------------------------------------------------------------------------------------------
 		#region IEyeDataClient INTERFACE IMPLEMENTATION 
 
-		public void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
+		public override void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
 			foreach (var sample in currentSamples) {
 				if (sample.eye.ToLower() == Eye.ToString().ToLower()) {
                     receivedEyeDataSamples.Clear();
