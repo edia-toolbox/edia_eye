@@ -6,20 +6,19 @@ using UXF;
 
 namespace Edia.Eye {
 
-
-    /// <summary>EyeData handler
-    /// EyeDataHandler 
-    /// - is a singleton
-    /// - receives data from an EyeTracker (or something that pretends to be) via its public `AddEyeDataPackage()` method
-    /// - puts these samples into an internal list `_currentSamples`
-    /// - has a list of registered `DataClients` (Instances that implement `IEyeDataClient`) 
-    /// - on the end of each frame
-    /// 	- activates the `Lock` to protect the access to `_currentSamples` (to avoid new values being written by another thread while it's reading out)
-    /// 	- pushes the samples currently in the `_currentSamples` to all DataClients via their `ProcessCurrentSamples()` method
-    /// 	- empties the `_currentSamples`
-    /// 	- releases the lock again
-    /// </summary>
-    /// 
+	/// <summary>
+	/// The `EyeDataHandler` class is responsible for receiving, managing, and distributing eye-tracking data to registered data clients.
+	///
+	/// - Operates as a singleton, ensuring that there is only one instance of it in the scene.
+	/// - Receives data from an EyeTracker (or something that pretends to be) via its public AddEyeDataPackage() method.
+	/// - Puts these samples into an internal list `_currentSamples`
+	/// - Manages a list of registered `DataClients` (objects implementing the `IEyeDataClient` interface).
+	/// - At the end (!) of each frame, the class:
+	///     - Locks access to the `_currentSamples` list for thread safety.
+	///     - Sends the collected samples to all registered `DataClients` using their `ProcessCurrentSamples()` method.
+	///     - Empties the `_currentSamples` list
+	///		- Releases the lock to allow further data collection.
+	/// </summary>
 
     public sealed class EyeDataHandler : MonoBehaviour
 
@@ -27,13 +26,24 @@ namespace Edia.Eye {
 		public static EyeDataHandler Instance;
 
 		[Header("Debug")]
+		[Tooltip("If set to `true`, the `EyeDataHandler` starts processing and pushing samples immediately when the scene " +
+		         "starts. If set to `false`, this must be initiated from code using `StartPushingSamples()`.")]
 		public bool ProcessOnStart = false;
 
         // Lock for thread safety:
+        /// <summary>
+        /// A lock object used for thread safety when accessing the `_currentSamples` list.
+        /// </summary>
         public readonly object Lock = new object();
 
+        /// <summary>
+        /// A list of registered data clients that will receive processed eye-tracking data.
+        /// </summary>
         private List<IEyeDataClient> _dataClients = new(); 
 
+        /// <summary>
+        /// A list that holds the eye-tracking samples of the current frame. This list is cleared after the data is pushed to clients.
+        /// </summary>
         List<EyeDataPackage> _currentSamples { get; } = new List<EyeDataPackage> ();
 
 		// Pseudo-Singleton pattern to make sure we have only one DataHandler in the scene:
@@ -58,7 +68,8 @@ namespace Edia.Eye {
 		}
 
 		/// <summary>
-		/// Start the coroutine that sends data to the `DataClients`. Called when recording should start
+		/// Starts the coroutine that pushes eye-tracking data to registered data clients.
+		/// This should be called when processing of samples should begin.
 		/// </summary>
 		public void StartPushingSamples () {
 			Debug.Log ("Started pushing");
@@ -66,8 +77,10 @@ namespace Edia.Eye {
 			StartCoroutine (PushSamplesThreadsafeAndReset ());
 		}
 
-		/// <summary> Coroutine that pushes the items in `_currentSamples` to all `DataClients` in a somewhat threadsafe way. 
-		/// Empties the list after all samples are sent.  </summary>
+		/// <summary>
+		/// Coroutine that pushes eye-tracking samples to all registered data clients in a thread-safe manner.
+		/// It ensures that the `_currentSamples` list is cleared after all samples have been processed.
+		/// </summary>
 		private IEnumerator PushSamplesThreadsafeAndReset () {
 			while (true) {
 				yield return new WaitForEndOfFrame ();
@@ -91,8 +104,11 @@ namespace Edia.Eye {
 			_currentSamples.Clear ();
 		}
 
-		/// <summary> Add samples to the list of `_currentSamples`.  </summary>
-		/// <param name="latestSample">Latest sample recorded by the eye tracker.</param>
+		/// <summary>
+		/// Adds a new eye-tracking data package to the list of current samples.
+		/// This method is called by the eye data converter to feed new data into the handler.
+		/// </summary>
+		/// <param name="latestSample">The latest eye-tracking sample to be added to the list.</param>
 		public void AddEyeDataPackage (EyeDataPackage latestSample) {
             _currentSamples.Add (latestSample);
 		}
