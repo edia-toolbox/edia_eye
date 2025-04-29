@@ -24,7 +24,9 @@ namespace Edia.Eye {
 
 	{
 		public static EyeDataHandler Instance;
-
+		[Header("Settings")]
+		[InspectorHeader("EDIA EYE", "Eye Data Handler", "Manages incoming eyetracking data from SDK, conversion to EDIA, and forwarding data to listed dataclients.")]
+		
 		[Header("Debug")]
 		[Tooltip("If set to `true`, the `EyeDataHandler` starts processing and pushing samples immediately when the scene " +
 		         "starts. If set to `false`, this must be initiated from code using `StartPushingSamples()`.")]
@@ -36,14 +38,10 @@ namespace Edia.Eye {
         /// </summary>
         public readonly object Lock = new object();
 
-        /// <summary>
-        /// A list of registered data clients that will receive processed eye-tracking data.
-        /// </summary>
+
         private List<IEyeDataClient> _dataClients = new(); 
 
-        /// <summary>
-        /// A list that holds the eye-tracking samples of the current frame. This list is cleared after the data is pushed to clients.
-        /// </summary>
+
         List<EyeDataPackage> _currentSamples { get; } = new List<EyeDataPackage> ();
 
 		// Pseudo-Singleton pattern to make sure we have only one DataHandler in the scene:
@@ -72,15 +70,12 @@ namespace Edia.Eye {
 		/// This should be called when processing of samples should begin.
 		/// </summary>
 		public void StartPushingSamples () {
-			Debug.Log ("Started pushing");
+			// Debug.Log ("Started pushing");
 			ResetCurrentSamplesCollection ();
 			StartCoroutine (PushSamplesThreadsafeAndReset ());
 		}
-
-		/// <summary>
-		/// Coroutine that pushes eye-tracking samples to all registered data clients in a thread-safe manner.
-		/// It ensures that the `_currentSamples` list is cleared after all samples have been processed.
-		/// </summary>
+		
+		
 		private IEnumerator PushSamplesThreadsafeAndReset () {
 			while (true) {
 				yield return new WaitForEndOfFrame ();
@@ -99,7 +94,6 @@ namespace Edia.Eye {
 			}
 		}
 
-		/// <summary>Empties the List of `_currentSamples`. </summary>
 		private void ResetCurrentSamplesCollection () {
 			_currentSamples.Clear ();
 		}
