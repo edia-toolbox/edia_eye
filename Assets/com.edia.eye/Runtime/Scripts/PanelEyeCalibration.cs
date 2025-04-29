@@ -1,14 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Edia;
 
 namespace Edia.Eye {
+	/// <summary>
+	/// Handles the Controller UI panel for eye calibration during an experiment. 
+	/// This class manages the eye calibration button.
+	/// </summary>
+	public class PanelEyeCalibration : Edia.Controller.ExperimenterPanel {
 
-	public class PanelEyeOptions : Edia.Controller.ExperimenterPanel {
-
+		/// <summary>
+		/// Reference to the Eye Calibration button in the UI.
+		/// </summary>
 		[Header("Refs")]
 		public Button btnEyeCalibration = null;
 
@@ -24,8 +26,12 @@ namespace Edia.Eye {
 			EventManager.StopListening("EvEnableEyeCalibrationTrigger", OnEvEnableEyeCalibrationTrigger);
 		}
 		
-		private void OnEvEnableEyeCalibrationTrigger(eParam obj)
-		{
+		/// <summary>
+		/// Callback function that handles the event when the eye calibration button's enable/disable state should be changed.
+		/// Shows or hides the eye calibration panel based on the event parameter.
+		/// </summary>
+		/// <param name="obj">The event parameter containing the boolean that determines if the panel should be shown.</param>
+		private void OnEvEnableEyeCalibrationTrigger(eParam obj) {
 			// Debug.Log(name + "OnEvEnableEyeCalibrationTrigger: " + obj.GetBool());
 			if (obj.GetBool()) {
 				ShowPanel();
@@ -33,6 +39,9 @@ namespace Edia.Eye {
 			} else HidePanel();
 		}
 
+		/// <summary>
+		/// Resets the calibration button, ensuring that it is interactable again.
+		/// </summary>
 		public void Reset() {
 			btnEyeCalibration.interactable = true;
 		}

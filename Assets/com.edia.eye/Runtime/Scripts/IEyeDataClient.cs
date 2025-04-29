@@ -15,8 +15,6 @@ namespace Edia.Eye {
 		/// </summary>
 		/// <param name="currentSamples"></param>
 		public void ProcessCurrentSamples (List<EyeDataPackage> currentSamples);
-
-		// public void EnableRecording (bool onOff);
 	}
 
 }
