@@ -8,11 +8,12 @@
         "com.unity.inputsystem": "1.13.1",
         "com.unity.xr.interaction.toolkit": "3.0.8",
         "com.unity.xr.management": "4.5.1",
+        "com.unity.xr.hands": "1.5.1",
         "com.unity.render-pipelines.universal": "17.0.4",
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.unity.textmeshpro": "3.0.8"
       },
-      "hash": "7d68aa515204af48d1edab2600026d18dc89570f"
+      "hash": "2c9794b99292b9bc77b7f3d9e39282a961d66f3a"
     },
     "com.edia.uxf": {
       "version": "https://github.com/edia-org/unity-experiment-framework.git?path=Assets/com.edia.uxf#dev",
@@ -50,7 +51,7 @@
       "dependencies": {}
     },
     "com.unity.ide.rider": {
-      "version": "3.0.35",
+      "version": "3.0.36",
       "depth": 0,
       "source": "registry",
       "dependencies": {

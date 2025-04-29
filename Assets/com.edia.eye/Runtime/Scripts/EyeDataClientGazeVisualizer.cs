@@ -1,121 +1,119 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Edia;
 using System.Linq;
 
 namespace Edia.Eye {
-	public class EyeDataClientGazeVisualizer : EyeDataClient {
-		#region DECLARATIONS 
+    public class EyeDataClientGazeVisualizer : EyeDataClient {
+#region DECLARATIONS
 
-		[Header("Which Eye?")]
-		public Constants.EyeId Eye = Constants.EyeId.CENTER;
+        [Header("Which Eye?")]
+        [InspectorHeader("EDIA EYE", "Gaze Visualizer", "Shows the eye gaze ray in the scene.")]
+        public Constants.EyeId Eye = Constants.EyeId.CENTER;
 
-		LineRenderer gazeRayRenderer;
-		int lengthOfRay = 25;
-		float gazeOriginOffsetZ = 0.05f;
+        [Header("Settings")]
+        [Tooltip("Update the gaze ray only every Xth update.")]
+        public int UpdateStep = 50;
 
-		[Header("Settings")]
-		[Tooltip("Update the gaze ray only every Xth update.")]
-		public int UpdateStep = 50;
-		[Tooltip("Hides the ray after X seconds with no new sample.")]
+        [Tooltip("Hides the ray after X seconds with no new sample.")]
         public float timeoutAfterSecondsWithNoNewSample = 4f;
-        
-        Vector3 gazeDirection;
-		Vector3 gazeOriginLocal;
-		int counter = 0;
 
-		Color colorRay;
-		Color colorLeft = Color.green;
-		Color colorRight = Color.yellow;
-		Color colorCenter = Color.cyan;
-		Color colorInvalid = Color.red;
+        private LineRenderer _gazeRayRenderer;
+        private int          _lengthOfRay       = 25;
+        private float        _gazeOriginOffsetZ = 0.05f;
 
-		float timeLastSample = -1f;
-		
+        private Vector3 _gazeDirection;
+        private Vector3 _gazeOriginLocal;
+        private int     _counter = 0;
 
-		private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
+        private Color _colorRay;
+        private Color _colorLeft    = Color.green;
+        private Color _colorRight   = Color.yellow;
+        private Color _colorCenter  = Color.cyan;
+        private Color _colorInvalid = Color.red;
 
-		#endregion // -------------------------------------------------------------------------------------------------------------------------------
-		#region INITS
+        private float _timeLastSample = -1f;
 
-		private protected override void Awake() {
-			base.Awake();
-			gazeRayRenderer = GetComponent<LineRenderer>();
-		}
+        private List<EyeDataPackage> _receivedEyeDataSamples = new List<EyeDataPackage>();
 
-		void Start() {
-			this.transform.parent = XRManager.Instance.XRCam;
-			this.transform.localPosition = Vector3.zero;
-			this.transform.localRotation = Quaternion.identity;
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+#region INITS
 
-			colorRay = Eye == Constants.EyeId.CENTER ? colorCenter : Eye == Constants.EyeId.LEFT ? colorLeft : colorRight;
-			gazeRayRenderer.materials[0].color = colorInvalid;
+        private protected override void Awake() {
+            base.Awake();
+            _gazeRayRenderer = GetComponent<LineRenderer>();
+        }
 
-			counter = UpdateStep;
-		}
+        void Start() {
+            this.transform.parent        = XRManager.Instance.XRCam;
+            this.transform.localPosition = Vector3.zero;
+            this.transform.localRotation = Quaternion.identity;
 
-		#endregion // -------------------------------------------------------------------------------------------------------------------------------
-		#region IEyeDataClient INTERFACE IMPLEMENTATION 
+            _colorRay                           = Eye == Constants.EyeId.CENTER ? _colorCenter : Eye == Constants.EyeId.LEFT ? _colorLeft : _colorRight;
+            _gazeRayRenderer.materials[0].color = _colorInvalid;
 
-		public override void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
-			foreach (var sample in currentSamples) {
-				if (sample.eye.ToLower() == Eye.ToString().ToLower()) {
-                    receivedEyeDataSamples.Clear();
-                    receivedEyeDataSamples.Add(sample);
-					timeLastSample = Time.time;
-				}
-			}
-		}
+            _counter = UpdateStep;
+        }
 
-		#endregion // -------------------------------------------------------------------------------------------------------------------------------
-		#region PROCESSING SAMPLES
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+#region IEyeDataClient INTERFACE IMPLEMENTATION
 
-		void Update() {
-			counter--;
+        public override void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
+            foreach (var sample in currentSamples) {
+                if (sample.eye.ToLower() == Eye.ToString().ToLower()) {
+                    _receivedEyeDataSamples.Clear();
+                    _receivedEyeDataSamples.Add(sample);
+                    _timeLastSample = Time.time;
+                }
+            }
+        }
 
-			if (counter < 0)
-				UpdateGazeRays();
-		}
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+#region PROCESSING SAMPLES
 
-		void UpdateGazeRays() {
-			counter = UpdateStep;
+        void Update() {
+            _counter--;
 
-			if (receivedEyeDataSamples.Count == 0 | (Time.time - timeLastSample > timeoutAfterSecondsWithNoNewSample)) {
-				UpdateRayPosition(gazeOriginLocal + Vector3.zero, Vector3.zero);
-				return;
-			}
+            if (_counter < 0)
+                UpdateGazeRays();
+        }
 
-			EyeDataPackage validEyeDataPackage = receivedEyeDataSamples.FirstOrDefault(x => x.isValid); // find first valid package
+        void UpdateGazeRays() {
+            _counter = UpdateStep;
+
+            if (_receivedEyeDataSamples.Count == 0 | (Time.time - _timeLastSample > timeoutAfterSecondsWithNoNewSample)) {
+                UpdateRayPosition(_gazeOriginLocal + Vector3.zero, Vector3.zero);
+                return;
+            }
+
+            EyeDataPackage validEyeDataPackage = _receivedEyeDataSamples.FirstOrDefault(x => x.isValid); // find first valid package
 
             // no valid samples, we skip:
             if (validEyeDataPackage == default) {
-				gazeRayRenderer.materials[0].color = Color.red;
-				return;
-			}
+                _gazeRayRenderer.materials[0].color = Color.red;
+                return;
+            }
 
-			gazeOriginLocal = new Vector3(
-				validEyeDataPackage.position_x_local,
-				validEyeDataPackage.position_y_local,
-				validEyeDataPackage.position_z_local
-			);
+            _gazeOriginLocal = new Vector3(
+                validEyeDataPackage.position_x_local,
+                validEyeDataPackage.position_y_local,
+                validEyeDataPackage.position_z_local
+            );
 
-			gazeDirection = new Vector3(
-				validEyeDataPackage.direction_x_local,
-				validEyeDataPackage.direction_y_local,
-				validEyeDataPackage.direction_z_local
-			);
+            _gazeDirection = new Vector3(
+                validEyeDataPackage.direction_x_local,
+                validEyeDataPackage.direction_y_local,
+                validEyeDataPackage.direction_z_local
+            );
 
-			gazeRayRenderer.materials[0].color = colorRay;
-			UpdateRayPosition(gazeOriginLocal + (Vector3.forward * gazeOriginOffsetZ), gazeOriginLocal + gazeDirection * lengthOfRay);
+            _gazeRayRenderer.materials[0].color = _colorRay;
+            UpdateRayPosition(_gazeOriginLocal + (Vector3.forward * _gazeOriginOffsetZ), _gazeOriginLocal + _gazeDirection * _lengthOfRay);
         }
 
-		private void UpdateRayPosition(Vector3 startPosition, Vector3 endPosition) {
-			gazeRayRenderer.SetPosition(0, startPosition);
-			gazeRayRenderer.SetPosition(1, endPosition);
-		}
+        private void UpdateRayPosition(Vector3 startPosition, Vector3 endPosition) {
+            _gazeRayRenderer.SetPosition(0, startPosition);
+            _gazeRayRenderer.SetPosition(1, endPosition);
+        }
 
-		#endregion // -------------------------------------------------------------------------------------------------------------------------------
-	}
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+    }
 }

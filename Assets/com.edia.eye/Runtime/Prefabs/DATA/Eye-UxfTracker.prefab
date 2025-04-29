@@ -14,7 +14,7 @@ GameObject:
   m_Layer: 0
   m_Name: Eye-UxfTracker
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: 5a549d322ccd7c947aed2f465d6d46cd, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46,19 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: '[_eye_]_uxf_tracker'
-  measurementDescriptor: eye-tracking-center
-  customHeader:
-  - timestamp_et
-  - timestamp_lsl
-  - direction_x_local
-  - direction_y_local
-  - direction_z_local
-  - position_x_local
-  - position_y_local
-  - position_z_local
-  - diameter
-  - confidence
   updateType: 0
+  EyeDataHandler: {fileID: 0}
   Eye: 2
 --- !u!114 &6344747835639068515
 MonoBehaviour:

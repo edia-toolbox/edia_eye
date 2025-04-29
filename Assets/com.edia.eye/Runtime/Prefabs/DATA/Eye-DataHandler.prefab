@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4625099936160350869}
-  - component: {fileID: 1873206133}
   - component: {fileID: 1409125293413158502}
+  - component: {fileID: 1873206133}
   m_Layer: 0
   m_Name: Eye-DataHandler
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: 5a549d322ccd7c947aed2f465d6d46cd, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -33,6 +33,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1409125293413158502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625099936160350870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 949ccbf220c960d4daa26152cd7aa851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProcessOnStart: 1
 --- !u!114 &1873206133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,17 +64,3 @@ MonoBehaviour:
     \n\nTick \"Process on Start\" on the EyeDataHandler if you want to push data
     to the clients right from the start. Otherwise you need to call the according
     method from code to start pushing. \n\n"
---- !u!114 &1409125293413158502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4625099936160350870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 949ccbf220c960d4daa26152cd7aa851, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DataClients: []
-  ProcessOnStart: 1

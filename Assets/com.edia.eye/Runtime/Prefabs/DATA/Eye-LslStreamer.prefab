@@ -15,7 +15,7 @@ GameObject:
   m_Layer: 0
   m_Name: Eye-LslStreamer
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: 5a549d322ccd7c947aed2f465d6d46cd, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2606ef4984f404f8da680ac0112bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EyeDataHandler: {fileID: 0}
   Eye: 2
 --- !u!114 &4234274112086025500
 MonoBehaviour:

@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Edia;
 using UnityEngine;
-using UXF;
 
 namespace Edia.Eye {
-
 
     /// <summary>EyeData handler
     /// EyeDataHandler 
@@ -22,18 +19,16 @@ namespace Edia.Eye {
     /// 
 
     public sealed class EyeDataHandler : MonoBehaviour
-
 	{
 		public static EyeDataHandler Instance;
-
+		[Header("Settings")]
+		[InspectorHeader("EDIA EYE", "Eye Data Handler", "Manages incoming eyetracking data from SDK, conversion to EDIA, and forwarding data to listed dataclients.")]
+		
 		[Header("Debug")]
 		public bool ProcessOnStart = false;
-
-        // Lock for thread safety:
-        public readonly object Lock = new object();
+        public readonly object Lock = new object(); // Lock for thread safety:
 
         private List<IEyeDataClient> _dataClients = new(); 
-
         List<EyeDataPackage> _currentSamples { get; } = new List<EyeDataPackage> ();
 
 		// Pseudo-Singleton pattern to make sure we have only one DataHandler in the scene:
@@ -61,7 +56,7 @@ namespace Edia.Eye {
 		/// Start the coroutine that sends data to the `DataClients`. Called when recording should start
 		/// </summary>
 		public void StartPushingSamples () {
-			Debug.Log ("Started pushing");
+			// Debug.Log ("Started pushing");
 			ResetCurrentSamplesCollection ();
 			StartCoroutine (PushSamplesThreadsafeAndReset ());
 		}
