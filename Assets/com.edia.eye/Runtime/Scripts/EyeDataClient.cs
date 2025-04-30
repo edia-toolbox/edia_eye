@@ -6,6 +6,7 @@ namespace Edia.Eye {
     public abstract class EyeDataClient : MonoBehaviour, IEyeDataClient
     {
         [Header("References")]
+        [InspectorHeader("EDIA EYE", "Gaze Visualizer", "Shows the eye gaze ray in the scene.")]
         [Tooltip("Add link to Eye Data Handler Prefab in the scene.")]
         public GameObject EyeDataHandler;
 

@@ -7,7 +7,6 @@ namespace Edia.Eye {
 #region DECLARATIONS
 
         [Header("Which Eye?")]
-        [InspectorHeader("EDIA EYE", "Gaze Visualizer", "Shows the eye gaze ray in the scene.")]
         public Constants.EyeId Eye = Constants.EyeId.CENTER;
 
         [Header("Settings")]
