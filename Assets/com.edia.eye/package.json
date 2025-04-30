@@ -14,8 +14,8 @@
 			"path": "Samples~/EdiaEyeSampleScene"
 		}],
 	"dependencies": {
-		"com.edia.core",
-		"com.edia.uxf"
+		"com.edia.core": "*",
+		"com.edia.uxf": "*"
 	},
 	"hideInEditor": false
 }
