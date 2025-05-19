@@ -38,11 +38,8 @@ namespace Edia.Eye {
         /// </summary>
         public readonly object Lock = new object();
 
-
         private List<IEyeDataClient> _dataClients = new(); 
-
-
-        List<EyeDataPackage> _currentSamples { get; } = new List<EyeDataPackage> ();
+        private List<EyeDataPackage>  _currentSamples { get; } = new List<EyeDataPackage> ();
 
 		// Pseudo-Singleton pattern to make sure we have only one DataHandler in the scene:
 		private void Awake () {
