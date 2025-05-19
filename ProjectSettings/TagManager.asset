@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - ControlUI
-  - CamOverlay
+  - MsgPanelUI
   - GazeCollision
   - EyeTrackingViz
   - 

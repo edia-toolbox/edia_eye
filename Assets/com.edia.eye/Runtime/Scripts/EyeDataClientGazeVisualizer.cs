@@ -39,10 +39,11 @@ namespace Edia.Eye {
 
         private protected override void Awake() {
             base.Awake();
-            _gazeRayRenderer = GetComponent<LineRenderer>();
+            _gazeRayRenderer = GetComponentInChildren<LineRenderer>();
         }
 
         void Start() {
+            
             this.transform.parent        = XRManager.Instance.XRCam;
             this.transform.localPosition = Vector3.zero;
             this.transform.localRotation = Quaternion.identity;

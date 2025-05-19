@@ -23,9 +23,9 @@ namespace Edia.Eye {
     public sealed class EyeDataHandler : MonoBehaviour
 
 	{
-		public static EyeDataHandler Instance;
 		[Header("Settings")]
 		[InspectorHeader("EDIA EYE", "Eye Data Handler", "Manages incoming eyetracking data from SDK, conversion to EDIA, and forwarding data to listed dataclients.")]
+		public static EyeDataHandler Instance;
 		
 		[Header("Debug")]
 		[Tooltip("If set to `true`, the `EyeDataHandler` starts processing and pushing samples immediately when the scene " +

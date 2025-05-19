@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7828082810676772037}
-  - component: {fileID: 2717778056733670142}
   - component: {fileID: 7628678314392591816}
+  - component: {fileID: 2717778056733670142}
   m_Layer: 0
   m_Name: Eye-GazeVisualizer
   m_TagString: Untagged
@@ -33,22 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2717778056733670142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883004046998932545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d877d8a2e73fe1749a9c91163f2eaae2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EyeDataHandler: {fileID: 0}
-  Eye: 2
-  UpdateStep: 50
-  timeoutAfterSecondsWithNoNewSample: 4
 --- !u!120 &7628678314392591816
 LineRenderer:
   serializedVersion: 2
@@ -156,3 +140,19 @@ LineRenderer:
   m_UseWorldSpace: 0
   m_Loop: 0
   m_ApplyActiveColorSpace: 0
+--- !u!114 &2717778056733670142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883004046998932545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d877d8a2e73fe1749a9c91163f2eaae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EyeDataHandler: {fileID: 0}
+  Eye: 2
+  UpdateStep: 50
+  timeoutAfterSecondsWithNoNewSample: 4

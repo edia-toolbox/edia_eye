@@ -75,9 +75,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Note: "Important steps: \n0. Add an EyeOutlet (from the EDIA_LSL package) to this
     GameObject.\n1. Add, if not there, the [EYE] DataHandler prefab to the scene.\n2.
-    Add this GameObject to the list of dataclients (it's important that the \"EyeDataClientLslPusher\"
-    is the upper most component on the GameObject!).\n3. Make sure that both \"EyeDataClientLslPusher\"
-    and \"EyeOutlet\" use the same Eye\n4. Set the Sampling Rate on the \"Eye Outlet\"
-    to the SR of your Eye Tracker (e.g., 120 Hz for the Vive Pro Eye) if the tracking
-    is implemented accordingly; otherwise set it to the display refresh rate (e.g.,
-    90 Hz)"
+    Reference the EyeDataHandler from the scene in the 'Eye Data Handler` slot.\n3.
+    Make sure that both \"EyeDataClientLslPusher\" and \"EyeOutlet\" use the same
+    Eye\n4. Set the Sampling Rate on the \"Eye Outlet\" to the SR of your Eye Tracker
+    (e.g., 120 Hz for the Vive Pro Eye) if the tracking is implemented accordingly;
+    otherwise set it to the display refresh rate (e.g., 90 Hz)"
