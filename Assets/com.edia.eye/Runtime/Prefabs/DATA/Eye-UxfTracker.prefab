@@ -61,13 +61,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e3dacc4599bc547af4a43b0b848c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Note: '1. Add, if not there, the [EYE] DataHandler prefab
+  Note: '1. Add, if not there, the Eye-DataHandler[EYE] DataHandler prefab
 
-    2. Add this to the
-    list of dataclients
-
-    3. Add this to the UXF prefab under DATA COLLECTION
+    3.
+    Add this to the UXF prefab under DATA COLLECTION
 
 
-    Note:
-    `Object_name'' value is overwritten at runtime'
+    Note: `Object_name'' value
+    is overwritten at runtime'
