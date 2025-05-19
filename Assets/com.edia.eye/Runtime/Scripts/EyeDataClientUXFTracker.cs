@@ -13,7 +13,8 @@ namespace Edia.Eye {
     public class EyeDataClientUXFTracker : Tracker, IEyeDataClient {
         
         [Header("References")]
-        [Tooltip("Add link to Eye Data Handler Prefab in the scene.")]
+        [InspectorHeader("EDIA EYE", "Eye Data UXF Tracker", "Tracks and saves data using UXF Tracker")]
+
         public GameObject EyeDataHandler;
         
         [Header("Which Eye?")]
