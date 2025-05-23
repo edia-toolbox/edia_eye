@@ -45,12 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e3dacc4599bc547af4a43b0b848c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Note: "Manages incoming eyetracking data, conversion and forwarding to dataclients.\n\nAll
-    EyeDataClients that need access to eye tracking data auto subscribe themselves
-    to the list of \"DataClients\" on this the Eye Data Handler (EyeDataClients need
-    to implement the EyeDataClient interface). \n\nTick \"Process on Start\" on the
-    EyeDataHandler if you want to push data to the clients right from the start.
-    Otherwise you need to call the according method from code to start pushing. \n\n"
+  Note: "Manages incoming eyetracking data, conversion and forwarding to dataclients.\nAlso
+    checks valid eye gaze package against the `GazeCollision` layer for raycast hits.\n\n>
+    EyeDataClients need to reference this EyeDataHandller on their inspector settings.\n>
+    EyeDataClients need to implement the EyeDataClient interface. \n> Tick \"Process
+    on Start\" on the EyeDataHandler if you want to push data to the clients right
+    from the start. Otherwise you need to call the according method from code to
+    start pushing. \n\n"
 --- !u!114 &1409125293413158502
 MonoBehaviour:
   m_ObjectHideFlags: 0

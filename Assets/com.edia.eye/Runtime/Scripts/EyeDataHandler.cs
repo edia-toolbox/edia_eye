@@ -20,16 +20,15 @@ namespace Edia.Eye {
 	///		- Releases the lock to allow further data collection.
 	/// </summary>
 
-    public sealed class EyeDataHandler : MonoBehaviour
+    public sealed class EyeDataHandler : Singleton<EyeDataHandler>
 
 	{
-		
 		[Header("Debug")]
 		[InspectorHeader("EDIA EYE", "Eye Data Handler", "Manages incoming eyetracking data from SDK, conversion to EDIA, and forwarding data to listed dataclients.")]
 		[Tooltip("If set to `true`, the `EyeDataHandler` starts processing and pushing samples immediately when the scene " +
 		         "starts. If set to `false`, this must be initiated from code using `StartPushingSamples()`.")]
 		public bool ProcessOnStart = false;
-		public static EyeDataHandler Instance;
+		// public static EyeDataHandler Instance;
 
         // Lock for thread safety:
         /// <summary>
@@ -40,14 +39,14 @@ namespace Edia.Eye {
         private List<IEyeDataClient> _dataClients = new(); 
         private List<EyeDataPackage>  _currentSamples { get; } = new List<EyeDataPackage> ();
 
-		// Pseudo-Singleton pattern to make sure we have only one DataHandler in the scene:
-		private void Awake () {
-			if (Instance == null) {
-				Instance = this;
-			} else if (Instance != this) {
-				Destroy (this.gameObject);
-			}
-		}
+		// // Pseudo-Singleton pattern to make sure we have only one DataHandler in the scene:
+		// private void Awake () {
+		// 	if (Instance == null) {
+		// 		Instance = this;
+		// 	} else if (Instance != this) {
+		// 		Destroy (this.gameObject);
+		// 	}
+		// }
 
 		private void Start() {
 			if(ProcessOnStart)
@@ -70,7 +69,6 @@ namespace Edia.Eye {
 			ResetCurrentSamplesCollection ();
 			StartCoroutine (PushSamplesThreadsafeAndReset ());
 		}
-		
 		
 		private IEnumerator PushSamplesThreadsafeAndReset () {
 			while (true) {
