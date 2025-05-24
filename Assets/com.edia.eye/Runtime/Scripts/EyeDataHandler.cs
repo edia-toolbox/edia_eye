@@ -20,12 +20,11 @@ namespace Edia.Eye {
 	///		- Releases the lock to allow further data collection.
 	/// </summary>
 
+	[EdiaHeader("EDIA EYE", "Eye Data Handler", "Manages incoming eyetracking data from SDK, conversion to EDIA, and forwarding data to listed dataclients.")]
     public sealed class EyeDataHandler : MonoBehaviour
-
 	{
 		
 		[Header("Debug")]
-		[InspectorHeader("EDIA EYE", "Eye Data Handler", "Manages incoming eyetracking data from SDK, conversion to EDIA, and forwarding data to listed dataclients.")]
 		[Tooltip("If set to `true`, the `EyeDataHandler` starts processing and pushing samples immediately when the scene " +
 		         "starts. If set to `false`, this must be initiated from code using `StartPushingSamples()`.")]
 		public bool ProcessOnStart = false;

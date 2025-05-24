@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace Edia.Eye {
     /// <summary> Dummy class to fake a minimal data stream from an eye tracker (with 90Hz). </summary>
+    [EdiaHeader("EDIA EYE", "FaKe data generator", "Generates eye data for testing purposes.")]
     public class DebugDataSender : MonoBehaviour {
 
         [Header("Refs")]
-        [InspectorHeader("EDIA EYE", "FaKe data generator", "Generates eye data for testing purposes.")]
         public bool IsRunning = false;
 
         public static ILslTimeAccessible LslTimer;

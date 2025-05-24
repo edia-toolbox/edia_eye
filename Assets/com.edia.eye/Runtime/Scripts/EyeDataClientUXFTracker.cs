@@ -10,10 +10,10 @@ namespace Edia.Eye {
     /// 
     /// The tracker records data for a specified eye (Left, Right, or Center) and logs relevant properties to UXF.
     /// </summary>
+    [EdiaHeader("EDIA EYE", "Eye Data UXF Tracker", "Tracks and saves data using UXF Tracker")]
     public class EyeDataClientUXFTracker : Tracker, IEyeDataClient {
         
         [Header("References")]
-        [InspectorHeader("EDIA EYE", "Eye Data UXF Tracker", "Tracks and saves data using UXF Tracker")]
 
         public GameObject EyeDataHandler;
         
