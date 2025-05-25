@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,14 +19,12 @@ namespace Edia.Eye {
     /// </summary>
     [EdiaHeader("EDIA EYE", "Eye Data Handler","Manages incoming eyetracking data from SDK, conversion to EDIA, and forwarding data to listed dataclients.")]
     public sealed class EyeDataHandler : Singleton<EyeDataHandler> {
-        [Header("Debug")]
             
-        [Tooltip("If set to `true`, the `EyeDataHandler` starts processing and pushing samples immediately when the scene " +
-                 "starts. If set to `false`, this must be initiated from code using `StartPushingSamples()`.")]
+        [Tooltip("Starts processing and pushing samples immediately when the scene ")]
         public bool ProcessOnStart = false;
 
         [Space(10)]
-        public bool IsDebug = false;
+        public bool ShowDebugRay = false;
 
         // Lock for thread safety:
         /// <summary>
@@ -40,11 +37,9 @@ namespace Edia.Eye {
 
         private float      _rayDistance = 50f;
         private int        _gazeLayer;
-        private GameObject _recticle;
 
         private void Awake() {
             _gazeLayer = LayerMask.GetMask("GazeCollision");
-            GenerateRecticle();
         }
 
         private void Start() {
@@ -52,6 +47,11 @@ namespace Edia.Eye {
                 StartPushingSamples();
         }
 
+        /// <summary>
+        /// Adds a new eye-tracking data client to the list of data clients,
+        /// if it is not already present in the list.
+        /// </summary>
+        /// <param name="dataClient">The eye-tracking data client to be added.</param>
         public void AddDataClient(IEyeDataClient dataClient) {
             if (!_dataClients.Contains(dataClient)) {
                 _dataClients.Add(dataClient);
@@ -63,11 +63,15 @@ namespace Edia.Eye {
         /// This should be called when processing of samples should begin.
         /// </summary>
         public void StartPushingSamples() {
-            // Debug.Log ("Started pushing");
             ResetCurrentSamplesCollection();
             StartCoroutine(PushSamplesThreadsafeAndReset());
         }
 
+        /// <summary>
+        /// Continuously pushes the current collection of eye-tracking samples to all registered data clients
+        /// in a thread-safe manner and resets the sample collection afterwards.
+        /// </summary>
+        /// <returns>An enumerator to be used with a coroutine, enabling frame-by-frame execution.</returns>
         private IEnumerator PushSamplesThreadsafeAndReset() {
             while (true) {
                 yield return new WaitForEndOfFrame();
@@ -107,9 +111,18 @@ namespace Edia.Eye {
         /// <param name="latestSample">The eye data package containing the initial local-space gaze data.</param>
         /// <returns>The updated eye data package containing intersection details if a hit is detected, or the original data if no hit occurs.</returns>
         private EyeDataPackage RegisterIntersection(EyeDataPackage latestSample) {
-            Vector3 Pos = transform.TransformPoint(new Vector3(latestSample.position_x_local, latestSample.position_y_local, latestSample.position_z_local));
-            Vector3 dir = transform.TransformDirection(new Vector3(latestSample.direction_x_local, latestSample.direction_y_local,
-                latestSample.direction_z_local));
+            
+            Vector3 Pos = transform.TransformPoint(new Vector3(
+                    latestSample.position_x_local, 
+                    latestSample.position_y_local, 
+                    latestSample.position_z_local)
+            );
+            
+            Vector3 dir = transform.TransformDirection(new Vector3(
+                latestSample.direction_x_local, 
+                latestSample.direction_y_local,
+                latestSample.direction_z_local)
+            );
 
             RaycastHit hit;
 
@@ -119,27 +132,13 @@ namespace Edia.Eye {
                 latestSample.intersection_y = hit.point.y;
                 latestSample.intersection_z = hit.point.z;
 
-                if (IsDebug) {
-                    _recticle.transform.position = hit.point;
-                    Debug.DrawRay(Pos, dir * hit.distance, Color.green);
-                }
+                if (ShowDebugRay) { Debug.DrawRay(Pos, dir * hit.distance, Color.green); }
             }
             else {
-                if (IsDebug) {
-                    Debug.DrawRay(Pos, dir * _rayDistance, Color.red);
-                    _recticle.transform.position = Vector3.zero;
-                }
+                if (ShowDebugRay) { Debug.DrawRay(Pos, dir * _rayDistance, Color.red); }
             }
 
             return latestSample;
-        }
-
-        private void GenerateRecticle() {
-            _recticle                                             = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            _recticle.transform.localScale                        = Vector3.one * 0.02f;
-            _recticle.GetComponent<MeshRenderer>().material.color = new Color(0.17f, 1f, 0f);
-            _recticle.name                                        = "Recticle";
-            _recticle.SetActive(IsDebug);
         }
     }
 }

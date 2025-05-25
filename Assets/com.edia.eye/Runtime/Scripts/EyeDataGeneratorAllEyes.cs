@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace Edia.Eye {
     /// <summary> Dummy class to fake a minimal data stream from an eye tracker (with 90Hz). </summary>
-    [EdiaHeader("EDIA EYE", "FaKe data generator", "Generates eye data for testing purposes.")]
-    public class EyeFakeDataGenerator : MonoBehaviour {
+    [EdiaHeader("EDIA EYE", "Dummy eyedata generator", "Generates eye data for testing purposes for each eye.")]
+    public class EyeDataGeneratorAllEyes : MonoBehaviour {
 
         [Header("Refs")]
         public bool IsRunning = false;
@@ -62,12 +62,12 @@ namespace Edia.Eye {
                 _ed.direction_y_local = eyeFwd.y;
                 _ed.direction_z_local = eyeFwd.z;
                 _ed.openness          = UnityEngine.Random.Range(0f, 1f) < 0.05f ? 0 : UnityEngine.Random.Range(0.8f, 1.0f);
-                _ed.isValid           = UnityEngine.Random.Range(0f, 1f) < ProportionInvalidSamples ? false : true; // sometimes send invalid sample
+                _ed.isValid           = !(UnityEngine.Random.Range(0f, 1f) < ProportionInvalidSamples); // sometimes send invalid sample
             }
 
             _ed.timestamp_et = Time.realtimeSinceStartup;
 
-            _timestampLsl     = LslTimer != null ? LslTimer.GetLslTime() : 0;
+            _timestampLsl     = LslTimer?.GetLslTime() ?? 0;
             _ed.timestamp_lsl = _timestampLsl;
 
             EyeDataHandler.Instance.AddEyeDataPackage(_ed);

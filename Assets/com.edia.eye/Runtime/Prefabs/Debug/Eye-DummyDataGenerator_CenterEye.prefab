@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1301190124291287324}
   - component: {fileID: 8677386676586205441}
   m_Layer: 0
-  m_Name: Eye-FakeDataSingleCenterEyeRay
+  m_Name: Eye-DummyDataGenerator_CenterEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

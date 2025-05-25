@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Edia.Eye {
     /// <summary> Dummy class to fake a minimal data stream from an eye tracker (with 90Hz). </summary>
     [EdiaHeader("EDIA EYE", "Fake center eye gaze", "Generates center eye data for testing purposes.")]
-    public class EyeFakeDataSingleGaze : MonoBehaviour {
+    public class EyeDataGeneratorCenterEye : MonoBehaviour {
 
         [Header("Refs")]
         public bool IsRunning = true;
@@ -13,8 +13,7 @@ namespace Edia.Eye {
 
         // Locals
         private double         _timestampLsl;
-        private EyeDataPackage _ed              = new();
-        private double         _randomWaitValue = 0.15f;
+        private EyeDataPackage _ed = new();
         private double         _lastTime;
 
         /// <summary> Start the dummy data provider from script </summary>
@@ -36,7 +35,7 @@ namespace Edia.Eye {
             }
         }
 
-        // Sends random data to the eDIA `EyeDataHandler` 
+        // Sends random data to the `EyeDataHandler` 
         private void Update() {
             if (!IsRunning)
                 return;
