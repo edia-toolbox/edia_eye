@@ -1,9 +1,9 @@
 using Edia;
 using Edia.Eye;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[EdiaHeader("EDIA EYE", "EyeData Debug helper", "Eyeball representing active live eye data samples.")]
 public class EyeDataClientEyeBallVisualizer : EyeDataClient
 {
     public Constants.EyeId Eye = Constants.EyeId.CENTER;

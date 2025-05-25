@@ -44,10 +44,7 @@ namespace Edia.Eye {
 
         private void Awake() {
             _gazeLayer = LayerMask.GetMask("GazeCollision");
-
-            if (IsDebug)
-                GenerateRecticle();
-            ;
+            GenerateRecticle();
         }
 
         private void Start() {
@@ -141,6 +138,8 @@ namespace Edia.Eye {
             _recticle                                             = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             _recticle.transform.localScale                        = Vector3.one * 0.02f;
             _recticle.GetComponent<MeshRenderer>().material.color = new Color(0.17f, 1f, 0f);
+            _recticle.name                                        = "Recticle";
+            _recticle.SetActive(IsDebug);
         }
     }
 }

@@ -1,12 +1,9 @@
-using Edia.Eye;
 using UnityEngine;
 using System.Collections.Generic;
 
 namespace Edia.Eye {
     [EdiaHeader("EDIA EYE", "EyeData Client", "Eye data package client")]
     public abstract class EyeDataClient : MonoBehaviour, IEyeDataClient {
-        [Header("References")]
-        public string dummyforheaderandwillberemoved;
 
         private void AddToEyeDataHandler()
         {

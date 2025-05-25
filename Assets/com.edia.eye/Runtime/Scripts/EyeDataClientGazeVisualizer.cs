@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 
 namespace Edia.Eye {
+    [EdiaHeader("EDIA EYE", "EyeData Debug helper", "Ray representing active eye data gaze sample.")]
     public class EyeDataClientGazeVisualizer : EyeDataClient {
 #region DECLARATIONS
 

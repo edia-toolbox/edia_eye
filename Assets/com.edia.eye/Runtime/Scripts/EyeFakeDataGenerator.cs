@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Edia.Eye {
     /// <summary> Dummy class to fake a minimal data stream from an eye tracker (with 90Hz). </summary>
     [EdiaHeader("EDIA EYE", "FaKe data generator", "Generates eye data for testing purposes.")]
-    public class DebugDataSender : MonoBehaviour {
+    public class EyeFakeDataGenerator : MonoBehaviour {
 
         [Header("Refs")]
         public bool IsRunning = false;
