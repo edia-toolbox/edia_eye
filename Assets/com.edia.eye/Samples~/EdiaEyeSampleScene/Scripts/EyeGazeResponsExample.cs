@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 /// <summary>
@@ -9,7 +10,7 @@ using UnityEngine;
 /// </remarks>
 public class EyeGazeResponsExample : MonoBehaviour
 {
-    [InspectorHelpBox("Highlight color for the gaze hovered object.")]
+    [InspectorHelpBox("Highlight color for the gaze hovered object.", MessageType.Info)]
     public Color HoverColor = Color.green;
     private Color _defaultColor;
     

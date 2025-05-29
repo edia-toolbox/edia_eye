@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowRecticle: 0
-  RecticleSize: 0.1
+  RecticleSize: 0.04
 --- !u!114 &1103977050297350625
 MonoBehaviour:
   m_ObjectHideFlags: 0

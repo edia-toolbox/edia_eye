@@ -13,7 +13,7 @@
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.unity.textmeshpro": "3.0.8"
       },
-      "hash": "832a0fdd7ab1e44e2a50e532d21bc359d280313c"
+      "hash": "d608b1d467426a50a9f1475be38c86b9cfd6c9c2"
     },
     "com.edia.eye.varjo": {
       "version": "git@github.com:edia-toolbox/edia_eye_varjo.git?path=Assets/com.edia.eye.varjo#dev",

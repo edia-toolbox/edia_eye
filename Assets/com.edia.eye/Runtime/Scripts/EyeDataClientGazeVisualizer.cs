@@ -17,19 +17,19 @@ namespace Edia.Eye {
         [Tooltip("Hides the ray after X seconds with no new sample.")]
         public float timeoutAfterSecondsWithNoNewSample = 4f;
 
-        private LineRenderer _gazeRayRenderer;
-        private int          _lengthOfRay       = 25;
-        private float        _gazeOriginOffsetZ = 0.05f;
+        private          LineRenderer _gazeRayRenderer;
+        private readonly int          _lengthOfRay       = 25;
+        private readonly float        _gazeOriginOffsetZ = 0.05f;
 
         private Vector3 _gazeDirection;
         private Vector3 _gazeOriginLocal;
         private int     _counter = 0;
 
-        private Color _colorRay;
-        private Color _colorLeft    = Color.green;
-        private Color _colorRight   = Color.yellow;
-        private Color _colorCenter  = Color.cyan;
-        private Color _colorInvalid = Color.red;
+        private          Color _colorRay;
+        private readonly Color _colorLeft    = Color.green;
+        private readonly Color _colorRight   = Color.yellow;
+        private readonly Color _colorCenter  = Color.cyan;
+        private readonly Color _colorInvalid = Color.red;
 
         private float _timeLastSample = -1f;
 

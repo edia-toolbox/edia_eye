@@ -10,7 +10,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 /// This class tracks the gaze direction of the user, allowing for interactions based on where the user is looking.
 /// It leverages Unity's built-in gaze interaction systems to implement gaze-related functionality.
 /// </remarks>
-[EdiaHeader("EDIA EYE", "`Base Gaze Interactor", "Uses Unity's Gaze Interactor to track the gaze direction of the user.")]
+[EdiaHeader("EDIA EYE", "Base Gaze Interactor", "Uses Unity's Gaze Interactor to track the gaze direction of the user.")]
 public class EyeDataClientGazeInteractor : MonoBehaviour
 {
     XRGazeAssistance gazeAssistance;
