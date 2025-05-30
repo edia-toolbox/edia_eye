@@ -14,6 +14,7 @@ namespace Edia.Eye {
     public class EyeDataClientUXFTracker : Tracker, IEyeDataClient {
         
         [Header("Which Eye?")]
+        [InspectorHelpBox("Eye Data UXF Tracker\nTracks and saves data using UXF Tracker")]    
         public Edia.Constants.EyeId Eye = Edia.Constants.EyeId.CENTER;
         
         #region DECLARATIONS 

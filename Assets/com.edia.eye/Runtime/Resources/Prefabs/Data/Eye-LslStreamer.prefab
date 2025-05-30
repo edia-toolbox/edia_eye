@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6814174451523147870}
   - component: {fileID: 5375352742598746080}
-  - component: {fileID: 4234274112086025500}
   - component: {fileID: -5724669730907343416}
   m_Layer: 0
   m_Name: Eye-LslStreamer
@@ -46,21 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2606ef4984f404f8da680ac0112bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EyeDataHandler: {fileID: 0}
   Eye: 2
---- !u!114 &4234274112086025500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 472562654239227347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34e3dacc4599bc547af4a43b0b848c66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Note: <replace this with an "EyeOutlet" component from EDIA_LSL>
 --- !u!114 &-5724669730907343416
 MonoBehaviour:
   m_ObjectHideFlags: 0

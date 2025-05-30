@@ -4,10 +4,17 @@ using UnityEngine;
 namespace Edia.Eye {
 
     /// <summary>
-    /// EyeDataClientLslPusher is a concrete implementation of the abstract class EyeDataClient.
-    /// It processes incoming eye data samples from the EyeDataHandler and filters the samples
-    /// based on the specified eye identifier.
+    /// The EyeDataClientLslPusher class is responsible for filtering and processing eye-tracking data received from the EyeDataHandler
+    /// and preparing it for streaming using the Lab Streaming Layer (LSL) protocol.
     /// </summary>
+    /// <remarks>
+    /// This class inherits from the EyeDataClient base class and implements specific functionality for handling and streaming data
+    /// related to the specified eye ID. It filters data samples to include only those that match the configured eye type.
+    /// </remarks>
+    /// <seealso cref="EyeDataClient"/>
+    /// <seealso cref="Edia.Constants.EyeId"/>
+    [EdiaHeader("EDIA EYE", "Eye Data Client - LSL Streamer", "Tracks and streams data using LSL")]
+    [RequireComponent(typeof(ILslEyeOutlet))]
     public class EyeDataClientLslPusher : EyeDataClient {
         private List<EyeDataPackage> _receivedEyeDataSamples = new List<EyeDataPackage>();
         private float[]              _sample;
