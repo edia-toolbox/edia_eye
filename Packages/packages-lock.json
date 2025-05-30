@@ -13,7 +13,16 @@
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.unity.textmeshpro": "3.0.8"
       },
-      "hash": "5bdfe3d2bdd8d3985f99071761b8b5118ab35e45"
+      "hash": "d608b1d467426a50a9f1475be38c86b9cfd6c9c2"
+    },
+    "com.edia.eye.varjo": {
+      "version": "git@github.com:edia-toolbox/edia_eye_varjo.git?path=Assets/com.edia.eye.varjo#dev",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.varjo.xr": "3.6.0"
+      },
+      "hash": "ba4c88e8812cbcb1c13f32dc4e5733f6df521c80"
     },
     "com.edia.uxf": {
       "version": "https://github.com/edia-org/unity-experiment-framework.git?path=Assets/com.edia.uxf#dev",
@@ -42,6 +51,13 @@
         "com.unity.nuget.mono-cecil": "1.11.4",
         "com.unity.test-framework.performance": "3.0.3"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.editorcoroutines": {
+      "version": "1.0.0",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {
@@ -214,6 +230,24 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "com.unity.xr.arfoundation": {
+      "version": "6.0.5",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "2.0.0",
+        "com.unity.modules.ui": "1.0.0",
+        "com.unity.inputsystem": "1.6.3",
+        "com.unity.mathematics": "1.2.6",
+        "com.unity.xr.core-utils": "2.3.0",
+        "com.unity.xr.management": "4.4.0",
+        "com.unity.editorcoroutines": "1.0.0",
+        "com.unity.modules.particlesystem": "1.0.0",
+        "com.unity.modules.unityanalytics": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.xr.core-utils": {
       "version": "2.5.2",
       "depth": 1,
@@ -274,6 +308,16 @@
         "com.unity.xr.legacyinputhelpers": "2.1.11"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.varjo.xr": {
+      "version": "https://github.com/varjocom/VarjoUnityXRPlugin.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.xr.management": "4.4.0",
+        "com.unity.xr.arfoundation": "5.1.3"
+      },
+      "hash": "d074462f6c99b8e8bc6d83037457973496cb47d9"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6965339190779550066}
   - component: {fileID: 5453856833236217953}
   m_Layer: 0
-  m_Name: Eye-FakeDataGenerator
+  m_Name: Eye-DummyDataGenerator_AllEyes
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 5a549d322ccd7c947aed2f465d6d46cd, type: 3}
   m_NavMeshLayer: 0

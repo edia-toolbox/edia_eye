@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7240533768170468706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6297447088407364769}
+  - component: {fileID: 3476819347274309027}
+  - component: {fileID: 6062292833095210063}
+  - component: {fileID: 1103977050297350625}
+  m_Layer: 0
+  m_Name: Eye-GazeIntersectionVisualizer
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 5a549d322ccd7c947aed2f465d6d46cd, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6297447088407364769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7240533768170468706}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3476819347274309027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7240533768170468706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974a3a2a05da19d4496a93e6c9df8a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Eye: 2
+  UpdateStep: 1
+  OnValidGazeIntersection:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6062292833095210063}
+        m_TargetAssemblyTypeName: Edia.Eye.EyeGazeRecticleRenderer, edia.eye
+        m_MethodName: UpdatePosition
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1103977050297350625}
+        m_TargetAssemblyTypeName: Edia.Eye.EyeGazTrailRenderer, edia.eye
+        m_MethodName: AddToTrail
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6062292833095210063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7240533768170468706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 129aa31d552d6ab42b5c6390939df317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowRecticle: 0
+  RecticleSize: 0.04
+--- !u!114 &1103977050297350625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7240533768170468706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6d44770ccc487ea21f993a529fd8a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTrail: 1
+  TrailMaterial: {fileID: 2100000, guid: 3bdef68795d1c554cb83ce679160d858, type: 2}
+  TrailLength: 4
+  TrailPointSize: 0.02

@@ -13,10 +13,6 @@ namespace Edia.Eye {
     [EdiaHeader("EDIA EYE", "Eye Data UXF Tracker", "Tracks and saves data using UXF Tracker")]
     public class EyeDataClientUXFTracker : Tracker, IEyeDataClient {
         
-        [Header("References")]
-
-        public GameObject EyeDataHandler;
-        
         [Header("Which Eye?")]
         public Edia.Constants.EyeId Eye = Edia.Constants.EyeId.CENTER;
         
@@ -45,7 +41,7 @@ namespace Edia.Eye {
         #region IEyeDataClient INTERFACE IMPLEMENTATION 
 
         void Awake() {
-            EyeDataHandler.GetComponent<EyeDataHandler>().AddDataClient(this);
+            EyeDataHandler.Instance.AddDataClient(this);
             objectName = Eye.ToString().ToLower();
             gameObject.name = ($"Eye-{objectName}-UxfTracker");
         }
