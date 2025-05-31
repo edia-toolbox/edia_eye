@@ -17,7 +17,7 @@ namespace Edia.Eye {
     ///     - Empties the `_currentSamples` list
     ///		- Releases the lock to allow further data collection.
     /// </summary>
-    [EdiaHeader("EDIA EYE", "Eye Data Handler","Manages incoming eyetracking data from SDK, conversion to EDIA, and forwarding data to listed dataclients.")]
+    [EdiaHeader("EDIA EYE", "Eye Data Handler","Converts SDK ET data to EDIA and pushes it to registered dataclients.")]
     public sealed class EyeDataHandler : Singleton<EyeDataHandler> {
             
         [Tooltip("Starts processing and pushing samples immediately when the scene ")]
