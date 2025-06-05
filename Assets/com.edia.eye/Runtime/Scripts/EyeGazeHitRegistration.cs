@@ -17,7 +17,7 @@ namespace Edia.Eye {
         
         [Header("Default events:")]
         public UnityEvent<GameObject> GazeHoverEnter;
-        public UnityEvent<GameObject> GazeHoverExit;
+        public UnityEvent GazeHoverExit;
 
         [Header("Events fired only when TrackGaze is on:")]
         public UnityEvent<Vector3> NewHitLocalPosition;
@@ -30,7 +30,7 @@ namespace Edia.Eye {
         private bool              _isRecording { get; set; }
         private XRRayInteractor   _rayInteractor;
         private DebugRaysRenderer _debugRaysRenderer;
-
+        
         // -------------------------------------------------------------------------------------------------------------------------------
         
         protected override void Awake() {
@@ -52,9 +52,9 @@ namespace Edia.Eye {
             _rayInteractor = args.interactorObject as XRRayInteractor;
             if (TrackGaze)
                 _isRecording   = true;
-
-            GazeHoverEnter?.Invoke(this.gameObject);
-            XRManager.Instance.AddToConsole($"GazeHoverEnter: {transform.name}");
+            _rayInteractor.TryGetCurrent3DRaycastHit(out var hit);
+            GazeHoverEnter?.Invoke(hit.collider.gameObject);
+            XRManager.Instance.AddToConsole($"GazeHoverEnter: {hit.collider.name}");
         }
 
         protected override void OnHoverExited(HoverExitEventArgs args) {
@@ -63,8 +63,7 @@ namespace Edia.Eye {
             _isRecording   = false;
             _rayInteractor = null;
 
-            GazeHoverExit?.Invoke(this.gameObject);
-            XRManager.Instance.AddToConsole($"GazeHoverExit: {transform.name}");
+            GazeHoverExit?.Invoke();
         }
 
         // -------------------------------------------------------------------------------------------------------------------------------
