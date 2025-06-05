@@ -152,11 +152,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Note: "Manages incoming eyetracking data, conversion and forwarding to dataclients.\nAlso
     checks valid eye gaze package against the `GazeCollision` layer for raycast hits.\n\n>
-    EyeDataClients need to reference this EyeDataHandller on their inspector settings.\n>
-    EyeDataClients need to implement the EyeDataClient interface. \n> Tick \"Process
-    on Start\" on the EyeDataHandler if you want to push data to the clients right
-    from the start. Otherwise you need to call the according method from code to
-    start pushing. \n\n"
+    EyeDataClients register to this handlerneed to reference this EyeDataHandller
+    on their inspector settings.\n> EyeDataClients need to implement the EyeDataClient
+    interface. \n> Tick \"Process on Start\" on the EyeDataHandler if you want to
+    push data to the clients right from the start. Otherwise you need to call the
+    according method from code to start pushing. \n\n"
 --- !u!114 &1409125293413158502
 MonoBehaviour:
   m_ObjectHideFlags: 0

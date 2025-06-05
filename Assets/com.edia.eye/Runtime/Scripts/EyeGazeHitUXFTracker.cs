@@ -15,14 +15,13 @@ namespace Edia.Eye {
     /// as it depends on real-time data streams provided by the registration system.
     /// </remarks>
     [EdiaHeader("EDIA EYE", "Eye Gaze Hit UXF Tracker", "Tracks and saves Raycast Hit data using UXF Tracker")]
-    [RequireComponent(typeof(EyeGazeHitRegistration))]
     [AddComponentMenu("EDIA/Eye/Eye Gaze Hit UXF Tracker")]
     public class EyeGazeHitUXFTracker : Tracker {
 #region DECLARATIONS
         
         [Header("Settings")]
         [InspectorHelpBox("Processes hitpoint + uv data sample from EyeGazeHitRegistration")]
-        public bool AutoRegisterToHitRegistration = true;
+        public bool AutoRegisterWithUXF = true;
         
         public override string              MeasurementDescriptor => $"eye-gazehits";
         public override IEnumerable<string> CustomHeader          => Properties2Log;
@@ -44,34 +43,24 @@ namespace Edia.Eye {
         };
 
         private List<float[]>          receivedGazeHitSamples = new();
-        private EyeGazeHitRegistration _eyeGazeHitRegistration;
 
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region IMPLEMENTATION
 
         void Awake() {
             gameObject.name         = ($"Eye-{objectName}-GazeHit-UxfTracker");
-            _eyeGazeHitRegistration = GetComponent<EyeGazeHitRegistration>();
         }
 
         /// <summary> Auto add myself to UXF trackers in start, as the Session singleton does not exist earlier </summary>
         private void Start() {
-            if (AutoRegisterToHitRegistration) 
-                RegisterWithHitRegistration();
-            RegisterWithUXF();
-        }
-
-        private void OnDestroy() {
-            _eyeGazeHitRegistration.NewHit.RemoveListener(AddSample);
-        }
-
-        private void RegisterWithHitRegistration() {
-            _eyeGazeHitRegistration.NewHit.AddListener(AddSample);
+            if (AutoRegisterWithUXF)
+                RegisterWithUXF();
         }
 
         private void RegisterWithUXF() {
-            if (UXF.Session.instance != null)
+            if (UXF.Session.instance != null) {
                 UXF.Session.instance.trackedObjects.Add(this);
+            }
             else {
                 Debug.LogError("Session not yet initialized. You probably need to add the <b>Edia-Executer</b> prefab to the scene.");
             }
@@ -97,17 +86,21 @@ namespace Edia.Eye {
         protected override UXFDataRow GetCurrentValues() {
             UXFDataRow row = new UXFDataRow();
             if (receivedGazeHitSamples.Count > 0) {
+                // TODO Check: Does the situation occur that there are multiple samples? If not, why use a list<float[]>
                 row = ParseSampleToUXFrow(receivedGazeHitSamples[0]);
                 receivedGazeHitSamples.RemoveAt(0);
             }
             else {
-                Debug.Log("Queue is empty.");
+                row = ParseSampleToUXFrow(null); // add empty row
             }
 
             return row;
         }
 
-        UXFDataRow ParseSampleToUXFrow(float[] sample) {
+        UXFDataRow ParseSampleToUXFrow(float[] sample = null) {
+            if (sample == null)
+                sample = new float[] {float.NaN, float.NaN, float.NaN, float.NaN, float.NaN};
+            
             UXFDataRow row = new UXFDataRow();
             for (int i = 0; i < sample.Length; i++) {
                 row.Add((Properties2Log[i], sample[i]));

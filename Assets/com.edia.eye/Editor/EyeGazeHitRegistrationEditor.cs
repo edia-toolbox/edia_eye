@@ -10,7 +10,9 @@ public class EyeGazeHitRegistrationEditor : UnityEditor.XR.Interaction.Toolkit.I
     private SerializedProperty NewGazeHitPosition;
     private SerializedProperty NewUVHitCoordinate;
     private SerializedProperty NewHit;
+    private SerializedProperty NewHitRaycastHit;
     private SerializedProperty ShowDebugRaysProperty;
+    private SerializedProperty TrackGaze;
 
     private Texture2D           iconTexture;
     private bool                XRSimpleInteractableProps = false;
@@ -52,7 +54,9 @@ public class EyeGazeHitRegistrationEditor : UnityEditor.XR.Interaction.Toolkit.I
                 NewGazeHitPosition     = serializedObject.FindProperty("NewHitLocalPosition");
                 NewUVHitCoordinate     = serializedObject.FindProperty("NewHitUV");
                 NewHit                 = serializedObject.FindProperty("NewHit");
+                NewHitRaycastHit           = serializedObject.FindProperty("NewHitRaycastHit");
                 ShowDebugRaysProperty  = serializedObject.FindProperty("ShowDebugRays");
+                TrackGaze              = serializedObject.FindProperty("TrackGaze");
             }
 
             // Initialize styles - only create them, don't use GUILayout methods
@@ -93,15 +97,18 @@ public class EyeGazeHitRegistrationEditor : UnityEditor.XR.Interaction.Toolkit.I
             }
 
             // Hit Recording section
-            EditorGUILayout.LabelField("Settings", EditorStyles.boldLabel);
+            if (TrackGaze != null) {
+                EditorGUILayout.PropertyField(TrackGaze, true);
+            }
+            
+            EditorGUILayout.Space(10);
             if (ShowDebugRaysProperty != null) {
                 EditorGUILayout.PropertyField(ShowDebugRaysProperty, true);
             }
-
+            
             EditorGUILayout.Space(5);
 
             // Events section
-            EditorGUILayout.LabelField("Eye Gaze Events", EditorStyles.boldLabel);
             if (gazeHoverEnterProperty != null) {
                 EditorGUILayout.PropertyField(gazeHoverEnterProperty);
             }
@@ -122,6 +129,10 @@ public class EyeGazeHitRegistrationEditor : UnityEditor.XR.Interaction.Toolkit.I
                 EditorGUILayout.PropertyField(NewHit);
             }
 
+            if (NewHitRaycastHit != null) {
+                EditorGUILayout.PropertyField(NewHitRaycastHit, true);
+            }
+            
             EditorGUILayout.Space(10);
             EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
             EditorGUILayout.Space(5);
@@ -145,7 +156,9 @@ public class EyeGazeHitRegistrationEditor : UnityEditor.XR.Interaction.Toolkit.I
             // Draw the default inspector excluding properties we're handling explicitly
             DrawPropertiesExcluding(serializedObject,
                 "GazeHoverEnter",
+                "ShowDebugRays",
                 "GazeHoverExit",
+                "TrackGaze",
                 "NewHitLocalPosition",
                 "NewHitUV",
                 "NewHit",

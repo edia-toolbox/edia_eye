@@ -1,4 +1,4 @@
 ﻿{
-    "InteractiveSide": "NONE",
+    "InteractiveSide": "BOTH",
     "pathToLogfiles": "../logfiles"
 }

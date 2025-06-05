@@ -1,5 +1,6 @@
 
 using Edia;
+using Edia.Eye;
 using UnityEngine;
 
 public class XBlockTemplate : XBlock {
@@ -18,6 +19,8 @@ public class XBlockTemplate : XBlock {
 
     private int _selectedStimulus = 0;
 
+    public GameObject FlatEyeGazeRecorder;
+    
     private void Awake() {
         /*
             Each trial exists out of a sequence of steps.
@@ -57,6 +60,8 @@ public class XBlockTemplate : XBlock {
             - ...
         */
 
+        FlatEyeGazeRecorder.SetActive(true);
+        
         /*
          * A step always ends with either a 'PROCEED' and/or 'WAITONPROCEED'
          */
@@ -127,6 +132,7 @@ public class XBlockTemplate : XBlock {
     }
 
     public override void OnEndTrial() {
+        FlatEyeGazeRecorder.SetActive(false);
     }
 
     public override void OnBetweenSteps() {
