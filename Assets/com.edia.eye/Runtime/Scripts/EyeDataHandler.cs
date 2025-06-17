@@ -78,15 +78,15 @@ namespace Edia.Eye {
 
                 if (_currentSamples.Count == 0)
                     continue;
-
-                // To detect intersections we need the current pose. Note that this assumes the same pose (the one valid
-                // at the end of the frame) for all ET samples collected during the frame. In practice, this should not
-                // make a relevant difference for hit detection. 
-                foreach (var sample in _currentSamples) {
-                    RegisterIntersection(sample);
-                }
                 
                 lock (Lock) {
+                    // To detect intersections we need the current pose. Note that this assumes the same pose (the one valid
+                    // at the end of the frame) for all ET samples collected during the frame. In practice, this should not
+                    // make a relevant difference for hit detection. 
+                    for (int i = 0; i < _currentSamples.Count; i++) {
+                        RegisterIntersection(_currentSamples[i]);
+                    }
+                    
                     // Push listed samples to all clients
                     foreach (IEyeDataClient dataClient in _dataClients) {
                         dataClient.ProcessCurrentSamples(_currentSamples);
