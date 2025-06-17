@@ -116,8 +116,7 @@ namespace Edia.Eye {
         /// to detect an intersection with colliders in the scene, and populates the eye data package with the intersection details if a hit occurs.
         /// </summary>
         /// <param name="latestSample">The eye data package containing the initial local-space gaze data.</param>
-        /// <returns>The updated eye data package containing intersection details if a hit is detected, or the original data if no hit occurs.</returns>
-        private EyeDataPackage RegisterIntersection(EyeDataPackage latestSample) {
+        private void RegisterIntersection(EyeDataPackage latestSample) {
             
             Vector3 pos = transform.TransformPoint(new Vector3(
                     latestSample.position_x_local, 
@@ -144,8 +143,6 @@ namespace Edia.Eye {
             else {
                 if (ShowDebugRay) { Debug.DrawRay(pos, dir * _rayDistance, Color.red); }
             }
-
-            return latestSample;
         }
     }
 }
