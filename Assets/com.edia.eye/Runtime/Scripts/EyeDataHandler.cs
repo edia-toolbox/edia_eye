@@ -83,7 +83,7 @@ namespace Edia.Eye {
                     // To detect intersections we need the current pose. Note that this assumes the same pose (the one valid
                     // at the end of the frame) for all ET samples collected during the frame. In practice, this should not
                     // make a relevant difference for hit detection. 
-                    // Note that we CANNOT use `foreach` (which makes a copy of the list) here, bc we ae updating the
+                    // Note that we CANNOT use `foreach` (which makes a copy of the list) here, bc we are updating the
                     // samples in-place.
                     for (int i = 0; i < _currentSamples.Count; i++) {
                         RegisterIntersection(_currentSamples[i]);
@@ -113,7 +113,7 @@ namespace Edia.Eye {
         }
 
         /// <summary>
-        /// Updates (in place!) the given eye data package with intersection data resulting from a raycast operation.
+        /// Updates (in-place!) the given eye data package with intersection data resulting from a raycast operation.
         /// This method computes the world-space position and direction of the eye's gaze, performs a raycast
         /// to detect an intersection with colliders in the scene, and populates the eye data package with the intersection details if a hit occurs.
         /// </summary>
