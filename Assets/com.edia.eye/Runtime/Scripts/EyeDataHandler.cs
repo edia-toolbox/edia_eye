@@ -79,6 +79,13 @@ namespace Edia.Eye {
                 if (_currentSamples.Count == 0)
                     continue;
 
+                // To detect intersections we need the current pose. Note that this assumes the same pose (the one valid
+                // at the end of the frame) for all ET samples collected during the frame. In practice, this should not
+                // make a relevant difference for hit detection. 
+                foreach (var sample in _currentSamples) {
+                    RegisterIntersection(sample);
+                }
+                
                 lock (Lock) {
                     // Push listed samples to all clients
                     foreach (IEyeDataClient dataClient in _dataClients) {
@@ -100,7 +107,7 @@ namespace Edia.Eye {
         /// </summary>
         /// <param name="latestSample">The latest eye-tracking sample to be added to the list.</param>
         public void AddEyeDataPackage(EyeDataPackage latestSample) {
-            _currentSamples.Add(RegisterIntersection(latestSample));
+            _currentSamples.Add(latestSample);
         }
 
         /// <summary>
@@ -112,7 +119,7 @@ namespace Edia.Eye {
         /// <returns>The updated eye data package containing intersection details if a hit is detected, or the original data if no hit occurs.</returns>
         private EyeDataPackage RegisterIntersection(EyeDataPackage latestSample) {
             
-            Vector3 Pos = transform.TransformPoint(new Vector3(
+            Vector3 pos = transform.TransformPoint(new Vector3(
                     latestSample.position_x_local, 
                     latestSample.position_y_local, 
                     latestSample.position_z_local)
@@ -126,16 +133,16 @@ namespace Edia.Eye {
 
             RaycastHit hit;
 
-            if (Physics.Raycast(Pos, dir, out hit, 50, _gazeLayer)) {
+            if (Physics.Raycast(pos, dir, out hit, 50, _gazeLayer)) {
                 latestSample.target_id      = hit.collider.name;
                 latestSample.intersection_x = hit.point.x;
                 latestSample.intersection_y = hit.point.y;
                 latestSample.intersection_z = hit.point.z;
 
-                if (ShowDebugRay) { Debug.DrawRay(Pos, dir * hit.distance, Color.green); }
+                if (ShowDebugRay) { Debug.DrawRay(pos, dir * hit.distance, Color.green); }
             }
             else {
-                if (ShowDebugRay) { Debug.DrawRay(Pos, dir * _rayDistance, Color.red); }
+                if (ShowDebugRay) { Debug.DrawRay(pos, dir * _rayDistance, Color.red); }
             }
 
             return latestSample;
