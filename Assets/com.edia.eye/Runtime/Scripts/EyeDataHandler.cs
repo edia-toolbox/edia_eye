@@ -115,7 +115,7 @@ namespace Edia.Eye {
         /// <summary>
         /// Updates (in-place!) the given eye data package with intersection data resulting from a raycast operation.
         /// This method computes the world-space position and direction of the eye's gaze, performs a raycast
-        /// to detect an intersection with colliders in the scene, and populates the eye data package with the intersection details if a hit occurs.
+        /// to detect an intersection with colliders (on the `_gazeLayer`) in the scene, and populates the eye data package with the intersection details if a hit occurs.
         /// </summary>
         /// <param name="latestSample">The eye data package containing the initial local-space gaze data.</param>
         private void RegisterIntersection(EyeDataPackage latestSample) {
