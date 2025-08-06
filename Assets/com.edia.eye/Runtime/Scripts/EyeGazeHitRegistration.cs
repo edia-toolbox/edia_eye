@@ -31,7 +31,9 @@ namespace Edia.Eye {
         private bool              _isRecording { get; set; }
         private XRRayInteractor   _rayInteractor;
         private DebugRaysRenderer _debugRaysRenderer;
-
+        private GameObject        _gameObjectBeingHit;
+        
+        
         // -------------------------------------------------------------------------------------------------------------------------------
 
         protected override void Awake() {
@@ -54,6 +56,7 @@ namespace Edia.Eye {
 
             if (_rayInteractor != null && _rayInteractor.TryGetCurrent3DRaycastHit(out var hit)) {
                 GazeHoverEnter?.Invoke(hit.collider.gameObject);
+                _gameObjectBeingHit = hit.collider.gameObject;
                 XRManager.Instance.AddToConsole($"GazeHoverEnter: {hit.collider.name}");
             }
         }
@@ -61,10 +64,13 @@ namespace Edia.Eye {
         protected override void OnHoverExited(HoverExitEventArgs args) {
             base.OnHoverExited(args);
 
-            _isRecording   = false;
-            _rayInteractor = null;
-
+            _isRecording        = false;
+            _rayInteractor      = null;
+            
+            _gameObjectBeingHit = null;
+            
             GazeHoverExit?.Invoke();
+            XRManager.Instance.AddToConsole($"GazeHoverExit: {_gameObjectBeingHit}");
         }
 
         // -------------------------------------------------------------------------------------------------------------------------------

@@ -88,7 +88,7 @@ namespace Edia.Eye
         /// <summary>
         /// The identifier of the object that was intersected by the gaze ray.
         /// </summary>
-        public string target_id = "";
+        public string target_id = "NA";
 
         /// <summary>
         /// The diameter of the pupil in millimeters.
