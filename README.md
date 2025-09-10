@@ -1,21 +1,32 @@
-# EDIA EYE
+<p align="center">
+  <img src="./Assets/com.edia.eye/Editor/Resources/Icons/IconEye.png" width="128" />
+</p>
 
-Central eye tracking support package for `EDIA`. 
+# EDIA Eye
 
-## Table of Contents
+Central eye tracking support package for the [`EDIA toolbox`](https://edia-toolbox.github.io/). 
 
-- [Installing as a package](#installing-as-a-package)
-- [Usage](#usage)
+## Installation
 
-## Installing as a package
+### Dependencies
+Make sure you have installed [EDIA Core](https://github.com/edia-toolbox/edia_core.git) and its dependencies. 
 
-There are different ways to achieve this. We recommend to always use Unity's `PackageManager`. Click on the `+` sign (top left corner) and then add the package from 
-1. **git** (*recommended*; assumes that you have access rights to this repo on gitlab or github)  
-    Use the link to the repository extended by `?path=Assets/com.edia.eye` (e.g., the full path should be something like:  
-    `https://github.com/edia-toolbox/edia_eye.git?path=Assets/com.edia.eye` )  
+### As a package (Unity package manager)
+- In Unity open the package manager window → **Window** → **Package Manager**  
+- Use `Install from GIT URL`  
+- To install:
+  - **Latest release**:  
+    `https://github.com/edia-toolbox/edia_eye.git?path=Assets/com.edia.eye#main`
+  - **Specific release** (replace `vX.Y.Z` with a version from the [release list](https://github.com/edia-toolbox/edia_eye/releases)):  
+    `https://github.com/edia-toolbox/edia_eye.git#vX.Y.Z`
+  - **Development version**:  
+    `https://github.com/edia-toolbox/edia_eye.git?path=Assets/com.edia.eye`
+- Hit `ADD`
 
-2. **from disk**:  
-    Download the content in [Assets/com.edia.eye](Assets/com.edia.eye), unzip, and put into a local directory on your machine. Then install from this location.
+Unity now starts to download and install the `com.edia.eye` package. 
+
+### For development
+Clone this repository. 
 
 ## Usage
 
