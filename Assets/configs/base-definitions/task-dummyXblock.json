@@ -1,0 +1,8 @@
+{
+  "type": "task",
+  "subType": "dummyXblock",
+  "settings": [],
+  "messages": [
+    { "key": "_intro", "value": "Now we are doing the dummyXblock task." }
+  ]
+}

@@ -1,87 +1,120 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-namespace Edia.Eye
-{
-    public class EyeDataClientGazeVisualizer : MonoBehaviour, IEyeDataClient
-    {
+namespace Edia.Eye {
+    [EdiaHeader("EDIA EYE", "EyeData Debug helper", "Ray representing active eye data gaze sample.")]
+    public class EyeDataClientGazeVisualizer : EyeDataClient {
+#region DECLARATIONS
 
-        #region DECLARATIONS 
-
-		[Header("Which Eye?")]
-		public Edia.Constants.EyeId Eye = Edia.Constants.EyeId.CENTER;
-
-		[Header ("Ray")]
-		public LineRenderer GazeRayRenderer;
-		public int LengthOfRay = 25;
-		public float gazeOriginOffsetZ = 0.05f;
+        [Header("Which Eye?")]
+        public Constants.EyeId Eye = Constants.EyeId.CENTER;
 
         [Header("Settings")]
-        public int updateDelay = 50;
+        [Tooltip("Update the gaze ray only every Xth update.")]
+        public int UpdateStep = 50;
 
-        Vector3 GazeDirectionCombined;
-        Vector3 GazeOriginCombinedLocal;
-        int counter = 0;
+        [Tooltip("Hides the ray after X seconds with no new sample.")]
+        public float timeoutAfterSecondsWithNoNewSample = 4f;
 
+        private          LineRenderer _gazeRayRenderer;
+        private readonly int          _lengthOfRay       = 25;
+        private readonly float        _gazeOriginOffsetZ = 0.05f;
 
+        private Vector3 _gazeDirection;
+        private Vector3 _gazeOriginLocal;
+        private int     _counter = 0;
 
-        private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
+        private          Color _colorRay;
+        private readonly Color _colorLeft    = Color.green;
+        private readonly Color _colorRight   = Color.yellow;
+        private readonly Color _colorCenter  = Color.cyan;
+        private readonly Color _colorInvalid = Color.red;
 
-        #endregion // -------------------------------------------------------------------------------------------------------------------------------
-        #region INITS	
-        private void OnEnable()
-        {
-            this.transform.parent = XRManager.Instance.XRCam;
+        private float _timeLastSample = -1f;
+
+        private List<EyeDataPackage> _receivedEyeDataSamples = new List<EyeDataPackage>();
+
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+#region INITS
+
+        private protected override void Awake() {
+            base.Awake();
+            _gazeRayRenderer = GetComponentInChildren<LineRenderer>();
         }
 
-        void Start()
-        {
-            counter = updateDelay;
+        void Start() {
+            
+            this.transform.parent        = XRManager.Instance.XRCam;
+            this.transform.localPosition = Vector3.zero;
+            this.transform.localRotation = Quaternion.identity;
+
+            _colorRay                           = Eye == Constants.EyeId.CENTER ? _colorCenter : Eye == Constants.EyeId.LEFT ? _colorLeft : _colorRight;
+            _gazeRayRenderer.materials[0].color = _colorInvalid;
+
+            _counter = UpdateStep;
         }
 
-        #endregion // -------------------------------------------------------------------------------------------------------------------------------
-        #region IEyeDataClient INTERFACE IMPLEMENTATION 
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+#region IEyeDataClient INTERFACE IMPLEMENTATION
 
-		public void ProcessCurrentSamples (List<EyeDataPackage> currentSamples) {
-			receivedEyeDataSamples.Clear ();
-			foreach (var sample in currentSamples) {
-				if (sample.eye.ToLower() == Eye.ToString().ToLower())
-					receivedEyeDataSamples.Add (sample);
+        public override void ProcessCurrentSamples(List<EyeDataPackage> currentSamples) {
+            foreach (var sample in currentSamples) {
+                if (sample.eye.ToLower() == Eye.ToString().ToLower()) {
+                    _receivedEyeDataSamples.Clear();
+                    _receivedEyeDataSamples.Add(sample);
+                    _timeLastSample = Time.time;
+                }
             }
-		}
+        }
 
-        #endregion // -------------------------------------------------------------------------------------------------------------------------------
-        #region PROCESSING SAMPLES
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+#region PROCESSING SAMPLES
 
-        void Update()
-        {
-            counter--;
+        void Update() {
+            _counter--;
 
-            if (counter < 0)
+            if (_counter < 0)
                 UpdateGazeRays();
         }
 
-        void UpdateGazeRays()
-        {
-            counter = updateDelay;
+        void UpdateGazeRays() {
+            _counter = UpdateStep;
 
-            //Debug.Log($"EyeDataClientGazeRecorder: {receivedEyeDataSamples.Count} samples received");
-
-            if (receivedEyeDataSamples.Count == 0)
+            if (_receivedEyeDataSamples.Count == 0 | (Time.time - _timeLastSample > timeoutAfterSecondsWithNoNewSample)) {
+                UpdateRayPosition(_gazeOriginLocal + Vector3.zero, Vector3.zero);
                 return;
+            }
 
-            // Substract the vector from 0,0,0 to have the center between two eyes offset from the lenses
-            GazeOriginCombinedLocal = new Vector3(receivedEyeDataSamples[0].position_x_local, receivedEyeDataSamples[0].position_y_local, receivedEyeDataSamples[0].position_z_local);
+            EyeDataPackage validEyeDataPackage = _receivedEyeDataSamples.FirstOrDefault(x => x.isValid); // find first valid package
 
-            // The gaze starts from GazeOriginCombinedLocal in the given direction
-            GazeDirectionCombined = new Vector3(receivedEyeDataSamples[0].direction_x_local, receivedEyeDataSamples[0].direction_y_local, receivedEyeDataSamples[0].direction_z_local);
+            // no valid samples, we skip:
+            if (validEyeDataPackage == default) {
+                _gazeRayRenderer.materials[0].color = Color.red;
+                return;
+            }
 
-            GazeRayRenderer.SetPosition(0, new Vector3(0f, 0f, gazeOriginOffsetZ));
-            GazeRayRenderer.SetPosition(1, GazeOriginCombinedLocal + GazeDirectionCombined * LengthOfRay);
+            _gazeOriginLocal = new Vector3(
+                validEyeDataPackage.position_x_local,
+                validEyeDataPackage.position_y_local,
+                validEyeDataPackage.position_z_local
+            );
+
+            _gazeDirection = new Vector3(
+                validEyeDataPackage.direction_x_local,
+                validEyeDataPackage.direction_y_local,
+                validEyeDataPackage.direction_z_local
+            );
+
+            _gazeRayRenderer.materials[0].color = _colorRay;
+            UpdateRayPosition(_gazeOriginLocal + (Vector3.forward * _gazeOriginOffsetZ), _gazeOriginLocal + _gazeDirection * _lengthOfRay);
         }
 
-        #endregion // -------------------------------------------------------------------------------------------------------------------------------
+        private void UpdateRayPosition(Vector3 startPosition, Vector3 endPosition) {
+            _gazeRayRenderer.SetPosition(0, startPosition);
+            _gazeRayRenderer.SetPosition(1, endPosition);
+        }
+
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
     }
 }

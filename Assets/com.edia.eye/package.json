@@ -1,18 +1,21 @@
 {
-  "name": "com.edia.eye",
-  "displayName": "EDIA Eye",
-  "version": "0.3.0",
-  "unity": "2022.3",
-  "description": "EDIA: Eye tracking functionalities",
-  "keywords": [
-    "EDIA",
-    "xr",
-    "vr",
-    "experiment"
-  ],
-  "author": {
-    "name": "EDIA"
-  },
-  "dependencies": {},
-  "hideInEditor": false
+	"name": "com.edia.eye",
+	"displayName": "EDIA Eye",
+	"version": "0.4.0",
+	"unity": "6000.0",
+	"description": "EDIA: Eye tracking functionalities",
+	"keywords": ["EDIA", "xr", "vr", "experiment"],
+	"author": {
+		"name": "EDIA"
+	},
+	"samples": [{
+			"displayName": "EDIA Eye demo scene",
+			"description": "Scene demonstrating basic eye tracking.",
+			"path": "Samples~/EdiaEyeSampleScene"
+		}],
+	"dependencies": {
+		"com.edia.core": "*",
+		"com.edia.uxf": "*"
+	},
+	"hideInEditor": false
 }
