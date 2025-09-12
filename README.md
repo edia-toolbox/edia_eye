@@ -35,4 +35,4 @@ Check out the [documentation](https://mind-body-emotion.notion.site/EDIA-Eye-1e7
 ## Contribution
 We are happy to receive feedback and contributions. If you want to report a bug, please open a GitHub issue. 
 If you have questions or suggestions, please use the [GitHub Discussion board](https://github.com/edia-toolbox/edia_core/discussions). 
-If you want to [contribute to EDIA](./CONTRIBUTOR.md), ideally first reach out to us (e.g., via the [Discussion board](https://github.com/edia-toolbox/edia_core/discussions) or [email](mailto:edia.toolbox@gmail.com)), and/or post a pull request.  
+If you want to [contribute to EDIA](https://github.com/edia-toolbox/edia_core/blob/dev/CONTRIBUTOR.md), ideally first reach out to us (e.g., via the [Discussion board](https://github.com/edia-toolbox/edia_core/discussions) or [email](mailto:edia.toolbox@gmail.com)), and/or post a pull request.  
