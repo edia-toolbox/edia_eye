@@ -1,6 +1,11 @@
 using UnityEngine;
 
 namespace Edia.Eye {
+    /// <summary>
+    /// Creates and manages a small spherical reticle that visualizes the current eye-gaze point in 3D space.
+    /// Call <see cref="UpdatePosition(Vector3)"/> to move the reticle to the latest gaze position.
+    /// Visibility and size are controlled via <see cref="ShowReticle"/> and <see cref="ReticleSize"/>.
+    /// </summary>
     public class EyeGazeReticleRenderer : MonoBehaviour {
 
         public  bool       ShowReticle = false;

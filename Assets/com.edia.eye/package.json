@@ -9,13 +9,11 @@
 		"name": "EDIA"
 	},
 	"samples": [{
-			"displayName": "EDIA Eye demo scene",
-			"description": "Scene demonstrating basic eye tracking.",
-			"path": "Samples~/EdiaEyeSampleScene"
-		}],
-	"dependencies": {
-		"com.edia.core": "*",
-		"com.edia.uxf": "*"
-	},
+			"displayName": "EDIA Eye demo scenes",
+			"description": "Scenes demonstrating basic eye tracking features.",
+			"path": "Samples~/EdiaEyeSampleScenes"
+		}
+	],
+	"dependencies": {},
 	"hideInEditor": false
 }
