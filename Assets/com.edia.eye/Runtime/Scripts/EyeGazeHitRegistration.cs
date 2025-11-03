@@ -18,7 +18,7 @@ namespace Edia.Eye {
 
         [Header("Default events:")]
         public UnityEvent<GameObject> GazeHoverEnter;
-        public UnityEvent GazeHoverExit;
+        public UnityEvent<GameObject> GazeHoverExit;
 
         [Header("Events fired only when TrackGaze is on:")]
         public UnityEvent<Vector3> NewHitLocalPosition;
@@ -67,10 +67,9 @@ namespace Edia.Eye {
             _isRecording        = false;
             _rayInteractor      = null;
             
-            _gameObjectBeingHit = null;
-            
-            GazeHoverExit?.Invoke();
+            GazeHoverExit?.Invoke(_gameObjectBeingHit);
             XRManager.Instance.AddToConsole($"GazeHoverExit: {_gameObjectBeingHit}");
+            _gameObjectBeingHit = null;
         }
 
         // -------------------------------------------------------------------------------------------------------------------------------
