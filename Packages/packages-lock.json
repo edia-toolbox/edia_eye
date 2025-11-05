@@ -13,7 +13,7 @@
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.unity.textmeshpro": "3.0.8"
       },
-      "hash": "8fe4e6095c772605d93cadde91222648b6a524a2"
+      "hash": "65dfce75ea569ca480e503970841c462ce9aa24e"
     },
     "com.edia.eye.varjo": {
       "version": "git@github.com:edia-toolbox/edia_eye_varjo.git?path=Assets/com.edia.eye.varjo#dev",
@@ -29,7 +29,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "4e4e58bb0ee44e63c87aa32d815dd93e57e66680"
+      "hash": "dc4d8877831775912ba98486553ab3c83724c44d"
     },
     "com.unity.burst": {
       "version": "1.8.25",
