@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "com.edia.core": "git@github.com:edia-toolbox/edia_core.git?path=Assets/com.edia.core#dev",
-    "com.edia.eye.varjo": "git@github.com:edia-toolbox/edia_eye_varjo.git?path=Assets/com.edia.eye.varjo#dev",
     "com.edia.uxf": "https://github.com/edia-org/unity-experiment-framework.git?path=Assets/com.edia.uxf#dev",
     "com.unity.ide.rider": "3.0.38",
     "com.unity.ide.visualstudio": "2.0.25",
