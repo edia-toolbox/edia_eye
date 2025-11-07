@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.edia.core": {
-      "version": "git@github.com:edia-toolbox/edia_core.git?path=Assets/com.edia.core#dev",
+      "version": "https://github.com/edia-toolbox/edia_core.git?path=Assets/com.edia.core#main",
       "depth": 0,
       "source": "git",
       "dependencies": {
@@ -13,14 +13,14 @@
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.unity.textmeshpro": "3.0.8"
       },
-      "hash": "2b69636188eb06877cb23bed2536b5035c6a41c8"
+      "hash": "b16d0588fabf8c47a6d9241866a8624cc76c3f94"
     },
     "com.edia.uxf": {
-      "version": "https://github.com/edia-org/unity-experiment-framework.git?path=Assets/com.edia.uxf#dev",
+      "version": "https://github.com/edia-toolbox/edia_uxf.git?path=Assets/com.edia.uxf#main",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "98f6501bd74e52df6ba962e990e224b9348ba053"
+      "hash": "81e2534a6cc329272b1a2f1c2c872c1aa97f0768"
     },
     "com.unity.burst": {
       "version": "1.8.25",
