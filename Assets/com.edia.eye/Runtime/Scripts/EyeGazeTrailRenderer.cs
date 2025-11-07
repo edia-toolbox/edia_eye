@@ -1,16 +1,22 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Edia.Eye {
+    /// <summary>
+    /// Generates a fading particle-based trail that visualizes the user's gaze points over time.
+    /// Call <see cref="AddToTrail(Vector3)"/> with the gaze position each frame to emit new trail points.
+    /// The trail appearance (size, lifetime, material) and visibility are configurable via public fields.
+    /// </summary>
     public class EyeGazTrailRenderer : MonoBehaviour {
         
         public bool ShowTrail = false;
         [Tooltip("This depends on your render pipeline.")]
         public Material TrailMaterial;
         
-        [Tooltip("Length in seconds.")]
-        public int TrailLength = 10;
+        [Tooltip("For how long (in s) shall the trail points be shown?")]
+        public int TrailPointLifetime = 10;
 
-        [Tooltip("Length in seconds.")]
+        [Tooltip("Size of trail points.")]
         public float TrailPointSize = 0.2f;
         
         
@@ -26,8 +32,9 @@ namespace Edia.Eye {
             var main = _particleSystem.main;
             main.startColor    = new Color(0.85f, 0.45f, 0.05f);
             main.startSize     = TrailPointSize;
-            main.startLifetime = TrailLength;
+            main.startLifetime = TrailPointLifetime;
             main.startSpeed    = 0f;
+            main.simulationSpace = ParticleSystemSimulationSpace.World;
             
             var visuals = _particleSystem.GetComponent<ParticleSystemRenderer>();
             visuals.material   = TrailMaterial;

@@ -12,7 +12,7 @@ namespace Edia.Eye {
 
         [Header("Settings")]
         [Tooltip("Update the gaze ray only every Xth update.")]
-        public int UpdateStep = 50;
+        public int UpdateStep = 1;
 
         [Tooltip("Hides the ray after X seconds with no new sample.")]
         public float timeoutAfterSecondsWithNoNewSample = 4f;

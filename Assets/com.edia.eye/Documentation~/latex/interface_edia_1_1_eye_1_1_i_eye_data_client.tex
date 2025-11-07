@@ -1,0 +1,50 @@
+\doxysection{Edia.\+Eye.\+IEye\+Data\+Client Interface Reference}
+\hypertarget{interface_edia_1_1_eye_1_1_i_eye_data_client}{}\label{interface_edia_1_1_eye_1_1_i_eye_data_client}\index{Edia.Eye.IEyeDataClient@{Edia.Eye.IEyeDataClient}}
+
+
+Interface to be implemented by data clients that receive data from the {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}}.  
+
+
+Inheritance diagram for Edia.\+Eye.\+IEye\+Data\+Client\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_edia_1_1_eye_1_1_i_eye_data_client}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interface_edia_1_1_eye_1_1_i_eye_data_client_a45e817f3aeb1f611e5863743c84f8dd3}{Process\+Current\+Samples}} (List$<$ \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_package}{Eye\+Data\+Package}} $>$ current\+Samples)
+\begin{DoxyCompactList}\small\item\em This method is called by the {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}} to push the current samples to the data clients. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface to be implemented by data clients that receive data from the {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}}. 
+
+\label{doc-func-members}
+\Hypertarget{interface_edia_1_1_eye_1_1_i_eye_data_client_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_edia_1_1_eye_1_1_i_eye_data_client_a45e817f3aeb1f611e5863743c84f8dd3}\index{Edia.Eye.IEyeDataClient@{Edia.Eye.IEyeDataClient}!ProcessCurrentSamples@{ProcessCurrentSamples}}
+\index{ProcessCurrentSamples@{ProcessCurrentSamples}!Edia.Eye.IEyeDataClient@{Edia.Eye.IEyeDataClient}}
+\doxysubsubsection{\texorpdfstring{ProcessCurrentSamples()}{ProcessCurrentSamples()}}
+{\footnotesize\ttfamily \label{interface_edia_1_1_eye_1_1_i_eye_data_client_a45e817f3aeb1f611e5863743c84f8dd3} 
+void Edia.\+Eye.\+IEye\+Data\+Client.\+Process\+Current\+Samples (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_package}{Eye\+Data\+Package}} $>$}]{current\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+This method is called by the {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}} to push the current samples to the data clients. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Samples} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_client_lsl_pusher_aa98dffa16b5b21b9ca2c54308b2d989e}{Edia.\+Eye.\+Eye\+Data\+Client\+Lsl\+Pusher}}, \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_client_u_x_f_tracker_a62c110832f0b5e80136e3c7ff22c7b72}{Edia.\+Eye.\+Eye\+Data\+Client\+UXFTracker}}, and \mbox{\hyperlink{class_eye_data_client_tracked_eye_pose_driver_ab3996eb194641309a038d1e9f3253a24}{Eye\+Data\+Client\+Tracked\+Eye\+Pose\+Driver}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Felix/\+Projects/\+EDIA/edia\+\_\+eye/\+Assets/com.\+edia.\+eye/\+Runtime/\+Scripts/IEye\+Data\+Client.\+cs\end{DoxyCompactItemize}

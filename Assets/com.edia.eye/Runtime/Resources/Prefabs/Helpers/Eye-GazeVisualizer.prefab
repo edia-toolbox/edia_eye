@@ -57,7 +57,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 670d18fdd1920a84eb357ab0bdf342eb, type: 2}
+  - {fileID: 2100000, guid: cb6c0b26d3cb8fe4d9a3b204a6033c29, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d877d8a2e73fe1749a9c91163f2eaae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EyeDataHandler: {fileID: 0}
   Eye: 2
   UpdateStep: 50
   timeoutAfterSecondsWithNoNewSample: 4

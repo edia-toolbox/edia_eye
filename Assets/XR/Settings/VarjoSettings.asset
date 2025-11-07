@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StereoRenderingMode: 0
   SeparateCullPass: 0
-  FoveatedRendering: 1
+  FoveatedRendering: 0
   ContextScalingFactor: 1
   FocusScalingFactor: 1
   Opaque: 1
-  FaceLocked: 1
+  FaceLocked: 0
   FlipY: 0
-  OcclusionMesh: 1
+  OcclusionMesh: 0
   SessionPriority: 0
   SubmitDepth: 0
   DepthSorting: 0
