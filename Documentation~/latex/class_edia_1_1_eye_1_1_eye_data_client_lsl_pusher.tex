@@ -1,0 +1,53 @@
+\doxysection{Edia.\+Eye.\+Eye\+Data\+Client\+Lsl\+Pusher Class Reference}
+\hypertarget{class_edia_1_1_eye_1_1_eye_data_client_lsl_pusher}{}\label{class_edia_1_1_eye_1_1_eye_data_client_lsl_pusher}\index{Edia.Eye.EyeDataClientLslPusher@{Edia.Eye.EyeDataClientLslPusher}}
+
+
+The \doxylink{class_edia_1_1_eye_1_1_eye_data_client_lsl_pusher}{Eye\+Data\+Client\+Lsl\+Pusher} class is responsible for filtering and processing eye-\/tracking data received from the \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler} and preparing it for streaming using the Lab Streaming Layer (LSL) protocol.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_client_lsl_pusher_aa98dffa16b5b21b9ca2c54308b2d989e}{Process\+Current\+Samples}} (List$<$ \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_package}{Eye\+Data\+Package}} $>$ current\+Samples)
+\begin{DoxyCompactList}\small\item\em This method is called by the {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}} to push the current samples to the data clients. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{class_edia_1_1_eye_1_1_eye_data_client_lsl_pusher}{Eye\+Data\+Client\+Lsl\+Pusher} class is responsible for filtering and processing eye-\/tracking data received from the \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler} and preparing it for streaming using the Lab Streaming Layer (LSL) protocol. 
+
+This class inherits from the Eye\+Data\+Client base class and implements specific functionality for handling and streaming data related to the specified eye ID. It filters data samples to include only those that match the configured eye type. 
+
+\begin{DoxySeeAlso}{See also}
+Eye\+Data\+Client, Edia.\+Constants.\+Eye\+Id
+
+
+\end{DoxySeeAlso}
+
+
+\label{doc-func-members}
+\Hypertarget{class_edia_1_1_eye_1_1_eye_data_client_lsl_pusher_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_edia_1_1_eye_1_1_eye_data_client_lsl_pusher_aa98dffa16b5b21b9ca2c54308b2d989e}\index{Edia.Eye.EyeDataClientLslPusher@{Edia.Eye.EyeDataClientLslPusher}!ProcessCurrentSamples@{ProcessCurrentSamples}}
+\index{ProcessCurrentSamples@{ProcessCurrentSamples}!Edia.Eye.EyeDataClientLslPusher@{Edia.Eye.EyeDataClientLslPusher}}
+\doxysubsubsection{\texorpdfstring{ProcessCurrentSamples()}{ProcessCurrentSamples()}}
+{\footnotesize\ttfamily \label{class_edia_1_1_eye_1_1_eye_data_client_lsl_pusher_aa98dffa16b5b21b9ca2c54308b2d989e} 
+override void Edia.\+Eye.\+Eye\+Data\+Client\+Lsl\+Pusher.\+Process\+Current\+Samples (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_package}{Eye\+Data\+Package}} $>$}]{current\+Samples}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+This method is called by the {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}} to push the current samples to the data clients. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Samples} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_edia_1_1_eye_1_1_i_eye_data_client_a45e817f3aeb1f611e5863743c84f8dd3}{Edia.\+Eye.\+IEye\+Data\+Client}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Felix/\+Projects/\+EDIA/edia\+\_\+eye/\+Assets/com.\+edia.\+eye/\+Runtime/\+Scripts/Eye\+Data\+Client\+Lsl\+Pusher.\+cs\end{DoxyCompactItemize}

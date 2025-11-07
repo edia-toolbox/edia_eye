@@ -1,0 +1,92 @@
+\doxysection{Edia.\+Eye.\+Eye\+Data\+Handler Class Reference}
+\hypertarget{class_edia_1_1_eye_1_1_eye_data_handler}{}\label{class_edia_1_1_eye_1_1_eye_data_handler}\index{Edia.Eye.EyeDataHandler@{Edia.Eye.EyeDataHandler}}
+
+
+The {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}} class is responsible for receiving, managing, and distributing eye-\/tracking data to registered data clients.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_handler_a48accefc4b573462c7481538e16fdf66}{Add\+Data\+Client}} (\mbox{\hyperlink{interface_edia_1_1_eye_1_1_i_eye_data_client}{IEye\+Data\+Client}} data\+Client)
+\begin{DoxyCompactList}\small\item\em Adds a new eye-\/tracking data client to the list of data clients, if it is not already present in the list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_handler_a5f24279d436a87ce5fdbc2033ee3e45b}{Start\+Pushing\+Samples}} ()
+\begin{DoxyCompactList}\small\item\em Starts the coroutine that pushes eye-\/tracking data to registered data clients. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_handler_a9a65cbb3a7b4c19796826bc1023ebd9c}{Add\+Eye\+Data\+Package}} (\mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_package}{Eye\+Data\+Package}} latest\+Sample)
+\begin{DoxyCompactList}\small\item\em Adds a new eye-\/tracking data package to the list of current samples. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_edia_1_1_eye_1_1_eye_data_handler_aff076e29e11a68c5aca3ef63bfff9d66}\label{class_edia_1_1_eye_1_1_eye_data_handler_aff076e29e11a68c5aca3ef63bfff9d66} 
+readonly object {\bfseries Lock} = new object()
+\begin{DoxyCompactList}\small\item\em A lock object used for thread safety when accessing the {\ttfamily \+\_\+current\+Samples} list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}} class is responsible for receiving, managing, and distributing eye-\/tracking data to registered data clients. 
+
+
+\begin{DoxyItemize}
+\item Operates as a singleton, ensuring that there is only one instance of it in the scene.
+\item Receives data from an Eye\+Tracker (or something that pretends to be) via its public \doxylink{class_edia_1_1_eye_1_1_eye_data_handler_a9a65cbb3a7b4c19796826bc1023ebd9c}{Add\+Eye\+Data\+Package()} method.
+\item Puts these samples into an internal list {\ttfamily \+\_\+current\+Samples}
+\item Manages a list of registered {\ttfamily Data\+Clients} (objects implementing the {\ttfamily \doxylink{interface_edia_1_1_eye_1_1_i_eye_data_client}{IEye\+Data\+Client}} interface).
+\item At the end (!) of each frame, the class\+:
+\begin{DoxyItemize}
+\item Locks access to the {\ttfamily \+\_\+current\+Samples} list for thread safety.
+\item Sends the collected samples to all registered {\ttfamily Data\+Clients} using their {\ttfamily Process\+Current\+Samples()} method.
+\item Empties the {\ttfamily \+\_\+current\+Samples} list
+\item Releases the lock to allow further data collection. 
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\label{doc-func-members}
+\Hypertarget{class_edia_1_1_eye_1_1_eye_data_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_edia_1_1_eye_1_1_eye_data_handler_a48accefc4b573462c7481538e16fdf66}\index{Edia.Eye.EyeDataHandler@{Edia.Eye.EyeDataHandler}!AddDataClient@{AddDataClient}}
+\index{AddDataClient@{AddDataClient}!Edia.Eye.EyeDataHandler@{Edia.Eye.EyeDataHandler}}
+\doxysubsubsection{\texorpdfstring{AddDataClient()}{AddDataClient()}}
+{\footnotesize\ttfamily \label{class_edia_1_1_eye_1_1_eye_data_handler_a48accefc4b573462c7481538e16fdf66} 
+void Edia.\+Eye.\+Eye\+Data\+Handler.\+Add\+Data\+Client (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_edia_1_1_eye_1_1_i_eye_data_client}{IEye\+Data\+Client}}}]{data\+Client}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a new eye-\/tracking data client to the list of data clients, if it is not already present in the list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+Client} & The eye-\/tracking data client to be added.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_edia_1_1_eye_1_1_eye_data_handler_a9a65cbb3a7b4c19796826bc1023ebd9c}\index{Edia.Eye.EyeDataHandler@{Edia.Eye.EyeDataHandler}!AddEyeDataPackage@{AddEyeDataPackage}}
+\index{AddEyeDataPackage@{AddEyeDataPackage}!Edia.Eye.EyeDataHandler@{Edia.Eye.EyeDataHandler}}
+\doxysubsubsection{\texorpdfstring{AddEyeDataPackage()}{AddEyeDataPackage()}}
+{\footnotesize\ttfamily \label{class_edia_1_1_eye_1_1_eye_data_handler_a9a65cbb3a7b4c19796826bc1023ebd9c} 
+void Edia.\+Eye.\+Eye\+Data\+Handler.\+Add\+Eye\+Data\+Package (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_package}{Eye\+Data\+Package}}}]{latest\+Sample}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a new eye-\/tracking data package to the list of current samples. 
+
+This method is called by the eye data converter to feed new data into the handler.
+
+
+\begin{DoxyParams}{Parameters}
+{\em latest\+Sample} & The latest eye-\/tracking sample to be added to the list.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_edia_1_1_eye_1_1_eye_data_handler_a5f24279d436a87ce5fdbc2033ee3e45b}\index{Edia.Eye.EyeDataHandler@{Edia.Eye.EyeDataHandler}!StartPushingSamples@{StartPushingSamples}}
+\index{StartPushingSamples@{StartPushingSamples}!Edia.Eye.EyeDataHandler@{Edia.Eye.EyeDataHandler}}
+\doxysubsubsection{\texorpdfstring{StartPushingSamples()}{StartPushingSamples()}}
+{\footnotesize\ttfamily \label{class_edia_1_1_eye_1_1_eye_data_handler_a5f24279d436a87ce5fdbc2033ee3e45b} 
+void Edia.\+Eye.\+Eye\+Data\+Handler.\+Start\+Pushing\+Samples (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Starts the coroutine that pushes eye-\/tracking data to registered data clients. 
+
+This should be called when processing of samples should begin. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Felix/\+Projects/\+EDIA/edia\+\_\+eye/\+Assets/com.\+edia.\+eye/\+Runtime/\+Scripts/Eye\+Data\+Handler.\+cs\end{DoxyCompactItemize}
