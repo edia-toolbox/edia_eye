@@ -13,23 +13,14 @@
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.unity.textmeshpro": "3.0.8"
       },
-      "hash": "65dfce75ea569ca480e503970841c462ce9aa24e"
-    },
-    "com.edia.eye.varjo": {
-      "version": "git@github.com:edia-toolbox/edia_eye_varjo.git?path=Assets/com.edia.eye.varjo#dev",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.varjo.xr": "3.6.0"
-      },
-      "hash": "ba4c88e8812cbcb1c13f32dc4e5733f6df521c80"
+      "hash": "2b69636188eb06877cb23bed2536b5035c6a41c8"
     },
     "com.edia.uxf": {
       "version": "https://github.com/edia-org/unity-experiment-framework.git?path=Assets/com.edia.uxf#dev",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "dc4d8877831775912ba98486553ab3c83724c44d"
+      "hash": "98f6501bd74e52df6ba962e990e224b9348ba053"
     },
     "com.unity.burst": {
       "version": "1.8.25",
