@@ -34,6 +34,7 @@ namespace Edia.Eye {
             main.startSize     = TrailPointSize;
             main.startLifetime = TrailPointLifetime;
             main.startSpeed    = 0f;
+            main.simulationSpace = ParticleSystemSimulationSpace.World;
             
             var visuals = _particleSystem.GetComponent<ParticleSystemRenderer>();
             visuals.material   = TrailMaterial;
