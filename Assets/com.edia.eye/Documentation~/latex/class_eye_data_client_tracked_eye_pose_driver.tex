@@ -1,0 +1,48 @@
+\doxysection{Eye\+Data\+Client\+Tracked\+Eye\+Pose\+Driver Class Reference}
+\hypertarget{class_eye_data_client_tracked_eye_pose_driver}{}\label{class_eye_data_client_tracked_eye_pose_driver}\index{EyeDataClientTrackedEyePoseDriver@{EyeDataClientTrackedEyePoseDriver}}
+
+
+A client that processes eye-\/tracking data to update the position and rotation of a Game\+Object.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{class_eye_data_client_tracked_eye_pose_driver_ab3996eb194641309a038d1e9f3253a24}{Process\+Current\+Samples}} (List$<$ \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_package}{Eye\+Data\+Package}} $>$ current\+Samples)
+\begin{DoxyCompactList}\small\item\em Processes the current eye-\/tracking samples and updates the position and/or rotation of the Game\+Object accordingly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A client that processes eye-\/tracking data to update the position and rotation of a Game\+Object. 
+
+This class applies the eye pose (position and rotation) from the latest eye-\/tracking data sample to the associated Game\+Object\textquotesingle{}s transform in local space. 
+
+\label{doc-func-members}
+\Hypertarget{class_eye_data_client_tracked_eye_pose_driver_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_eye_data_client_tracked_eye_pose_driver_ab3996eb194641309a038d1e9f3253a24}\index{EyeDataClientTrackedEyePoseDriver@{EyeDataClientTrackedEyePoseDriver}!ProcessCurrentSamples@{ProcessCurrentSamples}}
+\index{ProcessCurrentSamples@{ProcessCurrentSamples}!EyeDataClientTrackedEyePoseDriver@{EyeDataClientTrackedEyePoseDriver}}
+\doxysubsubsection{\texorpdfstring{ProcessCurrentSamples()}{ProcessCurrentSamples()}}
+{\footnotesize\ttfamily \label{class_eye_data_client_tracked_eye_pose_driver_ab3996eb194641309a038d1e9f3253a24} 
+override void Eye\+Data\+Client\+Tracked\+Eye\+Pose\+Driver.\+Process\+Current\+Samples (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_package}{Eye\+Data\+Package}} $>$}]{current\+Samples}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Processes the current eye-\/tracking samples and updates the position and/or rotation of the Game\+Object accordingly. 
+
+This method uses the latest eye data sample to apply position and rotation changes to the Game\+Object\textquotesingle{}s transform.
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Samples} & A list of the current eye-\/tracking data samples.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_edia_1_1_eye_1_1_i_eye_data_client_a45e817f3aeb1f611e5863743c84f8dd3}{Edia.\+Eye.\+IEye\+Data\+Client}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/jur/\+Documents/projects/edia\+\_\+eye/\+Assets/com.\+edia.\+eye/\+Runtime/\+Scripts/Eye\+Data\+Client\+Tracked\+Eye\+Pose\+Driver.\+cs\end{DoxyCompactItemize}

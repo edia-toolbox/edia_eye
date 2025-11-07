@@ -1,0 +1,54 @@
+\doxysection{Edia.\+Eye.\+Eye\+Data\+Client\+UXFTracker Class Reference}
+\hypertarget{class_edia_1_1_eye_1_1_eye_data_client_u_x_f_tracker}{}\label{class_edia_1_1_eye_1_1_eye_data_client_u_x_f_tracker}\index{Edia.Eye.EyeDataClientUXFTracker@{Edia.Eye.EyeDataClientUXFTracker}}
+
+
+The {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_client_u_x_f_tracker}{Eye\+Data\+Client\+UXFTracker}} class is a data client for the {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}} that receives eye-\/tracking data and writes it to a custom UXF log file.  
+
+
+Inheritance diagram for Edia.\+Eye.\+Eye\+Data\+Client\+UXFTracker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_edia_1_1_eye_1_1_eye_data_client_u_x_f_tracker}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_client_u_x_f_tracker_a62c110832f0b5e80136e3c7ff22c7b72}{Process\+Current\+Samples}} (List$<$ \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_package}{Eye\+Data\+Package}} $>$ current\+Samples)
+\begin{DoxyCompactList}\small\item\em Called from \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler} to supply new eye-\/tracking data samples. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_client_u_x_f_tracker}{Eye\+Data\+Client\+UXFTracker}} class is a data client for the {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}} that receives eye-\/tracking data and writes it to a custom UXF log file. 
+
+The tracker records data for a specified eye (Left, Right, or Center) and logs relevant properties to UXF. 
+
+\label{doc-func-members}
+\Hypertarget{class_edia_1_1_eye_1_1_eye_data_client_u_x_f_tracker_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_edia_1_1_eye_1_1_eye_data_client_u_x_f_tracker_a62c110832f0b5e80136e3c7ff22c7b72}\index{Edia.Eye.EyeDataClientUXFTracker@{Edia.Eye.EyeDataClientUXFTracker}!ProcessCurrentSamples@{ProcessCurrentSamples}}
+\index{ProcessCurrentSamples@{ProcessCurrentSamples}!Edia.Eye.EyeDataClientUXFTracker@{Edia.Eye.EyeDataClientUXFTracker}}
+\doxysubsubsection{\texorpdfstring{ProcessCurrentSamples()}{ProcessCurrentSamples()}}
+{\footnotesize\ttfamily \label{class_edia_1_1_eye_1_1_eye_data_client_u_x_f_tracker_a62c110832f0b5e80136e3c7ff22c7b72} 
+void Edia.\+Eye.\+Eye\+Data\+Client\+UXFTracker.\+Process\+Current\+Samples (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_package}{Eye\+Data\+Package}} $>$}]{current\+Samples}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Called from \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler} to supply new eye-\/tracking data samples. 
+
+Filters samples based on the specified eye and stores them for later processing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Samples} & The sampled eye data for this frame.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_edia_1_1_eye_1_1_i_eye_data_client_a45e817f3aeb1f611e5863743c84f8dd3}{Edia.\+Eye.\+IEye\+Data\+Client}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/jur/\+Documents/projects/edia\+\_\+eye/\+Assets/com.\+edia.\+eye/\+Runtime/\+Scripts/Eye\+Data\+Client\+UXFTracker.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,25 @@
+var class_edia_1_1_eye_1_1_eye_data_package =
+[
+    [ "confidence", "class_edia_1_1_eye_1_1_eye_data_package.html#a01a947df9f0ea65fcd1f5ee730472627", null ],
+    [ "diameter", "class_edia_1_1_eye_1_1_eye_data_package.html#acf20ffb0f493979a692507ec5860b30b", null ],
+    [ "diameter_x", "class_edia_1_1_eye_1_1_eye_data_package.html#a4626415629c84d963db82406128fdbc0", null ],
+    [ "diameter_y", "class_edia_1_1_eye_1_1_eye_data_package.html#a35a834f4e8275a937fc90dd86d70eb6d", null ],
+    [ "direction_x_local", "class_edia_1_1_eye_1_1_eye_data_package.html#a02ccde14d52b3e31ae0e2d4c66d3c77e", null ],
+    [ "direction_y_local", "class_edia_1_1_eye_1_1_eye_data_package.html#a5afd97839899030bff0e231f38327f78", null ],
+    [ "direction_z_local", "class_edia_1_1_eye_1_1_eye_data_package.html#acd09b2fa00bbe49b4c78d9766bb2b52d", null ],
+    [ "eye", "class_edia_1_1_eye_1_1_eye_data_package.html#a279855a826c99688e8d790d0dd8d15f0", null ],
+    [ "intersection_x", "class_edia_1_1_eye_1_1_eye_data_package.html#a03ddfbdd662f62226c48f927f9065f15", null ],
+    [ "intersection_y", "class_edia_1_1_eye_1_1_eye_data_package.html#ad7de3a416c8fc589ac2f315b334e3e3e", null ],
+    [ "intersection_z", "class_edia_1_1_eye_1_1_eye_data_package.html#a01e73d4e495726b2aab174d9cd9afadd", null ],
+    [ "isValid", "class_edia_1_1_eye_1_1_eye_data_package.html#a429efa8e36d4d7ade808b66a2d6f2ed2", null ],
+    [ "openness", "class_edia_1_1_eye_1_1_eye_data_package.html#a5c60f41eea0700818396171bdf6e4b06", null ],
+    [ "position_x_local", "class_edia_1_1_eye_1_1_eye_data_package.html#abebadfcff19b6ff76bd1620d5f927ed3", null ],
+    [ "position_y_local", "class_edia_1_1_eye_1_1_eye_data_package.html#a8eeaf475643232e6368a5e3936291171", null ],
+    [ "position_z_local", "class_edia_1_1_eye_1_1_eye_data_package.html#a316200848bf4a5ed9b0056ee174a0505", null ],
+    [ "rotation_x_local", "class_edia_1_1_eye_1_1_eye_data_package.html#a779dfa6837a14d9adadc87c62d8bfebc", null ],
+    [ "rotation_y_local", "class_edia_1_1_eye_1_1_eye_data_package.html#aed71134a8ef3da9c3edd0e69ae345c7f", null ],
+    [ "rotation_z_local", "class_edia_1_1_eye_1_1_eye_data_package.html#a669953a56955862797353ec4156b6753", null ],
+    [ "target_id", "class_edia_1_1_eye_1_1_eye_data_package.html#aeb5356b169eb775a1f5bc5a50adf4840", null ],
+    [ "timestamp_et", "class_edia_1_1_eye_1_1_eye_data_package.html#a4244e09e7681fdc8e11c795697cc564f", null ],
+    [ "timestamp_lsl", "class_edia_1_1_eye_1_1_eye_data_package.html#ab614e404922d9e3d2de5bf8e11f40feb", null ]
+];

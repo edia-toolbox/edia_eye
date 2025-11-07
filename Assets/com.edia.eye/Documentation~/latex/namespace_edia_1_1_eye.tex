@@ -1,0 +1,27 @@
+\doxysection{Edia.\+Eye Namespace Reference}
+\hypertarget{namespace_edia_1_1_eye}{}\label{namespace_edia_1_1_eye}\index{Edia.Eye@{Edia.Eye}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_client_lsl_pusher}{Eye\+Data\+Client\+Lsl\+Pusher}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{class_edia_1_1_eye_1_1_eye_data_client_lsl_pusher}{Eye\+Data\+Client\+Lsl\+Pusher} class is responsible for filtering and processing eye-\/tracking data received from the \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler} and preparing it for streaming using the Lab Streaming Layer (LSL) protocol. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_client_u_x_f_tracker}{Eye\+Data\+Client\+UXFTracker}}
+\begin{DoxyCompactList}\small\item\em The {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_client_u_x_f_tracker}{Eye\+Data\+Client\+UXFTracker}} class is a data client for the {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}} that receives eye-\/tracking data and writes it to a custom UXF log file. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_generator_all_eyes}{Eye\+Data\+Generator\+All\+Eyes}}
+\begin{DoxyCompactList}\small\item\em Dummy class to fake a minimal data stream from an eye tracker (with 90Hz). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_generator_center_eye}{Eye\+Data\+Generator\+Center\+Eye}}
+\begin{DoxyCompactList}\small\item\em Dummy class to fake a minimal data stream from an eye tracker (with 90Hz). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}}
+\begin{DoxyCompactList}\small\item\em The {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}} class is responsible for receiving, managing, and distributing eye-\/tracking data to registered data clients. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_data_package}{Eye\+Data\+Package}}
+\begin{DoxyCompactList}\small\item\em Data container for one single frame of eye data from an eye tracker. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_gaze_hit_u_x_f_tracker}{Eye\+Gaze\+Hit\+UXFTracker}}
+\begin{DoxyCompactList}\small\item\em Tracks and records raycast hit data using the UXF (Unity Experiment Framework) Tracker framework. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_gaze_reticle_renderer}{Eye\+Gaze\+Reticle\+Renderer}}
+\begin{DoxyCompactList}\small\item\em Creates and manages a small spherical reticle that visualizes the current eye-\/gaze point in 3D space. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_gaz_trail_renderer}{Eye\+Gaz\+Trail\+Renderer}}
+\begin{DoxyCompactList}\small\item\em Generates a fading particle-\/based trail that visualizes the user\textquotesingle{}s gaze points over time. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_edia_1_1_eye_1_1_i_eye_data_client}{IEye\+Data\+Client}}
+\begin{DoxyCompactList}\small\item\em Interface to be implemented by data clients that receive data from the {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_data_handler}{Eye\+Data\+Handler}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_edia_1_1_eye_1_1_panel_eye_calibration}{Panel\+Eye\+Calibration}}
+\begin{DoxyCompactList}\small\item\em Handles the Controller UI panel for eye calibration during an experiment. \end{DoxyCompactList}\end{DoxyCompactItemize}
