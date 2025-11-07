@@ -1,0 +1,44 @@
+\doxysection{Edia.\+Eye.\+Eye\+Gaze\+Hit\+UXFTracker Class Reference}
+\hypertarget{class_edia_1_1_eye_1_1_eye_gaze_hit_u_x_f_tracker}{}\label{class_edia_1_1_eye_1_1_eye_gaze_hit_u_x_f_tracker}\index{Edia.Eye.EyeGazeHitUXFTracker@{Edia.Eye.EyeGazeHitUXFTracker}}
+
+
+Tracks and records raycast hit data using the UXF (Unity Experiment Framework) Tracker framework.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_edia_1_1_eye_1_1_eye_gaze_hit_u_x_f_tracker_ae5bbe8fde675ac281eb24045abde25b6}{Add\+Sample}} (float\mbox{[}$\,$\mbox{]} current\+Sample)
+\begin{DoxyCompactList}\small\item\em Adds a new sample to the list of received gaze hit samples for tracking. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Tracks and records raycast hit data using the UXF (Unity Experiment Framework) Tracker framework. 
+
+This class integrates with Eye\+Gaze\+Hit\+Registration and processes hit position as well as UV coordinate data.
+
+The {\ttfamily \doxylink{class_edia_1_1_eye_1_1_eye_gaze_hit_u_x_f_tracker}{Eye\+Gaze\+Hit\+UXFTracker}} adds raycast hit sample data to the UXF tracker system. It retrieves hitpoints (local positions) and UV coordinates, stores them for frame-\/by-\/frame processing, and logs them in the UXF data management system. Ensure this component is linked with an {\ttfamily Eye\+Gaze\+Hit\+Registration} for correct operation, as it depends on real-\/time data streams provided by the registration system. 
+
+\label{doc-func-members}
+\Hypertarget{class_edia_1_1_eye_1_1_eye_gaze_hit_u_x_f_tracker_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_edia_1_1_eye_1_1_eye_gaze_hit_u_x_f_tracker_ae5bbe8fde675ac281eb24045abde25b6}\index{Edia.Eye.EyeGazeHitUXFTracker@{Edia.Eye.EyeGazeHitUXFTracker}!AddSample@{AddSample}}
+\index{AddSample@{AddSample}!Edia.Eye.EyeGazeHitUXFTracker@{Edia.Eye.EyeGazeHitUXFTracker}}
+\doxysubsubsection{\texorpdfstring{AddSample()}{AddSample()}}
+{\footnotesize\ttfamily \label{class_edia_1_1_eye_1_1_eye_gaze_hit_u_x_f_tracker_ae5bbe8fde675ac281eb24045abde25b6} 
+void Edia.\+Eye.\+Eye\+Gaze\+Hit\+UXFTracker.\+Add\+Sample (\begin{DoxyParamCaption}\item[{float\mbox{[}$\,$\mbox{]}}]{current\+Sample}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a new sample to the list of received gaze hit samples for tracking. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Sample} & An array of floats representing the current sample data to be added.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/jur/\+Documents/projects/edia\+\_\+eye/\+Assets/com.\+edia.\+eye/\+Runtime/\+Scripts/Eye\+Gaze\+Hit\+UXFTracker.\+cs\end{DoxyCompactItemize}
