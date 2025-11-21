@@ -31,6 +31,12 @@ Clone this repository.
 ## Usage
 
 Check out the [documentation](https://mind-body-emotion.notion.site/EDIA-Eye-1e703dd4773f80ea8cfcd75bd87c004b). 
+> [!TIP]
+> In order to use `EDIA Eye` with a specific headset and eye tracker, you will need the according submodule. At the moment, we provide the following:  
+> - For *HTC Vive Pro Eye* &rarr; [<img src="./Assets/com.edia.eye/Editor/Resources/Icons/IconEye.png" width="15"> EDIA Eye Vive](https://github.com/edia-toolbox/edia_eye_vive)  
+> - For *Varjo headsets* &rarr; [<img src="./Assets/com.edia.eye/Editor/Resources/Icons/IconEye.png" width="15"> EDIA Eye Varjo](https://github.com/edia-toolbox/edia_eye_varjo)  
+> - For *Meta headsets (currently: Meta Quest Pro)* &rarr; [<img src="./Assets/com.edia.eye/Editor/Resources/Icons/IconEye.png" width="15"> EDIA Eye Quest](https://github.com/edia-toolbox/edia_eye_quest)  
+> - For *PICO headsets (currently: PICO NEO 4 Enterprise* &rarr; [<img src="./Assets/com.edia.eye/Editor/Resources/Icons/IconEye.png" width="15"> EDIA Eye PICO](https://github.com/edia-toolbox/edia_eye_pico)
 
 ## Contribution
 We are happy to receive feedback and contributions. If you want to report a bug, please open a GitHub issue. 
