@@ -3,7 +3,6 @@ using UnityEngine;
 using UXF;
 
 namespace Edia.Eye {
-
     /// <summary>
     /// The `EyeDataClientUXFTracker` class is a data client for the `EyeDataHandler` that receives eye-tracking data 
     /// and writes it to a custom UXF log file.
@@ -12,15 +11,17 @@ namespace Edia.Eye {
     /// </summary>
     [EdiaHeader("EDIA EYE", "Eye Data UXF Tracker", "Tracks and saves data using UXF Tracker")]
     public class EyeDataClientUXFTracker : Tracker, IEyeDataClient {
-        
         [Header("Which Eye?")]
-        [InspectorHelpBox("Eye Data UXF Tracker\nTracks and saves data using UXF Tracker")]    
+#if UNITY_EDITOR
+        [InspectorHelpBox("Eye Data UXF Tracker\nTracks and saves data using UXF Tracker")]
+#endif
         public Edia.Constants.EyeId Eye = Edia.Constants.EyeId.CENTER;
-        
-        #region DECLARATIONS 
+
+#region DECLARATIONS
+
         // When properties are added to this list in this script -> call component RESET on inspector to force updating
         // the component in the editor.
-        
+
         string[] Properties2Log = new string[] {
             "timestamp_et",
             "timestamp_lsl",
@@ -35,16 +36,16 @@ namespace Edia.Eye {
             "openness",
             "eye",
             "target_id"
-    };
+        };
 
         private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
 
-        #endregion // -------------------------------------------------------------------------------------------------------------------------------
-        #region IEyeDataClient INTERFACE IMPLEMENTATION 
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+#region IEyeDataClient INTERFACE IMPLEMENTATION
 
         void Awake() {
             EyeDataHandler.Instance.AddDataClient(this);
-            objectName = Eye.ToString().ToLower();
+            objectName      = Eye.ToString().ToLower();
             gameObject.name = ($"Eye-{objectName}-UxfTracker");
         }
 
@@ -74,8 +75,8 @@ namespace Edia.Eye {
             }
         }
 
-        #endregion // -------------------------------------------------------------------------------------------------------------------------------
-        #region PROCESSING SAMPLES
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+#region PROCESSING SAMPLES
 
         //As we're always recording "manually" with this tracker, we can overwrite LateUpdate
         void LateUpdate() {
@@ -96,26 +97,29 @@ namespace Edia.Eye {
             foreach (string prop2log in Properties2Log) {
                 row.Add((prop2log, GetFieldValue(eyeData, prop2log)));
             }
+
             return row;
         }
 
-        #endregion // -------------------------------------------------------------------------------------------------------------------------------
-        #region  TRACKER
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
+#region TRACKER
 
-        public override string MeasurementDescriptor => $"-eye-tracking";
-        public override IEnumerable<string> CustomHeader => Properties2Log;
+        public override string              MeasurementDescriptor => $"-eye-tracking";
+        public override IEnumerable<string> CustomHeader          => Properties2Log;
 
         protected override UXFDataRow GetCurrentValues() {
             UXFDataRow row = new UXFDataRow();
             if (receivedEyeDataSamples.Count > 0) {
                 row = ParseEyeDataToUXFrow(receivedEyeDataSamples[0]);
-            } else {
+            }
+            else {
                 Debug.Log("ET queue is empty. Not a good sign.");
             }
+
             return row;
         }
 
-        #endregion // -------------------------------------------------------------------------------------------------------------------------------
+#endregion // -------------------------------------------------------------------------------------------------------------------------------
 
         // TODO: This should go to the `Utils` of EDIA_core
         object GetFieldValue(object src, string propName) {

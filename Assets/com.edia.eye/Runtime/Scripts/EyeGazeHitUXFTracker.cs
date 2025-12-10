@@ -3,7 +3,6 @@ using UnityEngine;
 using UXF;
 
 namespace Edia.Eye {
-
     /// <summary>
     /// Tracks and records raycast hit data using the UXF (Unity Experiment Framework) Tracker framework.
     /// This class integrates with EyeGazeHitRegistration and processes hit position as well as UV coordinate data.
@@ -18,11 +17,13 @@ namespace Edia.Eye {
     [AddComponentMenu("EDIA/Eye/Eye Gaze Hit UXF Tracker")]
     public class EyeGazeHitUXFTracker : Tracker {
 #region DECLARATIONS
-        
+
         [Header("Settings")]
+#if UNITY_EDITOR
         [InspectorHelpBox("Processes hitpoint + uv data sample from EyeGazeHitRegistration")]
+#endif
         public bool AutoRegisterWithUXF = true;
-        
+
         public override string              MeasurementDescriptor => $"eye-gazehits";
         public override IEnumerable<string> CustomHeader          => Properties2Log;
 
@@ -42,13 +43,13 @@ namespace Edia.Eye {
             "uv_y",
         };
 
-        private List<float[]>          receivedGazeHitSamples = new();
+        private List<float[]> receivedGazeHitSamples = new();
 
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region IMPLEMENTATION
 
         void Awake() {
-            gameObject.name         = ($"Eye-{objectName}-GazeHit-UxfTracker");
+            gameObject.name = ($"Eye-{objectName}-GazeHit-UxfTracker");
         }
 
         /// <summary> Auto add myself to UXF trackers in start, as the Session singleton does not exist earlier </summary>
@@ -73,7 +74,7 @@ namespace Edia.Eye {
         public void AddSample(float[] currentSample) {
             receivedGazeHitSamples.Add(currentSample);
         }
-        
+
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region TRACKER
 
@@ -99,8 +100,8 @@ namespace Edia.Eye {
 
         UXFDataRow ParseSampleToUXFrow(float[] sample = null) {
             if (sample == null)
-                sample = new float[] {float.NaN, float.NaN, float.NaN, float.NaN, float.NaN};
-            
+                sample = new float[] { float.NaN, float.NaN, float.NaN, float.NaN, float.NaN };
+
             UXFDataRow row = new UXFDataRow();
             for (int i = 0; i < sample.Length; i++) {
                 row.Add((Properties2Log[i], sample[i]));
@@ -110,6 +111,5 @@ namespace Edia.Eye {
         }
 
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
-
     }
 }
