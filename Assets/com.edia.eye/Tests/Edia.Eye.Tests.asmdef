@@ -1,0 +1,24 @@
+﻿{
+    "name": "Edia.Eye.Tests",
+    "rootNamespace": "Edia.Eye.Tests",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "GUID:59fd51bd7dd08ca49ae988d9737232f9",
+        "GUID:6293785af1473f2438a6a9e672c48391",
+        "GUID:0460cc0aa903ae648b1655e8367669bf"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
