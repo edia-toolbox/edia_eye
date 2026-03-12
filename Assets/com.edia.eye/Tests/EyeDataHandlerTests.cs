@@ -2,7 +2,6 @@
 using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
-using Edia.Eye;
 
 namespace Edia.Eye.Tests
 {
@@ -33,6 +32,9 @@ namespace Edia.Eye.Tests
             }
         }
 
+        /// <summary>
+        /// Verifies that adding an IEyeDataClient correctly registers it in the internal client list.
+        /// </summary>
         [Test]
         public void AddDataClient_AddsClientToInternalList()
         {
@@ -47,6 +49,9 @@ namespace Edia.Eye.Tests
             Object.DestroyImmediate(go);
         }
 
+        /// <summary>
+        /// Verifies that adding an EyeDataPackage correctly registers it in the internal sample list.
+        /// </summary>
         [Test]
         public void AddEyeDataPackage_AddsPackageToInternalList()
         {

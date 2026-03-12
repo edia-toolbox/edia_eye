@@ -2,7 +2,6 @@
 using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
-using Edia.Eye;
 using UXF;
 
 namespace Edia.Eye.Tests
@@ -26,6 +25,9 @@ namespace Edia.Eye.Tests
                 Object.DestroyImmediate(_tracker.gameObject);
         }
 
+        /// <summary>
+        /// Verifies that adding a sample increases the internal sample count and stores the correct data.
+        /// </summary>
         [Test]
         public void AddSample_IncreasesSampleCount()
         {
@@ -39,6 +41,9 @@ namespace Edia.Eye.Tests
             Assert.AreEqual(sample, samples[0]);
         }
 
+        /// <summary>
+        /// Verifies that GetCurrentValues returns a correctly populated UXFDataRow based on the added sample.
+        /// </summary>
         [Test]
         public void GetCurrentValues_ReturnsCorrectDataRow()
         {
@@ -56,6 +61,9 @@ namespace Edia.Eye.Tests
             Assert.AreEqual(0.5f, (float)row.First(i => i.columnName == "uv_y").value);
         }
         
+        /// <summary>
+        /// Verifies that GetCurrentValues returns a UXFDataRow filled with NaN when no samples have been added.
+        /// </summary>
         [Test]
         public void GetCurrentValues_WithNoSamples_ReturnsNaNRow()
         {

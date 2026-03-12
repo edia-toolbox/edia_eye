@@ -1,11 +1,13 @@
 ﻿using NUnit.Framework;
-using Edia.Eye;
 
 namespace Edia.Eye.Tests
 {
     [TestFixture]
     public class EyeDataPackageTests
     {
+        /// <summary>
+        /// Verifies that a new EyeDataPackage instance starts with its default values.
+        /// </summary>
         [Test]
         public void EyeDataPackage_Initialization_HasDefaultValues()
         {
@@ -17,6 +19,9 @@ namespace Edia.Eye.Tests
             Assert.AreEqual("NA", package.target_id);
         }
 
+        /// <summary>
+        /// Verifies that property values set on an EyeDataPackage are correctly stored and retrieved.
+        /// </summary>
         [Test]
         public void EyeDataPackage_SettingValues_RetainsValues()
         {
