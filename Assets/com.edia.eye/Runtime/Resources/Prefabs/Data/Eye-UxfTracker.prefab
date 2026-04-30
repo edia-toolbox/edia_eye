@@ -47,7 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: '[_eye_]_uxf_tracker'
   updateType: 0
-  EyeDataHandler: {fileID: 0}
   Eye: 2
 --- !u!114 &6344747835639068515
 MonoBehaviour:

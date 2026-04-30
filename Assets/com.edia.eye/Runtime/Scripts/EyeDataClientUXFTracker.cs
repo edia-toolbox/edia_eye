@@ -35,7 +35,10 @@ namespace Edia.Eye {
             "confidence",
             "openness",
             "eye",
-            "target_id"
+            "target_id",
+            "intersection_x",
+            "intersection_y",
+            "intersection_z"
         };
 
         private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
