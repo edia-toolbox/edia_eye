@@ -153,5 +153,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Eye: 2
-  UpdateStep: 50
+  UpdateStep: 1
   timeoutAfterSecondsWithNoNewSample: 4
