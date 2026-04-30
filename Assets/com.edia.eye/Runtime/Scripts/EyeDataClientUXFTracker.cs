@@ -35,7 +35,10 @@ namespace Edia.Eye {
             "confidence",
             "openness",
             "eye",
-            "target_id"
+            "target_id",
+            "intersection_x",
+            "intersection_y",
+            "intersection_z"
         };
 
         private List<EyeDataPackage> receivedEyeDataSamples = new List<EyeDataPackage>();
@@ -104,7 +107,7 @@ namespace Edia.Eye {
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region TRACKER
 
-        public override string              MeasurementDescriptor => $"-eye-tracking";
+        public override string              MeasurementDescriptor => $"eye_tracking";
         public override IEnumerable<string> CustomHeader          => Properties2Log;
 
         protected override UXFDataRow GetCurrentValues() {
