@@ -134,7 +134,7 @@ namespace Edia.Eye {
 
             RaycastHit hit;
 
-            if (Physics.Raycast(pos, dir, out hit, 50, _gazeLayer)) {
+            if (Physics.Raycast(pos, dir, out hit, Mathf.Infinity, _gazeLayer)) {
                 latestSample.target_id      = hit.collider.name;
                 latestSample.intersection_x = hit.point.x;
                 latestSample.intersection_y = hit.point.y;
