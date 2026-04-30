@@ -107,7 +107,7 @@ namespace Edia.Eye {
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
 #region TRACKER
 
-        public override string              MeasurementDescriptor => $"-eye-tracking";
+        public override string              MeasurementDescriptor => $"eye_tracking";
         public override IEnumerable<string> CustomHeader          => Properties2Log;
 
         protected override UXFDataRow GetCurrentValues() {
