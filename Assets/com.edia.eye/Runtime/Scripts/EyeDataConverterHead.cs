@@ -13,7 +13,7 @@ namespace Edia.Eye {
 
         // Locals
         private double         _timestampLsl;
-        private EyeDataPackage _ed = new();
+        private EyeDataPackage _ed;
         private double         _lastTime;
 
         /// <summary> Start the dummy data provider from script </summary>
@@ -40,6 +40,8 @@ namespace Edia.Eye {
             if (!IsRunning)
                 return;
 
+            _ed = new();
+            
             _ed.eye              = nameof(Constants.EyeId.CENTER).ToLower();
             _ed.position_x_local = 0f;
             _ed.position_y_local = 0f;
