@@ -16,7 +16,7 @@ namespace Edia.Eye {
 
         // Locals
         private double         _timestampLsl;
-        private EyeDataPackage _ed              = new();
+        private EyeDataPackage _ed;
         private double         _randomWaitValue = 0.15f;
         private double         _lastTime;
 
@@ -43,6 +43,8 @@ namespace Edia.Eye {
         private void Update() {
             if (!IsRunning)
                 return;
+
+            _ed = new();
 
             if (Time.time > (_lastTime + _randomWaitValue)) {
                 // Update fake eye data only after random interval
