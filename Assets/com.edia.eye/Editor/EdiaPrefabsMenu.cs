@@ -47,16 +47,6 @@ namespace com.edia.eye.Editor {
             InstantiatePrefab("Helpers", "Eye-AvatarWithEyeBalls", menuCommand);
         }
 
-        [MenuItem("GameObject/EDIA/Eye/Helpers/Eye-DummyDataGenerator_AllEyes", false, 1)]
-        private static void CreatePrefabEyeDummyDataGeneratorAllEyes(MenuCommand menuCommand) {
-            InstantiatePrefab("Helpers", "Eye-DummyDataGenerator_AllEyes", menuCommand);
-        }
-
-        [MenuItem("GameObject/EDIA/Eye/Helpers/Eye-DummyDataGenerator_CenterEye", false, 1)]
-        private static void CreatePrefabEyeDummyDataGeneratorCenterEye(MenuCommand menuCommand) {
-            InstantiatePrefab("Helpers", "Eye-DummyDataGenerator_CenterEye", menuCommand);
-        }
-
         [MenuItem("GameObject/EDIA/Eye/Helpers/Eye-GazeIntersectionVisualizer", false, 1)]
         private static void CreatePrefabEyeGazeIntersectionVisualizer(MenuCommand menuCommand) {
             InstantiatePrefab("Helpers", "Eye-GazeIntersectionVisualizer", menuCommand);
@@ -65,6 +55,21 @@ namespace com.edia.eye.Editor {
         [MenuItem("GameObject/EDIA/Eye/Helpers/Eye-GazeVisualizer", false, 1)]
         private static void CreatePrefabEyeGazeVisualizer(MenuCommand menuCommand) {
             InstantiatePrefab("Helpers", "Eye-GazeVisualizer", menuCommand);
+        }
+        
+        [MenuItem("GameObject/EDIA/Eye/Helpers/Eye-HeadDataConverter", false, 1)]
+        private static void CreatePrefabHeadEyeDataConverter(MenuCommand menuCommand) {
+            InstantiatePrefab("Helpers", "Eye-Head-EyeDataConverter", menuCommand);
+        }
+        
+        [MenuItem("GameObject/EDIA/Eye/Helpers/Eye-DummyDataGenerator_AllEyes", false, 1)]
+        private static void CreatePrefabEyeDummyDataGeneratorAllEyes(MenuCommand menuCommand) {
+            InstantiatePrefab("Helpers", "Eye-DummyDataGenerator_AllEyes", menuCommand);
+        }
+
+        [MenuItem("GameObject/EDIA/Eye/Helpers/Eye-DummyDataGenerator_CenterEye", false, 1)]
+        private static void CreatePrefabEyeDummyDataGeneratorCenterEye(MenuCommand menuCommand) {
+            InstantiatePrefab("Helpers", "Eye-DummyDataGenerator_CenterEye", menuCommand);
         }
 
 #endregion

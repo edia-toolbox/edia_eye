@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace Edia.Eye {
     /// <summary> Dummy class to fake a minimal data stream from an eye tracker (with 90Hz). </summary>
-    [EdiaHeader("EDIA EYE", "Fake center eye gaze", "Generates center eye data for testing purposes.")]
-    public class EyeDataGeneratorCenterEye : MonoBehaviour {
+    [EdiaHeader("EDIA EYE", "Proxy center eye gaze", "Generates center eye data based on headset orientation (NO REAL EYE TRACKING DATA!).")]
+    public class EyeDataConverterHead : MonoBehaviour {
 
         [Header("Refs")]
         public bool IsRunning = true;
@@ -35,7 +35,7 @@ namespace Edia.Eye {
             }
         }
 
-        // Sends random data to the `EyeDataHandler` 
+        // Sends "looking straight ahead" (relative to head) data to the `EyeDataHandler` 
         private void Update() {
             if (!IsRunning)
                 return;
@@ -46,16 +46,14 @@ namespace Edia.Eye {
             _ed.position_x_local = 0f;
             _ed.position_y_local = 0f;
             _ed.position_z_local = 0f;
-            _ed.diameter         = UnityEngine.Random.Range(0.02f, 1.0f);
+            _ed.diameter         = 0f;
             _ed.rotation_x_local = 0f;
             _ed.rotation_y_local = 0f;
             _ed.rotation_z_local = 0f;
-            Quaternion eyeRot = Quaternion.Euler(_ed.rotation_x_local, _ed.rotation_y_local, 0);
-            Vector3    eyeFwd = eyeRot * Vector3.forward;
-            _ed.direction_x_local = eyeFwd.x;
-            _ed.direction_y_local = eyeFwd.y;
-            _ed.direction_z_local = eyeFwd.z;
-            _ed.openness          = UnityEngine.Random.Range(0f, 1f) < 0.05f ? 0 : UnityEngine.Random.Range(0.8f, 1.0f);
+            _ed.direction_x_local = 0f;
+            _ed.direction_y_local = 0f;
+            _ed.direction_z_local = 1f;
+            _ed.openness          = 0f;
             _ed.isValid           = true;
 
             _ed.timestamp_et = Time.realtimeSinceStartup;
